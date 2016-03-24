@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import java.sql.Blob;
 import java.util.List;
 
@@ -15,33 +17,97 @@ import java.util.List;
 @Entity
 @Table(name="users")
 public class User extends BaseEntity {
-    @Length(max=20)
-    String username;
+	@Length(max=50)
+    private String firstName;
+	
+	@Length(max=50)
+	private String secondName;
+	
+	@Email
+	private String email;
+	
+	@Length(max = 50)
+	private String password;
+	
+	@NotNull
+	private Blob image;
+	
+	@Length(max=50)
+	private String location;
+	
+	@Length(max = 400)
+	private String biography;
+	
+	private String website;
+	
+	@OneToMany
+	private List<Song> songs;
+	
+	@OneToMany
+	private List<Comment> comments;
+	
+	@OneToMany
+	private List<Rating> ratings;
+	
+	private boolean active;
 
-    @Email
-    String email;
+    public String getPassword() {
+		return password;
+	}
 
-    @Length(max=50)
-    String firstName;
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    @Length(max=50)
-    String secondName;
+	public Blob getImage() {
+		return image;
+	}
 
-    @Length(max=50)
-    String location;
+	public void setImage(Blob image) {
+		this.image = image;
+	}
 
-    @OneToMany
-    List<Song> songs;
+	public String getBiography() {
+		return biography;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getWebsite() {
+		return website;
+	}
 
-    public String getEmail() {
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getEmail() {
         return email;
     }
 
