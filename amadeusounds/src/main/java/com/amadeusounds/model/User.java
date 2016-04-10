@@ -6,6 +6,19 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.sql.Blob;
+import java.util.List;
+
+/**
+ * Created by Vladica Jovanovski on 3/15/2016.
+ */
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import java.sql.Blob;
@@ -17,97 +30,97 @@ import java.util.List;
 @Entity
 @Table(name="users")
 public class User extends BaseEntity {
-	@Length(max=50)
+    @Length(max=50)
     private String firstName;
-	
-	@Length(max=50)
-	private String secondName;
-	
-	@Email
-	private String email;
-	
-	@Length(max = 50)
-	private String password;
-	
-	@NotNull
-	private Blob image;
-	
-	@Length(max=50)
-	private String location;
-	
-	@Length(max = 400)
-	private String biography;
-	
-	private String website;
-	
-	@OneToMany
-	private List<Song> songs;
-	
-	@OneToMany
-	private List<Comment> comments;
-	
-	@OneToMany
-	private List<Rating> ratings;
-	
-	private boolean active;
+
+    @Length(max=50)
+    private String secondName;
+
+    @Email
+    private String email;
+
+    @Length(max = 50)
+    private String password;
+
+    //@NotNull
+    private Blob image;
+
+    @Length(max=50)
+    private String location;
+
+    @Length(max = 400)
+    private String biography;
+
+    private String website;
+
+    @OneToMany
+    private List<Song> songs;
+
+    @OneToMany
+    private List<Comment> comments;
+
+    @OneToMany
+    private List<Rating> ratings;
+
+    private boolean active;
 
     public String getPassword() {
-		return password;
-	}
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Blob getImage() {
-		return image;
-	}
+    public Blob getImage() {
+        return image;
+    }
 
-	public void setImage(Blob image) {
-		this.image = image;
-	}
+    public void setImage(Blob image) {
+        this.image = image;
+    }
 
-	public String getBiography() {
-		return biography;
-	}
+    public String getBiography() {
+        return biography;
+    }
 
-	public void setBiography(String biography) {
-		this.biography = biography;
-	}
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
 
-	public String getWebsite() {
-		return website;
-	}
+    public String getWebsite() {
+        return website;
+    }
 
-	public void setWebsite(String website) {
-		this.website = website;
-	}
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	public List<Rating> getRatings() {
-		return ratings;
-	}
+    public List<Rating> getRatings() {
+        return ratings;
+    }
 
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
-	}
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public String getEmail() {
+    public String getEmail() {
         return email;
     }
 

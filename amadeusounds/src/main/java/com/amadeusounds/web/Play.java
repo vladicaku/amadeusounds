@@ -58,8 +58,10 @@ public class Play {
         return new HttpEntity<byte[]>(byteArray, header);
     }
 
-    @RequestMapping(path="/{id}", method = RequestMethod.GET)
-    public void play3(@PathVariable("id") String id, HttpServletResponse response, HttpServletRequest request) throws IOException, SQLException {
+    //@RequestMapping(path="/{id}", method = RequestMethod.GET)
+    //public void play3(@PathVariable("id") String id, HttpServletResponse response, HttpServletRequest request) throws IOException, SQLException {
+    @RequestMapping(method = RequestMethod.GET)
+    public void play3(HttpServletResponse response, HttpServletRequest request) throws IOException, SQLException {
         Song song = playService.getFirstSong();
         if (song != null) {
             response.reset();

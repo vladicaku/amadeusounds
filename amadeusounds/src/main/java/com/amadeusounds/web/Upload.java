@@ -21,7 +21,7 @@ public class Upload {
 
     @RequestMapping(method = RequestMethod.GET)
     public Response hello() {
-        return new Response(ResponseType.OK, "Hello world 12");
+        return new Response(ResponseType.OK, "Hello world");
     }
 
 

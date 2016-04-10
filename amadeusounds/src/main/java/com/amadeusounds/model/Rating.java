@@ -1,10 +1,11 @@
 package com.amadeusounds.model;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.Date;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -13,13 +14,27 @@ public class Rating extends BaseEntity{
 	
 	@NotNull
 	private int rating;
-	
-	@NotNull
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false, insertable=true, updatable=true, columnDefinition = "default CURRENT_TIMESTAMP")
 	private Date date;
-	
+
+	@PrePersist
+	public void onCreate(){
+		this.date = new java.util.Date();
+	}
+
+	@PreUpdate
+	public void onPersist(){
+		this.date = new java.util.Date();
+	}
+
+
+	@JsonIgnore
 	@ManyToOne
 	private User user;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	private Song song;
 
@@ -31,8 +46,8 @@ public class Rating extends BaseEntity{
 		this.rating = rating;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getDate() {
+		return date.toString();
 	}
 
 	public void setDate(Date date) {
@@ -54,6 +69,15 @@ public class Rating extends BaseEntity{
 	public void setSong(Song song) {
 		this.song = song;
 	}
-	
+
+	@JsonProperty
+	public Long getUserId() {
+		return user.getId();
+	}
+
+	@JsonProperty
+	public Long getSongId() {
+		return song.getId();
+	}
 	
 }

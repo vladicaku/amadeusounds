@@ -22,7 +22,7 @@ import java.util.List;
 public class Song extends BaseEntity {
     @Length(max = 50)
     private String name;
-    
+
     @NotNull
     private Blob song;
 
