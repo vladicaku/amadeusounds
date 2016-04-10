@@ -28,7 +28,7 @@ public class User extends BaseEntity {
 	
 	@Length(max = 50)
 	private String password;
-	
+
 	@NotNull
 	private Blob image;
 	

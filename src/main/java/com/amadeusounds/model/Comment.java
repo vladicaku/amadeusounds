@@ -2,11 +2,10 @@ package com.amadeusounds.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -15,13 +14,26 @@ public class Comment extends BaseEntity{
 	
 	@Length(max = 255)
 	private String comment;
-	
-	@NotNull
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false, insertable=true, updatable=true, columnDefinition = "default CURRENT_TIMESTAMP")
 	private Date date;
-	
+
+	@PrePersist
+	public void onCreate(){
+		this.date = new Date();
+	}
+
+	@PreUpdate
+	public void onPersist(){
+		this.date = new Date();
+	}
+
+	@JsonIgnore
 	@ManyToOne
 	private Song song;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	private User user;
 
@@ -33,8 +45,8 @@ public class Comment extends BaseEntity{
 		this.comment = comment;
 	}
 
-	public Date getDate() {
-		return date;
+	public String getDate() {
+		return date.toString();
 	}
 
 	public void setDate(Date date) {
@@ -56,6 +68,15 @@ public class Comment extends BaseEntity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	@JsonProperty
+	public Long getUserId() {
+		return user.getId();
+	}
+	@JsonProperty
+	public Long getSongId() {
+		return song.getId();
+	}
+
+
 }
