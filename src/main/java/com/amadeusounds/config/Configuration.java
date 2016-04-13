@@ -9,20 +9,7 @@ import org.springframework.context.annotation.Bean;
  * Created by Vladica Jovanovski on 3/15/2016.
  * http://stackoverflow.com/questions/26049294/spring-boot-hibernate-using-transaction
  */
-@org.springframework.context.annotation.Configuration
+//@org.springframework.context.annotation.Configuration
 public class Configuration {
-
-//    @Bean
-//    public SessionFactory sessionFactory() {
-//        return new SessionFactory() {
-//        }
-//    }
-
-//    @Autowired
-//    @Bean(name="sessionFactory")
-//    public SessionFactory sessionFactory(HibernateEntityManagerFactory factory) {
-//        return factory.getSessionFactory();
-//    }
-
 
 }

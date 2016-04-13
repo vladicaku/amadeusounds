@@ -1,10 +1,9 @@
 package com.amadeusounds.web;
 
-import com.amadeusounds.model.ResponseType;
-import com.amadeusounds.service.UploadService;
+import com.amadeusounds.model.json.Response;
+import com.amadeusounds.model.json.ResponseType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.amadeusounds.model.Response;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

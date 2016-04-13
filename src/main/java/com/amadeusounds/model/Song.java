@@ -1,5 +1,9 @@
 package com.amadeusounds.model;
 
+import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
@@ -11,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,37 +24,49 @@ import java.util.List;
 @Entity
 @Table(name = "songs")
 public class Song extends BaseEntity {
+
     @Length(max = 50)
+    @JsonView(SongView.BaseView.class)
     private String name;
-    
+
     @NotNull
     private Blob song;
 
     @Length(max = 200)
+    @JsonView(SongView.BaseView.class)
     private String description;
 
     @OneToMany
+    @JsonView(SongView.BaseView.class)
     private List<SongImage> images;
-    
+
     @ManyToOne
+    @JsonView(SongView.BaseView.class)
     private Category category;
-    
-    @ManyToMany (fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonView(SongView.BaseView.class)
     private List<Tag> tags;
-    
+
     @NotNull
-    private Date date;
-    
+    @JsonView(SongView.BaseView.class)
+    private LocalDate date;
+
     @ManyToOne
+    @JsonView(SongView.BaseView.class)
     private User user;
 
     @OneToMany
+    @JsonView(SongView.SummaryView.class)
     private List<Comment> comments;
-    
+
     @OneToMany
     private List<Rating> ratings;
-    
-    @Transient
+
+    @JsonView(SongView.BaseView.class)
+    private double rating;
+
+    @JsonView(SongView.BaseView.class)
     private Long views;
 
     public String getName() {
@@ -77,69 +93,75 @@ public class Song extends BaseEntity {
         this.song = song;
     }
 
-	public List<SongImage> getImages() {
-		return images;
-	}
+    public List<SongImage> getImages() {
+        return images;
+    }
 
-	public void setImages(List<SongImage> images) {
-		this.images = images;
-	}
+    public void setImages(List<SongImage> images) {
+        this.images = images;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public Category getCategory() {
+        return category;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-	public List<Tag> getTags() {
-		return tags;
-	}
+    public List<Tag> getTags() {
+        return tags;
+    }
 
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public LocalDate getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	public List<Rating> getRatings() {
-		return ratings;
-	}
+    public List<Rating> getRatings() {
+        return ratings;
+    }
 
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
-	}
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
-	public Long getViews() {
-		return views;
-	}
+    public Long getViews() {
+        return views;
+    }
 
-	public void setViews(Long views) {
-		this.views = views;
-	}
-    
-    
+    public void setViews(Long views) {
+        this.views = views;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 }
