@@ -8,6 +8,7 @@ import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.repository.UserRepository;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * Created by Vac on 4/13/2016.
  */
+@CrossOrigin()
 @RestController(value = "clientSongController")
 @RequestMapping("/songs")
 public class SongController {
@@ -45,11 +47,11 @@ public class SongController {
     }
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)
-    public MappingJacksonValue getLatestSongs(Pageable pageable) {
+    public Page<Song> getLatestSongs(Pageable pageable) {
         Page<Song> page = songService.getLatestSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
         result.setSerializationView(SongView.BaseView.class);
-        return result;
+        return page;
     }
 
     @RequestMapping(value = "/trending", method = RequestMethod.GET)

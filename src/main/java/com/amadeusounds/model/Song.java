@@ -1,6 +1,7 @@
 package com.amadeusounds.model;
 
 import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
 import org.hibernate.annotations.Type;
@@ -30,6 +31,7 @@ public class Song extends BaseEntity {
     private String name;
 
     @NotNull
+    @JsonIgnore
     private Blob song;
 
     @Length(max = 200)

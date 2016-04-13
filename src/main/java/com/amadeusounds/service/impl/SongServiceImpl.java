@@ -78,7 +78,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Page<Song> getLatestSongs(Pageable pageable) {
-        return null;
+        return songRepository.findAll(pageable);
     }
 
     @Override

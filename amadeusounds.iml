@@ -11,6 +11,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-hateoas:1.4.0.BUILD-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.hateoas:spring-hateoas:0.19.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.0.RC1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.0.RC1" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.4.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:1.4.0.BUILD-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:1.4.0.BUILD-SNAPSHOT" level="project" />
@@ -42,10 +48,7 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:1.10.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:1.12.1.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.0.RC1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.0.RC1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.0.RC1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.0.RC1" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.3.0.RC1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:1.4.0.BUILD-SNAPSHOT" level="project" />
