@@ -1,5 +1,6 @@
 package com.amadeusounds.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -7,7 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "comments")
@@ -15,10 +19,11 @@ public class Comment extends BaseEntity{
 	
 	@Length(max = 255)
 	private String comment;
-	
+
 	@NotNull
-	private Date date;
-	
+	@DateTimeFormat(pattern = "dd-MM-yy")
+	@JsonView(SongView.BaseView.class)
+	private LocalDate date;
 	@ManyToOne
 	private Song song;
 	
@@ -33,11 +38,11 @@ public class Comment extends BaseEntity{
 		this.comment = comment;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

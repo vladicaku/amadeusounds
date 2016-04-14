@@ -1,6 +1,11 @@
 package com.amadeusounds.model;
 
+import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -13,10 +18,12 @@ public class Rating extends BaseEntity{
 	
 	@NotNull
 	private int rating;
-	
+
 	@NotNull
-	private Date date;
-	
+	@DateTimeFormat(pattern = "dd-MM-yy")
+	@JsonView(SongView.BaseView.class)
+	private LocalDate date;
+
 	@ManyToOne
 	private User user;
 	
@@ -31,11 +38,11 @@ public class Rating extends BaseEntity{
 		this.rating = rating;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

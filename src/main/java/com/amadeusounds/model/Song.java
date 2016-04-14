@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,6 +52,7 @@ public class Song extends BaseEntity {
     private List<Tag> tags;
 
     @NotNull
+    @DateTimeFormat(pattern = "dd-MM-yy")
     @JsonView(SongView.BaseView.class)
     private LocalDate date;
 

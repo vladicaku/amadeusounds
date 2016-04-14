@@ -8,6 +8,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
@@ -33,18 +34,22 @@ public class SongImageServiceImpl implements SongImageService {
     }
 
     @Override
+    @Transactional
     public SongImage saveSongImage(SongImage songImage, Song song) {
         songImage.setSong(song);
         songImageRepository.saveAndFlush(songImage);
         return songImage;
     }
 
+    @Override
+    @Transactional
     public SongImage updateSongImage(SongImage songImage) {
         songImageRepository.saveAndFlush(songImage);
         return songImage;
     }
 
     @Override
+    @Transactional
     public void addBlobToSongImage(SongImage songImage, MultipartFile multipartFile) throws IOException {
         Blob blob = Hibernate.getLobCreator(getCurrentSession()).createBlob(multipartFile.getInputStream(), multipartFile.getSize());
         songImage.setImage(blob);
