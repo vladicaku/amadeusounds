@@ -1,11 +1,10 @@
 package com.amadeusounds.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.sql.Blob;
@@ -24,12 +23,13 @@ public class User extends BaseEntity {
 	private String secondName;
 	
 	@Email
+	@Column(unique = true)
 	private String email;
 	
 	@Length(max = 50)
 	private String password;
 
-	@NotNull
+	@JsonIgnore
 	private Blob image;
 	
 	@Length(max=50)
@@ -39,14 +39,17 @@ public class User extends BaseEntity {
 	private String biography;
 	
 	private String website;
-	
-	@OneToMany
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
 	private List<Song> songs;
-	
-	@OneToMany
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
-	
-	@OneToMany
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
 	private List<Rating> ratings;
 	
 	private boolean active;

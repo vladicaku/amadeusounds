@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Angela on 4/7/2016.
  */
 @Controller
-@RequestMapping("/api/Songs")
+@RequestMapping("/api/songs")
 public class CommentController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class CommentController {
      * @return list of all comments for a given song
      */
 
-    @RequestMapping(value = "/{song_id}/Comment", method = RequestMethod.GET)
+    @RequestMapping(value = "/{song_id}/comments", method = RequestMethod.GET)
     public @ResponseBody List<Comment> findAllComments(@PathVariable Long song_id) {
         return commentService.findCommentsForSong(song_id);
     }
@@ -45,7 +45,7 @@ public class CommentController {
      * @param comment_id
      * @return the comment with the given id
      */
-    @RequestMapping(value = "/{song_id}/Comment/{comment_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.GET)
     public @ResponseBody Comment findComment(@PathVariable Long song_id, @PathVariable Long comment_id) {
         return commentService.findCommentById(comment_id);
     }
@@ -59,8 +59,8 @@ public class CommentController {
      * @return the new comment
      */
 
-    @RequestMapping(value = "/{song_id}/Comment", method = RequestMethod.POST)
-    public @ResponseBody Comment addNewComment(@PathVariable Long song_id, @RequestBody Comment comment, @RequestParam Long user_id) {
+    @RequestMapping(value = "/{song_id}/comments/{user_id}", method = RequestMethod.POST)
+    public @ResponseBody Comment addNewComment(@PathVariable Long song_id, @RequestBody Comment comment, @PathVariable Long user_id) {
         comment.setSong(songRepository.findOne(song_id));
         comment.setUser(userRepository.findOne(user_id));
         return commentService.saveComment(comment);
@@ -71,11 +71,10 @@ public class CommentController {
      *
      * @param comment_id
      * @param comment
-     * @param user_id
      * @return the updated comment
      */
-    @RequestMapping(value = "/{song_id}/Comment/{comment_id}", method = RequestMethod.PUT)
-    public @ResponseBody Comment updateComment(@PathVariable Long song_id, @PathVariable Long comment_id, @RequestBody Comment comment, @RequestParam Long user_id) {
+    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.PUT)
+    public @ResponseBody Comment updateComment(@PathVariable Long song_id, @PathVariable Long comment_id, @RequestBody Comment comment) {
         Comment oldComment = commentService.findCommentById(comment_id);
         oldComment.setComment(comment.getComment());
         return commentService.saveComment(oldComment);
@@ -88,7 +87,7 @@ public class CommentController {
      * @param comment_id
      */
 
-    @RequestMapping(value = "/{song_id}/Comment/{comment_id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.DELETE)
     public void deleteComment(@PathVariable Long song_id, @PathVariable Long comment_id) {
         commentService.deleteComment(comment_id);
     }

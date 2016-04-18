@@ -35,6 +35,7 @@ public class Comment extends BaseEntity{
 
 	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public String getComment() {

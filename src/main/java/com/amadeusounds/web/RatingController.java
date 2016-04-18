@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @Controller
-@RequestMapping("/api/Songs")
+@RequestMapping("/api/songs")
 public class RatingController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class RatingController {
      * @return calculated rating for a given song
      */
 
-    @RequestMapping(value = "/{song_id}/Rating", method = RequestMethod.GET)
+    @RequestMapping(value = "/{song_id}/rating", method = RequestMethod.GET)
     public @ResponseBody Double findAvgRating(@PathVariable Long song_id) {
         return ratingService.findRating(song_id);
     }
@@ -45,8 +45,8 @@ public class RatingController {
      * @return new or updated rating
      */
 
-    @RequestMapping(value = "/{song_id}/Rating", method = RequestMethod.POST)
-    public @ResponseBody Rating addRating(@PathVariable Long song_id, @RequestBody Rating rating, @RequestParam Long user_id) {
+    @RequestMapping(value = "/{song_id}/rating/{user_id}", method = RequestMethod.POST)
+    public @ResponseBody Rating addRating(@PathVariable Long song_id, @RequestBody Rating rating, @PathVariable Long user_id) {
 
         Rating oldRating=null;
         try{
@@ -70,7 +70,7 @@ public class RatingController {
      * @param song_id
      * @param rating_id
      */
-    @RequestMapping(value = "/{song_id}/Rating/{rating_id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{song_id}/rating/{rating_id}", method = RequestMethod.DELETE)
     public void deleteComment(@PathVariable Long song_id, @PathVariable Long rating_id) {
         ratingService.deleteRating(rating_id);
     }
