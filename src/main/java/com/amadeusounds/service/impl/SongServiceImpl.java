@@ -100,17 +100,18 @@ public class SongServiceImpl implements SongService {
     public Page<Song> getLatestSongs(Pageable pageable) {
         // the query
         int days = Integer.valueOf(environment.getProperty("amadeusounds.songs.latest.days", "3"));
-        int max = Integer.valueOf(environment.getProperty("amadeusounds.songs.latest.max", "30"));
+        int max = Integer.valueOf(environment.getProperty("amadeusounds.songs.latest.max-results", "30"));
         LocalDate date = LocalDate.now().minusDays(days);
         Specifications specifications = Specifications.where(SpecificationUtils.<Song>greaterThan("date", date, true));
 
         // get total
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        CriteriaQuery<Song> criteriaQuery = criteriaBuilder.createQuery(Song.class);
         Root<Song> root = criteriaQuery.from(Song.class);
-        criteriaQuery.select(criteriaBuilder.count(root));
+        //criteriaQuery.select(criteriaBuilder.count(root));
+        criteriaQuery.select(root);
         criteriaQuery.where(specifications.toPredicate(root, criteriaQuery, criteriaBuilder));
-        long total = entityManager.createQuery(criteriaQuery).getSingleResult();
+        long total = entityManager.createQuery(criteriaQuery).setMaxResults(max).getResultList().size();
 
         // get results
         CriteriaQuery<Song> criteriaQuery1 = criteriaBuilder.createQuery(Song.class);
@@ -118,10 +119,14 @@ public class SongServiceImpl implements SongService {
         criteriaQuery1.select(root1);
         criteriaQuery1.where(specifications.toPredicate(root1, criteriaQuery1, criteriaBuilder));
         criteriaQuery1.orderBy(criteriaBuilder.desc(root1.get("date")));
-        int offset = pageable.getPageNumber() * pageable.getPageSize();
-        //int pageSize = pageable.getPageSize();
 
-        List<Song> content = entityManager.createQuery(criteriaQuery1).setFirstResult(offset).setMaxResults(max).getResultList();
+        // check out of bound
+        int queryOffset = pageable.getPageNumber() * pageable.getPageSize();
+        int queryMax = total - queryOffset < pageable.getPageSize() ? total - queryOffset <=0 ? 0 : (int) (total - queryOffset) : pageable.getPageNumber();
+
+//        List<Song> content = entityManager.createQuery(criteriaQuery1).setFirstResult(queryOffset).setMaxResults(queryMax).getResultList();
+
+        List<Song> content = entityManager.createQuery(criteriaQuery1).setMaxResults(-1).getResultList();
 
         Page<Song> page = new PageImpl<Song>(content, pageable, total);
         return page;
