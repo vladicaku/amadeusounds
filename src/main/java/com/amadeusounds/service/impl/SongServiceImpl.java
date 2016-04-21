@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -108,7 +109,6 @@ public class SongServiceImpl implements SongService {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Song> criteriaQuery = criteriaBuilder.createQuery(Song.class);
         Root<Song> root = criteriaQuery.from(Song.class);
-        //criteriaQuery.select(criteriaBuilder.count(root));
         criteriaQuery.select(root);
         criteriaQuery.where(specifications.toPredicate(root, criteriaQuery, criteriaBuilder));
         long total = entityManager.createQuery(criteriaQuery).setMaxResults(max).getResultList().size();
@@ -121,12 +121,18 @@ public class SongServiceImpl implements SongService {
         criteriaQuery1.orderBy(criteriaBuilder.desc(root1.get("date")));
 
         // check out of bound
-        int queryOffset = pageable.getPageNumber() * pageable.getPageSize();
-        int queryMax = total - queryOffset < pageable.getPageSize() ? total - queryOffset <=0 ? 0 : (int) (total - queryOffset) : pageable.getPageNumber();
+        boolean executeQuery = true;
+        int queryOffset = (pageable.getPageNumber()) * pageable.getPageSize();
+        executeQuery = (total - queryOffset) <= 0 ? false : true;
+        int queryMax = total - queryOffset < pageable.getPageSize() ? (int) (total - queryOffset) : pageable.getPageSize();
 
-//        List<Song> content = entityManager.createQuery(criteriaQuery1).setFirstResult(queryOffset).setMaxResults(queryMax).getResultList();
-
-        List<Song> content = entityManager.createQuery(criteriaQuery1).setMaxResults(-1).getResultList();
+        List<Song> content = null;
+        if (executeQuery) {
+            content = entityManager.createQuery(criteriaQuery1).setFirstResult(queryOffset).setMaxResults(queryMax).getResultList();
+        }
+        else {
+            content = new ArrayList<>(0);
+        }
 
         Page<Song> page = new PageImpl<Song>(content, pageable, total);
         return page;

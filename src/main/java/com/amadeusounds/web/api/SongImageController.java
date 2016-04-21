@@ -26,7 +26,7 @@ public class SongImageController {
     SongImageService songImageService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public Response uploadMultipartFile(@PathVariable long id, SongImage songImage) {
+    public Response saveSongImage(@PathVariable long id, SongImage songImage) {
         Song song = songService.findSongById(id);
         songImageService.saveSongImage(songImage, song);
         return new Response(ResponseType.OK, "");
@@ -34,7 +34,7 @@ public class SongImageController {
 
 
     @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
-    public Response uploadMultipartFile(@PathVariable long id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public Response uploadSongImage(@PathVariable long id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Song song = songService.findSongById(id);
         songService.addBlobToSong(song, multipartFile);
         Response response = new Response(ResponseType.OK, "");
