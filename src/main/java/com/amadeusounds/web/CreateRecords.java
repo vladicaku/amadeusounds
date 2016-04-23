@@ -4,6 +4,8 @@ import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
+import com.amadeusounds.repository.RatingRepository;
+import com.amadeusounds.service.RatingService;
 import com.amadeusounds.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,9 @@ public class CreateRecords {
     @Autowired
     SongService songService;
 
+    @Autowired
+    RatingService ratingService;
+
     Random random = new Random();
 
     @RequestMapping(method = RequestMethod.GET)
@@ -44,12 +49,9 @@ public class CreateRecords {
                 rating.setSong(song);
                 rating.setDate(LocalDate.now());
                 rating.setRating(ratingInt);
-
-
+                ratingService.saveRating(rating);
             }
-
         }
-
 
         return new Response(ResponseType.OK, "The database is populated");
     }

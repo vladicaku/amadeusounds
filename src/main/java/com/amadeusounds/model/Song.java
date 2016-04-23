@@ -54,11 +54,12 @@ public class Song extends BaseEntity {
     @JsonView(SongView.BaseView.class)
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "song")
     @JsonView(SongView.SummaryView.class)
     private List<Comment> comments;
 
-    @OneToMany
+    @OneToMany(mappedBy = "song")
+    @JsonView(SongView.SummaryView.class)
     private List<Rating> ratings;
 
     @JsonView(SongView.BaseView.class)

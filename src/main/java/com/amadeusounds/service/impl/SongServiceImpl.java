@@ -1,5 +1,6 @@
 package com.amadeusounds.service.impl;
 
+import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.User;
 import com.amadeusounds.repository.BaseRepository;
@@ -8,7 +9,10 @@ import com.amadeusounds.service.SongService;
 import com.amadeusounds.util.SpecificationUtils;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.omg.CORBA.Object;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
@@ -21,10 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.io.IOException;
 import java.sql.Blob;
 import java.time.LocalDate;
@@ -94,7 +95,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Page<Song> getAllSongsForUser(User user, Pageable pageable) {
-        return songRepository.findAll(SpecificationUtils.<Song>equals("user", (Object) user), pageable);
+        return songRepository.findAll(SpecificationUtils.<Song>equals("user", user), pageable);
     }
 
     @Override
@@ -143,6 +144,11 @@ public class SongServiceImpl implements SongService {
         return null;
     }
 
+    /**
+     * TODO:
+     * Da se razgleda dali presmetuvanjeto na rejtinzi da bide dinamicko
+     * ili pri sekoj nov rejt da se zapise i presmeta vo bazata
+     */
     @Override
     public Page<Song> getTopRatedSongs(Pageable pageable) {
         int max = Integer.valueOf(environment.getProperty("amadeusounds.songs.top-rated.max-results", "30"));
@@ -155,18 +161,17 @@ public class SongServiceImpl implements SongService {
         long total = entityManager.createQuery(criteriaQueryTotal).getSingleResult();
         total = total > max ? max : total;
 
-        /**
-         * TODO:
-         * Da se razgleda dali presmetuvanjeto na rejtinzi da bide dinamicko
-         * ili pri sekoj nov rejt da se zapise i presmeta vo bazata
-         */
         // the query
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Song> criteriaQuery = criteriaBuilder.createQuery(Song.class);
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
         Root<Song> root = criteriaQuery.from(Song.class);
-        Expression<Long> sum = criteriaBuilder.sum(root.get("ratings").get("raiting"));
-        criteriaQuery.multiselect(root, sum);
+        Join<Song, Rating> join = root.join("ratings");
+
+        Expression<Long> sum = criteriaBuilder.sum(join.get("rating"));
+        Expression<Long> count = criteriaBuilder.count(join);
+        criteriaQuery.multiselect(root, sum, count);
         criteriaQuery.orderBy(criteriaBuilder.desc(sum));
+        criteriaQuery.groupBy(root);
 
         // check out of bound
         boolean executeQuery = true;
@@ -174,7 +179,7 @@ public class SongServiceImpl implements SongService {
         executeQuery = (total - queryOffset) <= 0 ? false : true;
         int queryMax = total - queryOffset < pageable.getPageSize() ? (int) (total - queryOffset) : pageable.getPageSize();
 
-        List<Song> content = null;
+        List<Object> content = null;
         if (executeQuery) {
             content = entityManager.createQuery(criteriaQuery).setFirstResult(queryOffset).setMaxResults(queryMax).getResultList();
         }
@@ -182,7 +187,18 @@ public class SongServiceImpl implements SongService {
             content = new ArrayList<>(0);
         }
 
-        Page<Song> page = new PageImpl<Song>(content, pageable, total);
+        List<Song> songList = new ArrayList<>(content.size());
+        for (Object obj : content) {
+            //BeanWrapper wrapper = PropertyAccessorFactory.forBeanPropertyAccess(obj);
+            //BeanWrapperImpl wrapper = new BeanWrapperImpl(obj);
+            Song song = (Song) ((Object[]) obj)[0];
+            long ratingSum = (Long) ((Object[]) obj)[1];
+            long ratingCount = (Long) ((Object[]) obj)[2];
+            song.setRating(ratingSum * 1.0 / ratingCount);
+            songList.add(song);
+        }
+
+        Page<Song> page = new PageImpl<Song>(songList, pageable, total);
         return page;
     }
 
