@@ -8,13 +8,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Blob;
 import java.time.LocalDate;
@@ -39,7 +33,7 @@ public class Song extends BaseEntity {
     @JsonView(SongView.BaseView.class)
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "song")
     @JsonView(SongView.BaseView.class)
     private List<SongImage> images;
 
@@ -47,7 +41,7 @@ public class Song extends BaseEntity {
     @JsonView(SongView.BaseView.class)
     private Category category;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     @JsonView(SongView.BaseView.class)
     private List<Tag> tags;
 

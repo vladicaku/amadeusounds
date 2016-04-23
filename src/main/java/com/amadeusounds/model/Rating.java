@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,6 +19,8 @@ import javax.validation.constraints.NotNull;
 public class Rating extends BaseEntity{
 	
 	@NotNull
+	@Min(value = 1)
+	@Max(value = 5)
 	private int rating;
 
 	@NotNull

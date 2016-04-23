@@ -18,9 +18,8 @@ public class Tag extends BaseEntity{
 	private String name;
 	
 	private Blob image;
-	
-	//ova go nemase vo UML dijagramot, ama mislam deka ke ni pritreba
-	@ManyToMany(fetch = FetchType.EAGER)
+
+	@ManyToMany(mappedBy = "tags")
 	private List<Song> songs;
 
 	public String getName() {

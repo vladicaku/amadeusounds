@@ -40,13 +40,13 @@ public class User extends BaseEntity {
 	
 	private String website;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Song> songs;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Rating> ratings;
 	
 	private boolean active;

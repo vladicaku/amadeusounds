@@ -14,9 +14,8 @@ public class Category extends BaseEntity{
 	
 	@Length(max  = 50)
 	private String name;
-	
-	//ova go nemase vo UML dijagramot, ama mislam deka ke ni pritreba
-	@OneToMany
+
+	@OneToMany(mappedBy = "category")
 	private List<Song> songs;
 
 	public String getName() {

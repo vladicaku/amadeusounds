@@ -59,7 +59,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional
-    public void saveSong(Song song) {
+    public Song saveSong(Song song) {
         if (song.getDate() == null) {
             song.setDate(LocalDate.now());
         }
@@ -69,13 +69,13 @@ public class SongServiceImpl implements SongService {
             song.setSong(songBlob);
         }
 
-        songRepository.saveAndFlush(song);
+        return songRepository.saveAndFlush(song);
     }
 
     @Override
     @Transactional
-    public void updateSong(Song song) {
-        songRepository.saveAndFlush(song);
+    public Song updateSong(Song song) {
+        return songRepository.saveAndFlush(song);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Page<Song> getAllSongsForUser(User user, Pageable pageable) {
-        return null;
+        return songRepository.findAll(SpecificationUtils.<Song>equals("user", (Object) user), pageable);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class SongServiceImpl implements SongService {
 
         // check out of bound
         boolean executeQuery = true;
-        int queryOffset = (pageable.getPageNumber()) * pageable.getPageSize();
+        int queryOffset = pageable.getPageNumber() * pageable.getPageSize();
         executeQuery = (total - queryOffset) <= 0 ? false : true;
         int queryMax = total - queryOffset < pageable.getPageSize() ? (int) (total - queryOffset) : pageable.getPageSize();
 
@@ -145,16 +145,49 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Page<Song> getTopRatedSongs(Pageable pageable) {
-        return null;
+        int max = Integer.valueOf(environment.getProperty("amadeusounds.songs.top-rated.max-results", "30"));
+
+        // get total
+        CriteriaBuilder criteriaBuilderTotal = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQueryTotal = criteriaBuilderTotal.createQuery(Long.class);
+        Root<Song> rootTotal = criteriaQueryTotal.from(Song.class);
+        criteriaQueryTotal.select(criteriaBuilderTotal.count(rootTotal));
+        long total = entityManager.createQuery(criteriaQueryTotal).getSingleResult();
+        total = total > max ? max : total;
+
+        /**
+         * TODO:
+         * Da se razgleda dali presmetuvanjeto na rejtinzi da bide dinamicko
+         * ili pri sekoj nov rejt da se zapise i presmeta vo bazata
+         */
+        // the query
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Song> criteriaQuery = criteriaBuilder.createQuery(Song.class);
+        Root<Song> root = criteriaQuery.from(Song.class);
+        Expression<Long> sum = criteriaBuilder.sum(root.get("ratings").get("raiting"));
+        criteriaQuery.multiselect(root, sum);
+        criteriaQuery.orderBy(criteriaBuilder.desc(sum));
+
+        // check out of bound
+        boolean executeQuery = true;
+        int queryOffset = pageable.getPageNumber() * pageable.getPageSize();
+        executeQuery = (total - queryOffset) <= 0 ? false : true;
+        int queryMax = total - queryOffset < pageable.getPageSize() ? (int) (total - queryOffset) : pageable.getPageSize();
+
+        List<Song> content = null;
+        if (executeQuery) {
+            content = entityManager.createQuery(criteriaQuery).setFirstResult(queryOffset).setMaxResults(queryMax).getResultList();
+        }
+        else {
+            content = new ArrayList<>(0);
+        }
+
+        Page<Song> page = new PageImpl<Song>(content, pageable, total);
+        return page;
     }
 
     @Override
     public Page<Song> findAllSongs(String term, Pageable pageable) {
-        return null;
-    }
-
-
-    public Page<Song> getSongsForUser(User user) {
         return null;
     }
 
