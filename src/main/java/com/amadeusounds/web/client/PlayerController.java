@@ -81,22 +81,6 @@ public class PlayerController {
         }
     }
 
-    @RequestMapping(value = "/{songId}/image/{imageId}", method = RequestMethod.GET)
-    public void getImage(@PathVariable(value = "songId") long songId, @PathVariable(value = "imageId") long imageId,
-                         HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Song song = songService.findSongById(songId);
-        SongImage songImage = songImageService.findSongeImageById(imageId);
-
-        if (song == songImage.getSong()) {
-            OutputStream outputStream = response.getOutputStream();
-            byte[] byteArray = songImage.getImage().getBytes(0, (int) songImage.getImage().length());
-            outputStream.write(byteArray);
-            outputStream.flush();
-        } else {
-            throw new Exception("Image not found");
-        }
-    }
-
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public Response exception(Exception e) {

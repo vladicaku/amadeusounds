@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Vac on 4/13/2016.
  */
 @CrossOrigin()
-@RestController(value = "apiSongController")
+@RestController(value = "ApiSongController")
 @RequestMapping("/api/songs")
 public class SongController {
 

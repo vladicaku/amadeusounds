@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by Vac on 4/13/2016.
  */
-@RestController(value = "apiSongImageController")
+@RestController(value = "ApiSongImageController")
 @RequestMapping("api/images")
 public class SongImageController {
 
