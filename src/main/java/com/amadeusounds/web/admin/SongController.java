@@ -1,32 +1,26 @@
-package com.amadeusounds.web.api;
+package com.amadeusounds.web.admin;
 
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
-import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.view.SongView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Vac on 4/13/2016.
  */
 @CrossOrigin()
 @RestController(value = "ApiSongController")
-@RequestMapping("/api/songs")
+@RequestMapping("/admin/songs")
 public class SongController {
 
     @Autowired

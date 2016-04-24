@@ -1,4 +1,4 @@
-package com.amadeusounds.web.api;
+package com.amadeusounds.web.admin;
 
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.SongImage;
@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by Vac on 4/13/2016.
  */
 @RestController(value = "ApiSongImageController")
-@RequestMapping("api/images")
+@RequestMapping("/admin/images")
 public class SongImageController {
 
     @Autowired
