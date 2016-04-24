@@ -23,7 +23,7 @@ import java.util.List;
  */
 @CrossOrigin()
 @RestController(value = "clientSongController")
-@RequestMapping("/songs")
+@RequestMapping("/api/songs")
 public class SongController {
 
     @Autowired

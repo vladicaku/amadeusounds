@@ -13,9 +13,11 @@ public class SongImage extends BaseEntity{
 	
 	@NotNull
 	private Blob image;
-	
+
+	@NotNull
 	private int timing;
-	
+
+	@NotNull
 	@ManyToOne
 	private Song song;
 

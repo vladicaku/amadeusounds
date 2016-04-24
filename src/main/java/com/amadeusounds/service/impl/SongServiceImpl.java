@@ -87,8 +87,17 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @Transactional
-    public void addBlobToSong(Song song, MultipartFile multipartFile) throws IOException {
+    public void deleteSong(Long songId) {
+        songRepository.delete(songId);
+    }
+
+    @Override
+    @Transactional
+    public void addBlobToSong(Song song, MultipartFile multipartFile) throws Exception {
         Blob songBlob = Hibernate.getLobCreator(getCurrentSession()).createBlob(multipartFile.getInputStream(), multipartFile.getSize());
+        if (song.getSong().length() != 0) {
+            throw new Exception("Cannot change the song content once it is uploaded.");
+        }
         song.setSong(songBlob);
         songRepository.saveAndFlush(song);
     }

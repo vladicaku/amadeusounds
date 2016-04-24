@@ -22,7 +22,9 @@ public interface SongService {
 
     void deleteSong(Song song);
 
-    void addBlobToSong(Song song, MultipartFile multipartFile) throws IOException;
+    void deleteSong(Long id);
+
+    void addBlobToSong(Song song, MultipartFile multipartFile) throws Exception;
 
     Page<Song> getAllSongsForUser(User user, Pageable pageable);
 

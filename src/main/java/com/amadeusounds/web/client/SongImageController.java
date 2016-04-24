@@ -17,7 +17,7 @@ import java.io.OutputStream;
  * Created by Vac on 4/24/2016.
  */
 @RestController(value = "SongImageController")
-@RequestMapping("images")
+@RequestMapping("/api/images")
 public class SongImageController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class SongImageController {
                          HttpServletRequest request,
                          HttpServletResponse response) throws Exception {
         Song song = songService.findSongById(songId);
-        SongImage songImage = songImageService.findSongeImageById(imageId);
+        SongImage songImage = songImageService.findSongImageById(imageId);
 
         if (song == songImage.getSong()) {
             OutputStream outputStream = response.getOutputStream();

@@ -29,23 +29,32 @@ public class SongImageServiceImpl implements SongImageService {
     EntityManager entityManager;
 
     @Override
-    public SongImage findSongeImageById(Long id) {
+    public SongImage findSongImageById(Long id) {
         return songImageRepository.findOne(id);
     }
 
     @Override
     @Transactional
-    public SongImage saveSongImage(SongImage songImage, Song song) {
-        songImage.setSong(song);
+    public SongImage saveSongImage(SongImage songImage) {
+        if (songImage.getImage() == null) {
+            Blob imageBlob = Hibernate.getLobCreator(getCurrentSession()).createBlob(new byte[0]);
+            songImage.setImage(imageBlob);
+        }
+
         songImageRepository.saveAndFlush(songImage);
         return songImage;
     }
 
     @Override
     @Transactional
-    public SongImage updateSongImage(SongImage songImage) {
-        songImageRepository.saveAndFlush(songImage);
-        return songImage;
+    public SongImage updateSongImage(SongImage newSongImage) throws Exception {
+        SongImage oldSongImage = findSongImageById(newSongImage.getId());
+        if (oldSongImage == null) {
+            throw new Exception("Item does not exist");
+        }
+
+        oldSongImage.setTiming(newSongImage.getTiming());
+        return songImageRepository.saveAndFlush(oldSongImage);
     }
 
     @Override
@@ -57,8 +66,15 @@ public class SongImageServiceImpl implements SongImageService {
     }
 
     @Override
+    @Transactional
     public void deleteSongImage(SongImage songImage) {
         songImageRepository.delete(songImage);
+    }
+
+    @Override
+    @Transactional
+    public void deleteSongImage(Long id) {
+        songImageRepository.delete(id);
     }
 
     protected Session getCurrentSession()  {

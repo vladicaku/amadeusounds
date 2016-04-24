@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 @CrossOrigin()
 @RestController(value = "ApiSongController")
-@RequestMapping("/admin/songs")
+@RequestMapping("/api/admin/songs")
 public class SongController {
 
     @Autowired
@@ -37,8 +37,8 @@ public class SongController {
 
     /**
      * This method return the ID from the newly created song.
-     * The client then should upload the MultipartFile to the following url:
-     * /upload/ID
+     * The client should upload the MultipartFile to the following url:
+     * /upload/{id}
      * @param song
      * @return
      */
@@ -49,8 +49,15 @@ public class SongController {
         return response;
     }
 
+    @RequestMapping(value = "/{songId}", method = RequestMethod.DELETE)
+    public Response deleteSong(@PathVariable(value = "songId") Long songId) {
+        songService.deleteSong(songId);
+        Response response = new Response(ResponseType.OK, "");
+        return response;
+    }
+
     @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
-    public Response uploadMultipartFile(@PathVariable long id, @RequestParam("song") MultipartFile multipartFile) throws IOException {
+    public Response uploadMultipartFile(@PathVariable long id,  @RequestParam("song") MultipartFile multipartFile) throws Exception {
         Song song = songService.findSongById(id);
         songService.addBlobToSong(song, multipartFile);
         Response response = new Response(ResponseType.OK, "");

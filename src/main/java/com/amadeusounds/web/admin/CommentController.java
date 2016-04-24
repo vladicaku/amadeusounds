@@ -1,9 +1,11 @@
 package com.amadeusounds.web.admin;
 
 import com.amadeusounds.model.Comment;
+import com.amadeusounds.model.Song;
 import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.repository.UserRepository;
 import com.amadeusounds.service.CommentService;
+import com.amadeusounds.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +16,14 @@ import java.util.List;
  * Created by Angela on 4/7/2016.
  */
 @Controller
-@RequestMapping("/admin/comments")
+@RequestMapping("/api/admin/comments")
 public class CommentController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    SongService songService;
 
     @Autowired
     SongRepository songRepository;
@@ -29,25 +34,27 @@ public class CommentController {
     /**
      * Get all comments for a song
      *
-     * @param song_id
+     * @param songId
      * @return list of all comments for a given song
      */
 
-    @RequestMapping(value = "/{song_id}/comments", method = RequestMethod.GET)
-    public @ResponseBody List<Comment> findAllComments(@PathVariable Long song_id) {
-        return commentService.findCommentsForSong(song_id);
+    @RequestMapping(value = "/{songId}/comments", method = RequestMethod.GET)
+    public @ResponseBody List<Comment> findAllComments(@PathVariable(value = "songId") Long songId) {
+        Song song = songService.findSongById(songId);
+        return commentService.findCommentsForSong(song);
     }
 
     /**
      * Get a single comment
      *
-     * @param song_id
-     * @param comment_id
+     * @param songId
+     * @param commentId
      * @return the comment with the given id
      */
-    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.GET)
-    public @ResponseBody Comment findComment(@PathVariable Long song_id, @PathVariable Long comment_id) {
-        return commentService.findCommentById(comment_id);
+    @RequestMapping(value = "/{songId}/comments/{commentId}", method = RequestMethod.GET)
+    public @ResponseBody Comment findComment(@PathVariable(value = "songId") Long songId,
+                                             @PathVariable(value = "commentId") Long commentId) {
+        return commentService.findCommentById(commentId);
     }
 
     /**
@@ -69,13 +76,15 @@ public class CommentController {
     /**
      * Update existing comment
      *
-     * @param comment_id
+     * @param commentId
      * @param comment
      * @return the updated comment
      */
-    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.PUT)
-    public @ResponseBody Comment updateComment(@PathVariable Long song_id, @PathVariable Long comment_id, @RequestBody Comment comment) {
-        Comment oldComment = commentService.findCommentById(comment_id);
+    @RequestMapping(value = "/{songId}/comments/{commentId}", method = RequestMethod.PUT)
+    public @ResponseBody Comment updateComment(@PathVariable(value = "songId") Long songId,
+                                               @PathVariable(value = "commentId") Long commentId,
+                                               @RequestBody Comment comment) {
+        Comment oldComment = commentService.findCommentById(commentId);
         oldComment.setComment(comment.getComment());
         return commentService.saveComment(oldComment);
     }
@@ -83,12 +92,13 @@ public class CommentController {
     /**
      * Delete a comment with a given id
      *
-     * @param song_id
-     * @param comment_id
+     * @param songId
+     * @param commentId
      */
 
-    @RequestMapping(value = "/{song_id}/comments/{comment_id}", method = RequestMethod.DELETE)
-    public void deleteComment(@PathVariable Long song_id, @PathVariable Long comment_id) {
-        commentService.deleteComment(comment_id);
+    @RequestMapping(value = "/{songId}/comments/{commentId}", method = RequestMethod.DELETE)
+    public void deleteComment(@PathVariable(value = "songId") Long songId,
+                              @PathVariable(value = "commentId") Long commentId) {
+        commentService.deleteComment(commentId);
     }
 }
