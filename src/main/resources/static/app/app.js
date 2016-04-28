@@ -24,6 +24,10 @@ amadeusounds.config(['$stateProvider','$urlRouterProvider',function($stateProvid
         .state('login', {
             url: '/login',
             templateUrl: 'views/loginView.html'
+        })
+        .state('upload', {
+            url: '/upload',
+            templateUrl: 'views/uploadSongView.html'
         });
 
 }]);
