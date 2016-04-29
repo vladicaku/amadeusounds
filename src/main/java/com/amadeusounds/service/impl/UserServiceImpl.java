@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,6 +60,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword() + passwordSalt));
+        user.setSongs(new ArrayList<>());
+        user.setComments(new ArrayList<>());
+        user.setRatings(new ArrayList<>());
         userRepository.saveAndFlush(user);
         return user;
     }
