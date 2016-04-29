@@ -1,17 +1,11 @@
 package com.amadeusounds.web.client;
 
-import com.amadeusounds.model.Comment;
-import com.amadeusounds.model.Rating;
-import com.amadeusounds.model.Song;
-import com.amadeusounds.model.User;
+import com.amadeusounds.model.*;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.repository.UserRepository;
-import com.amadeusounds.service.CommentService;
-import com.amadeusounds.service.RatingService;
-import com.amadeusounds.service.SongService;
-import com.amadeusounds.service.UserService;
+import com.amadeusounds.service.*;
 import com.amadeusounds.view.SongView;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +15,9 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -45,6 +42,9 @@ public class SongController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SongImageService songImageService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public MappingJacksonValue getSong(@PathVariable(value = "id") long id) {
@@ -100,6 +100,33 @@ public class SongController {
         rating.setUser(user);
         ratingService.rate(rating);
         return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Get a image for a song
+     *
+     * @param songId
+     * @param imageId
+     * @param request
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{songId}/image/{imageId}", method = RequestMethod.GET)
+    public void getImage(@PathVariable(value = "songId") long songId,
+                         @PathVariable(value = "imageId") long imageId,
+                         HttpServletRequest request,
+                         HttpServletResponse response) throws Exception {
+        Song song = songService.findSongById(songId);
+        SongImage songImage = songImageService.findSongImageById(imageId);
+
+        if (song == songImage.getSong()) {
+            OutputStream outputStream = response.getOutputStream();
+            byte[] byteArray = songImage.getImage().getBytes(0, (int) songImage.getImage().length());
+            outputStream.write(byteArray);
+            outputStream.flush();
+        } else {
+            throw new Exception("Image not found");
+        }
     }
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)

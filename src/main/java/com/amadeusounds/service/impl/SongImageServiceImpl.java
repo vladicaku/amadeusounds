@@ -50,7 +50,11 @@ public class SongImageServiceImpl implements SongImageService {
     public SongImage updateSongImage(SongImage newSongImage) throws Exception {
         SongImage oldSongImage = findSongImageById(newSongImage.getId());
         if (oldSongImage == null) {
-            throw new Exception("Item does not exist");
+            throw new Exception("Item does not exist.");
+        }
+
+        if (!oldSongImage.getSong().equals(newSongImage.getSong())) {
+            throw new Exception("Item does not exist.");
         }
 
         oldSongImage.setTiming(newSongImage.getTiming());

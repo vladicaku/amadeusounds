@@ -1,4 +1,4 @@
-package com.amadeusounds.web;
+package com.amadeusounds.web.test;
 
 import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;

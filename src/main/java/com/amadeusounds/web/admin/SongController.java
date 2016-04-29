@@ -2,9 +2,11 @@ package com.amadeusounds.web.admin;
 
 import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
+import com.amadeusounds.model.SongImage;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.CommentService;
+import com.amadeusounds.service.SongImageService;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.view.SongView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class SongController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    SongImageService songImageService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MappingJacksonValue songs(Pageable pageable) {
         Page<Song> page = songService.getAllSongsForUser(null, pageable);
@@ -57,18 +62,31 @@ public class SongController {
         return response;
     }
 
+    /**
+     * Upload song file
+     *
+     * @param songId
+     * @param multipartFile
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{songId}/upload", method = RequestMethod.POST)
+    public Response uploadMultipartFile(@PathVariable("songId") long songId,  @RequestParam("song") MultipartFile multipartFile) throws Exception {
+        Song song = songService.findSongById(songId);
+        songService.addBlobToSong(song, multipartFile);
+        return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Dlete a song
+     * @param songId
+     * @return
+     */
     @RequestMapping(value = "/{songId}", method = RequestMethod.DELETE)
     public Response deleteSong(@PathVariable(value = "songId") Long songId) {
         songService.deleteSong(songId);
         Response response = new Response(ResponseType.OK, "");
         return response;
-    }
-
-    @RequestMapping(value = "/upload/{songId}", method = RequestMethod.POST)
-    public Response uploadMultipartFile(@PathVariable("songId") long songId,  @RequestParam("song") MultipartFile multipartFile) throws Exception {
-        Song song = songService.findSongById(songId);
-        songService.addBlobToSong(song, multipartFile);
-        return new Response(ResponseType.OK, "");
     }
 
     /**
@@ -119,6 +137,78 @@ public class SongController {
         Comment comment = commentService.findCommentById(commentId);
         commentService.deleteComment(song, comment);
         return new Response(ResponseType.OK, "");
+    }
+
+    // ====================================================================================================
+
+    /**
+     * Save SongImage
+     * This method will return an id for the newly created SongImage.
+     * The client should upload the image on this URL:
+     * /api/admin/songs/{songId}/images/{id}/upload
+     *
+     * @param songId
+     * @param songImage
+     * @return songImageId
+     */
+    @RequestMapping(value = "/{songId}/images", method = RequestMethod.POST)
+    public Response saveSongImage(@PathVariable(value = "songId") long songId, @RequestBody SongImage songImage) {
+        Song song = songService.findSongById(songId);
+        songImage.setSong(song);
+        songImageService.saveSongImage(songImage);
+        return new Response(ResponseType.OK, songImage.getId());
+    }
+
+    /**
+     * Update SongImage
+     *
+     * @param imageId
+     * @param songImage
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{songId}/images/{imageId}",method = RequestMethod.PUT)
+    public Response updateSongImage(@PathVariable("songId") Long songId,
+                                    @PathVariable("imageId") Long imageId,
+                                    @RequestBody SongImage songImage) throws Exception {
+        Song song = songService.findSongById(songId);
+        songImage.setId(imageId);
+        songImage.setSong(song);
+        songImageService.updateSongImage(songImage);
+        return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Delete SongImage
+     *
+     * @param songId
+     * @param imageId
+     * @return
+     */
+    @RequestMapping(value = "/{songId}/images/{imageId}", method = RequestMethod.DELETE)
+    public Response deleteSongImage(@PathVariable("songId") Long songId,
+                                    @PathVariable("imageId") Long imageId) {
+        songImageService.deleteSongImage(imageId);
+        return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Upload SongImage
+     *
+     * @param songId
+     * @param imageId
+     * @param multipartFile
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/{songId}/images/{imageId}/upload", method = RequestMethod.POST)
+    public Response uploadSongImage(@PathVariable("songId") Long songId,
+                                    @PathVariable("imageId") Long imageId,
+                                    @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        SongImage songImage = songImageService.findSongImageById(imageId);
+        songImageService.addBlobToSongImage(songImage, multipartFile);
+        Response response = new Response(ResponseType.OK, "");
+        return response;
     }
 
     @ExceptionHandler(Exception.class)

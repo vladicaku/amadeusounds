@@ -21,6 +21,7 @@ import java.sql.SQLException;
 /**
  * Created by Vac on 4/13/2016.
  */
+@CrossOrigin()
 @Controller
 @RequestMapping("/api/play")
 public class PlayerController {

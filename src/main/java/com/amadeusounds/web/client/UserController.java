@@ -21,29 +21,29 @@ import java.util.List;
 /**
  * Created by Slavce on 07.04.2016.
  */
-
+@CrossOrigin()
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Response registerUser(@RequestBody User user) {
+        userService.registerUser(user);
+        return new Response(ResponseType.OK, user);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Response getUserById(@PathVariable("id") Long id) {
         User user = userService.findUserById(id);
-
-        HttpHeaders responseHeader = new HttpHeaders();
-        responseHeader.add("Content-Type", "application/json; charset=UTF-8");
-        responseHeader.add("Access-Control-Allow-Origin", "*");
-
-        return new ResponseEntity<User>(user, responseHeader, HttpStatus.OK);
+        return new Response(ResponseType.OK, user);
     }
 
     @RequestMapping(path="/{id}/songs", method = RequestMethod.GET)
-    public List<Song> getUserSongs(@RequestParam("id") Long id) {
+    public Response getUserSongs(@RequestParam("id") Long id) {
         List<Song> userSongs = userService.getUserSongs(id);
-
-        return userSongs;
+        return new Response(ResponseType.OK, userSongs);
     }
 
     @RequestMapping(path="/{id}/image", method = RequestMethod.GET)
@@ -62,6 +62,18 @@ public class UserController {
              * Return default image
              */
         }
+    }
+
+    @RequestMapping(value = "/search-by-name/{name}", method = RequestMethod.GET)
+    public Response getUsersByName(@PathVariable("name") String name) {
+        List<User> users = userService.findUserByName(name);
+        return new Response(ResponseType.OK, users);
+    }
+
+    @RequestMapping(value = "/search-by-email/{email}", method = RequestMethod.GET)
+    public Response getUserByEmail(@PathVariable("email") String email) {
+        User user = userService.findUserByEmail(email);
+        return new Response(ResponseType.OK, user);
     }
 
     @ExceptionHandler(Exception.class)
