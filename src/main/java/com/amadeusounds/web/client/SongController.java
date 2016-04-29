@@ -1,6 +1,7 @@
 package com.amadeusounds.web.client;
 
 import com.amadeusounds.model.Comment;
+import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.User;
 import com.amadeusounds.model.json.Response;
@@ -8,7 +9,9 @@ import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.repository.UserRepository;
 import com.amadeusounds.service.CommentService;
+import com.amadeusounds.service.RatingService;
 import com.amadeusounds.service.SongService;
+import com.amadeusounds.service.UserService;
 import com.amadeusounds.view.SongView;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * Created by Vac on 4/13/2016.
+ * SongController
+ *
+ * @author Vladica Jovanovski
+ * @author Angela Josifovska
  */
 @CrossOrigin()
 @RestController(value = "clientSongController")
@@ -34,6 +40,12 @@ public class SongController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    RatingService ratingService;
+
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public MappingJacksonValue getSong(@PathVariable(value = "id") long id) {
         Song song = songService.findSongById(id);
@@ -42,9 +54,9 @@ public class SongController {
         return result;
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public MappingJacksonValue getAllSongsForUser(@PathVariable(value = "userId") long id, Pageable pageable) {
-        User user = null;
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public MappingJacksonValue getAllSongsForUser(@PathVariable("userId") long id, Pageable pageable) {
+        User user = userService.findUserById(id);
         Page<Song> page = songService.getAllSongsForUser(user, pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
         result.setSerializationView(SongView.BaseView.class);
@@ -55,6 +67,39 @@ public class SongController {
     public List<Comment> findAllComments(@PathVariable("id") Long id) {
         Song song = songService.findSongById(id);
         return commentService.findCommentsForSong(song);
+    }
+
+    /**
+     * Get rating for a given song
+     *
+     * @param songId
+     * @return calculated rating for a given song
+     */
+    @RequestMapping(value = "/{songId}/rating", method = RequestMethod.GET)
+    public Response getRating(@PathVariable("songId") Long songId) {
+        Song song = songService.findSongById(songId);
+        return new Response(ResponseType.OK, song.getRating());
+    }
+
+    /**
+     * Add (or change) rating to a song
+     *
+     * @param songId
+     * @param rating
+     * @return Response
+     */
+    @RequestMapping(value = "/{songId}/rating/", method = RequestMethod.POST)
+    public Response rateSong(@PathVariable("songId") Long songId, @RequestBody Rating rating) {
+        /**
+         * TODO:
+         * Get current user from session
+         */
+        User user = null;
+        Song song = songService.findSongById(songId);
+        rating.setSong(song);
+        rating.setUser(user);
+        ratingService.rate(rating);
+        return new Response(ResponseType.OK, "");
     }
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)

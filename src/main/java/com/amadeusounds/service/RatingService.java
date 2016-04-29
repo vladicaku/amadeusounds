@@ -19,7 +19,5 @@ public interface RatingService {
 
     void deleteRating(Long id);
 
-    double calculateRatingForSong(long id);
-
-    Rating findRatingByUserAndSong(User user, Song song);
+    Rating rate(Rating rating);
 }

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.amadeusounds.view.SongView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,10 +25,14 @@ public class Comment extends BaseEntity{
 	@DateTimeFormat(pattern = "dd-MM-yy")
 	@JsonView(SongView.BaseView.class)
 	private LocalDate date;
+
+
 	@ManyToOne
+	@JsonIgnore
 	private Song song;
-	
+
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 
 	public String getComment() {

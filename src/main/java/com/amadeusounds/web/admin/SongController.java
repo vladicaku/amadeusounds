@@ -22,6 +22,7 @@ import java.util.List;
  * SongController
  *
  * @author Vladica Jovanovski
+ * @author Angela Josifovska
  */
 @CrossOrigin()
 @RestController(value = "ApiSongController")
