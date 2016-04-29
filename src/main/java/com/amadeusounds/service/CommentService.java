@@ -16,7 +16,7 @@ public interface CommentService {
 
     public Comment saveComment(Comment comment);
 
-    public void deleteComment(Long commentId);
+    public void deleteComment(Song song, Comment comment) throws Exception;
 
 
 }

@@ -1,8 +1,10 @@
 package com.amadeusounds.web.admin;
 
+import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
+import com.amadeusounds.service.CommentService;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.view.SongView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
- * Created by Vac on 4/13/2016.
+ * SongController
+ *
+ * @author Vladica Jovanovski
  */
 @CrossOrigin()
 @RestController(value = "ApiSongController")
@@ -26,6 +31,8 @@ public class SongController {
     @Autowired
     SongService songService;
 
+    @Autowired
+    CommentService commentService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MappingJacksonValue songs(Pageable pageable) {
@@ -56,12 +63,61 @@ public class SongController {
         return response;
     }
 
-    @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
-    public Response uploadMultipartFile(@PathVariable long id,  @RequestParam("song") MultipartFile multipartFile) throws Exception {
-        Song song = songService.findSongById(id);
+    @RequestMapping(value = "/upload/{songId}", method = RequestMethod.POST)
+    public Response uploadMultipartFile(@PathVariable("songId") long songId,  @RequestParam("song") MultipartFile multipartFile) throws Exception {
+        Song song = songService.findSongById(songId);
         songService.addBlobToSong(song, multipartFile);
-        Response response = new Response(ResponseType.OK, "");
-        return response;
+        return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Get all comments for a song
+     *
+     * @param songId
+     * @return Response with list of all comments for a given song
+     */
+    @RequestMapping(value = "/{songId}/comments", method = RequestMethod.GET)
+    public Response findAllComments(@PathVariable(value = "songId") Long songId) {
+        Song song = songService.findSongById(songId);
+        List<Comment> commentList = song.getComments();
+        return new Response(ResponseType.OK, commentList);
+    }
+
+
+    /**
+     * Post new comment
+     *
+     * @param songId
+     * @param comment
+     * @return Response
+     */
+    @RequestMapping(value = "/{songId}/comments/", method = RequestMethod.POST)
+    public Response addNewComment(@PathVariable("songId") Long songId, @RequestBody Comment comment) {
+        Song song = songService.findSongById(songId);
+        comment.setSong(song);
+        comment.setUser(null);
+        /**
+         * TODO:
+         * Get current user from session
+         */
+        commentService.saveComment(comment);
+        return new Response(ResponseType.OK, "");
+    }
+
+    /**
+     * Delete a comment with a given id
+     *
+     * @param songId
+     * @param commentId
+     * @return Response
+     */
+    @RequestMapping(value = "/{songId}/comments/{commentId}", method = RequestMethod.DELETE)
+    public Response deleteComment(@PathVariable("songId") Long songId,
+                              @PathVariable("commentId") Long commentId) throws Exception {
+        Song song = songService.findSongById(songId);
+        Comment comment = commentService.findCommentById(commentId);
+        commentService.deleteComment(song, comment);
+        return new Response(ResponseType.OK, "");
     }
 
     @ExceptionHandler(Exception.class)

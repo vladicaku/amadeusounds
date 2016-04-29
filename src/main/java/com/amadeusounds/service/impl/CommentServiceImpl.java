@@ -7,6 +7,7 @@ import com.amadeusounds.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -30,11 +31,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment saveComment(Comment comment) {
+        comment.setDate(LocalDate.now());
         return commentRepository.saveAndFlush(comment);
     }
 
     @Override
-    public void deleteComment(Long commentId){
-        commentRepository.delete(commentId);
+    public void deleteComment(Song song, Comment comment) throws Exception {
+        if (comment.getSong() == song) {
+            commentRepository.delete(comment);
+        } else {
+            throw new Exception("Comment not found.");
+        }
     }
 }

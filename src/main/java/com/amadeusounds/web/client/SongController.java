@@ -1,11 +1,13 @@
 package com.amadeusounds.web.client;
 
+import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.User;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.repository.UserRepository;
+import com.amadeusounds.service.CommentService;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.view.SongView;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -29,6 +31,9 @@ public class SongController {
     @Autowired
     SongService songService;
 
+    @Autowired
+    CommentService commentService;
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public MappingJacksonValue getSong(@PathVariable(value = "id") long id) {
         Song song = songService.findSongById(id);
@@ -44,6 +49,12 @@ public class SongController {
         final MappingJacksonValue result = new MappingJacksonValue(page);
         result.setSerializationView(SongView.BaseView.class);
         return result;
+    }
+
+    @RequestMapping(value = "/{id}/comments", method = RequestMethod.GET)
+    public List<Comment> findAllComments(@PathVariable("id") Long id) {
+        Song song = songService.findSongById(id);
+        return commentService.findCommentsForSong(song);
     }
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)
