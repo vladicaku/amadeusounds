@@ -33,8 +33,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Response logout(@RequestParam("email") String email,
-                          @RequestParam("email") String password) {
+    public Response logout() {
         return new Response(ResponseType.OK, "");
     }
 }

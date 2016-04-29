@@ -29,10 +29,12 @@
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amadeusounds/web/client/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27809966">
-              <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.608343">
+              <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1053#1054#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1085,7 +1087,7 @@
       <workItem from="1461193425527" duration="3929000" />
       <workItem from="1461446847642" duration="11980000" />
       <workItem from="1461499409547" duration="8611000" />
-      <workItem from="1461938832730" duration="11406000" />
+      <workItem from="1461938832730" duration="11435000" />
     </task>
     <task id="LOCAL-00001" summary="Small change">
       <created>1459800687784</created>
@@ -1183,11 +1185,17 @@
       <option name="project" value="LOCAL" />
       <updated>1461949839478</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Small change">
+      <created>1461950270159</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1461950270159</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117175000" />
+    <option name="totallyTimeSpent" value="117204000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1292" height="1000" extended-state="0" />
@@ -1258,7 +1266,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small change" />
     <MESSAGE value="Major changes" />
     <MESSAGE value="spring.jackson.mapper.default_view_inclusion=true" />
     <MESSAGE value="Pageable service&#10;Date fixed among other classes" />
@@ -1270,7 +1277,8 @@
     <MESSAGE value="Comments functionality improved" />
     <MESSAGE value="Rating fully implemented" />
     <MESSAGE value="Controllers are merged&#10;Most URL are changed&#10;Login implementation started" />
-    <option name="LAST_COMMIT_MESSAGE" value="Controllers are merged&#10;Most URL are changed&#10;Login implementation started" />
+    <MESSAGE value="Small change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1689,10 +1697,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/amadeusounds/web/client/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27809966">
-          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.608343">
+          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
           </folding>
         </state>
       </provider>
