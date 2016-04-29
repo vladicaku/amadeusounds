@@ -20,11 +20,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class LoginController {
 
-    @Autowired
-    LoginService loginService;
-
-    @Autowired
-    UserService userService;
+//    @Autowired
+//    LoginService loginService;
+//
+//    @Autowired
+//    UserService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Response login(@RequestParam("email") String email,
