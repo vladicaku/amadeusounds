@@ -80,7 +80,7 @@ public class SongImageController {
      * @throws IOException
      */
     @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
-    public Response uploadSongImage(@PathVariable long id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public Response uploadSongImage(@PathVariable(value = "id") long id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         SongImage songImage = songImageService.findSongImageById(id);
         songImageService.addBlobToSongImage(songImage, multipartFile);
         Response response = new Response(ResponseType.OK, "");

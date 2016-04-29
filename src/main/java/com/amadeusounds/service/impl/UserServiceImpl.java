@@ -1,92 +1,160 @@
-//package com.amadeusounds.service.impl;
-//
-//import com.amadeusounds.model.Comment;
-//import com.amadeusounds.model.Rating;
-//import com.amadeusounds.model.Song;
-//import com.amadeusounds.model.User;
-//import com.amadeusounds.repository.UserRepository;
-//import com.amadeusounds.service.UserService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import javax.jws.soap.SOAPBinding;
-//import java.util.List;
-//
-///**
-// * Created by Slavce on 07.04.2016.
-// */
-//
-//@Service
-//public class UserServiceImpl implements UserService {
-//
-//    @Autowired
-//    UserRepository userRepository;
-//
-//    @Override
-//    public User registerUser(User user) {
-//
-//        userRepository.saveAndFlush(user);
-//
-//        return user;
-//    }
-//
-//    @Override
-//    public List<Song> getUserSongs(long id) {
-//
-//        User user = userRepository.findOne(id);
-//
-//        return user.getSongs();
-//    }
-//
-//    @Override
-//    public List<Comment> getUserComments(long id) {
-//
-//        User user = userRepository.findOne(id);
-//
-//        return user.getComments();
-//    }
-//
-//    @Override
-//    public List<Rating> getUserRatings(long id) {
-//
-//        User user = userRepository.findOne(id);
-//
-//        return user.getRatings();
-//    }
-//
-//    @Override
-//    public List<User> findUserByName(String name) {
-//
-//        List<User> users = userRepository.findByFirstName(name);
-//
-//        return users;
-//    }
-//
-//    @Override
-//    public User findUserById(long id) {
-//
-//        User user = userRepository.findOne(id);
-//
-//        return user;
-//    }
-//
-//    @Override
-//    public User findUserByEmail(String email) {
-//
-//        User user = userRepository.findByEmail(email);
-//
-//        return user;
-//    }
-//
-//    @Override
-//    public User loginUser(String email, String password) {
-//
-//        User user = userRepository.findByEmail(email);
-//
-//        if(user.getPassword().equals(password)){
-//            return user;
-//        }
-//
-//        return null;
-//    }
-//}
+package com.amadeusounds.service.impl;
+
+import com.amadeusounds.model.Comment;
+import com.amadeusounds.model.Rating;
+import com.amadeusounds.model.Song;
+import com.amadeusounds.model.User;
+import com.amadeusounds.repository.UserRepository;
+import com.amadeusounds.service.UserService;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.EntityManager;
+import java.io.IOException;
+import java.sql.Blob;
+import java.util.List;
+
+/**
+ * Created by Slavce on 07.04.2016.
+ */
+
+@Service
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    EntityManager entityManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    private static String passwordSalt = "AmadeusPassSalt!Amadeus";
+
+    @Override
+    public User findUserById(long id) {
+        User user = userRepository.findOne(id);
+        return user;
+    }
+
+    @Override
+    public List<User> findUserByName(String name) {
+        List<User> users = userRepository.findByFirstName(name);
+        return users;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
+    }
+
+    @Override
+    @Transactional
+    public User registerUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword() + passwordSalt));
+        userRepository.saveAndFlush(user);
+        return user;
+    }
+
+    @Override
+    public User loginUser(String email, String password) throws Exception {
+        User user = userRepository.findByEmail(email);
+        String encodedPassword = passwordEncoder.encode(password + passwordSalt);
+        if (user.getPassword().equals(encodedPassword)) {
+            return user;
+        } else {
+            throw new Exception("Wrong password.");
+        }
+    }
+
+    @Override
+    @Transactional
+    public User updateUser(User user) {
+        User oldUser = findUserById(user.getId());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
+        oldUser.setEmail(user.getEmail());
+        userRepository.saveAndFlush(oldUser);
+        return oldUser;
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(User user, String oldPassword, String newPassword) throws Exception {
+        String oldEncodedPassword = passwordEncoder.encode(oldPassword + passwordSalt);
+        String newEncodedPassword = passwordEncoder.encode(newPassword + passwordSalt);
+
+        if (!user.getPassword().equals(oldEncodedPassword)) {
+            throw new Exception("Wrong password.");
+        }
+
+        if (oldEncodedPassword.equals(newEncodedPassword)) {
+            throw new Exception("The old and the new password cannot be same.");
+        }
+
+        user.setPassword(newEncodedPassword);
+    }
+
+    @Override
+    @Transactional
+    public void saveImage(User user, MultipartFile multipartFile) throws IOException {
+        Blob blob = Hibernate.getLobCreator(getCurrentSession()).createBlob(multipartFile.getInputStream(), multipartFile.getSize());
+        user.setImage(blob);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public List<Song> getUserSongs(long id) {
+        User user = userRepository.findOne(id);
+        return user.getSongs();
+    }
+
+    @Override
+    public List<Comment> getUserComments(long id) {
+        User user = userRepository.findOne(id);
+        return user.getComments();
+    }
+
+    @Override
+    public List<Rating> getUserRatings(long id) {
+        User user = userRepository.findOne(id);
+        return user.getRatings();
+    }
+
+    @Override
+    @Transactional
+    public User deactivateUser(User user) {
+        user.setActive(false);
+        return userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Long id) {
+        userRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    @Override
+    @Transactional
+    public void deleteImage(User user) {
+        user.setImage(null);
+        userRepository.saveAndFlush(user);
+    }
+
+    protected Session getCurrentSession()  {
+        return entityManager.unwrap(Session.class);
+    }
+}

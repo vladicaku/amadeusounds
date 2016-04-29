@@ -4,7 +4,10 @@ import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.User;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -12,19 +15,33 @@ import java.util.List;
  */
 public interface UserService {
 
-    public User registerUser(User user);
+    User registerUser(User user);
 
-    public List<Song> getUserSongs(long id);
+    List<Song> getUserSongs(long id);
 
-    public List<Comment> getUserComments(long id);
+    List<Comment> getUserComments(long id);
 
-    public List<Rating> getUserRatings(long id);
+    List<Rating> getUserRatings(long id);
 
-    public List<User> findUserByName(String name);
+    List<User> findUserByName(String name);
 
-    public User findUserById(long id);
+    User findUserById(long id);
 
-    public User findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-    public User loginUser(String email, String password);
+    User loginUser(String email, String password) throws Exception;
+
+    User updateUser(User user);
+
+    void deleteUser(User user);
+
+    void deleteUser(Long id);
+
+    User deactivateUser(User user);
+
+    void saveImage(User user, MultipartFile multipartFile) throws IOException;
+
+    void deleteImage(User user);
+
+    void changePassword(User user, String oldPassword, String newPassword) throws Exception;
 }

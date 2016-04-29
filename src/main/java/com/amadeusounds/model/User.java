@@ -1,11 +1,10 @@
 package com.amadeusounds.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import java.sql.Blob;
@@ -17,21 +16,28 @@ import java.util.List;
 @Entity
 @Table(name="users")
 public class User extends BaseEntity {
+
+	@NotNull
 	@Length(max=50)
     private String firstName;
-	
-	@Length(max=50)
-	private String secondName;
-	
-	@Email
-	private String email;
-	
-	@Length(max = 50)
-	private String password;
-	
+
 	@NotNull
+	@Length(max=50)
+	private String lastName;
+
+	@NotNull
+	@Email
+	@Column(unique = true)
+	private String email;
+
+	@NotNull
+	@JsonIgnore
+	private String password;
+
+	@NotNull
+	@JsonIgnore
 	private Blob image;
-	
+
 	@Length(max=50)
 	private String location;
 	
@@ -123,15 +129,15 @@ public class User extends BaseEntity {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getLocation() {
+	public String getLocation() {
         return location;
     }
 
