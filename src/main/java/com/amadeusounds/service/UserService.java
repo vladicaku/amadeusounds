@@ -4,6 +4,7 @@ import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Rating;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,4 +45,6 @@ public interface UserService {
     void deleteImage(User user);
 
     void changePassword(User user, String oldPassword, String newPassword) throws Exception;
+
+    public UserDetails loadUserByUsername(String username);
 }

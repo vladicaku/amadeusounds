@@ -52,7 +52,7 @@ public class UserController {
         return new Response(ResponseType.OK, "");
     }
 
-    @RequestMapping(value = "/{id}/image", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/image", method = RequestMethod.DELETE)
     public Response deleteUserImage(@PathVariable(value = "id") Long id) {
         User user = userService.findUserById(id);
         userService.deleteImage(user);

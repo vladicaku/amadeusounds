@@ -9,6 +9,10 @@ import com.amadeusounds.service.UserService;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +29,7 @@ import java.util.List;
  */
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -160,5 +164,22 @@ public class UserServiceImpl implements UserService {
 
     protected Session getCurrentSession()  {
         return entityManager.unwrap(Session.class);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+
+        System.err.println(user);
+
+        if (user != null) {
+            SimpleGrantedAuthority role = new SimpleGrantedAuthority(user.role.toString());
+            List<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+            roles.add(role);
+
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), roles);
+        } else {
+            return null;
+        }
     }
 }

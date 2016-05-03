@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Registration Form Template</title>
+
+
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "json/countries.json",
+                dataType: "json",
+                success: function (data) {
+
+                    $("#form-location").html('');
+                    $("select").append("<option default selected> Location... </option>");
+                    for (i = 0; i < data.length; i++) {
+                        var display = data[i].name + " (" + data[i].code + ")";
+
+                        $("select").append("<option>" + display + "</option>");
+                    }
+                }
+            });
+
+            $(":file").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        function imageIsLoaded(e) {
+            $('#form-image').attr('src', e.target.result);
+        };
+    </script>
+
+
+</head>
+
+<body>
+
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1><strong>AmadeuSongs</strong> Registration Form</h1>
+                    <div class="description">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 phone">
+                    <img src="http://www.victoryapostolicchurch.org/sites/www.victoryapostolicchurch.org/files/assets/Register%20Button.jpg" alt="" style="border-radius: 10px; margin-top: 19%">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Register to our App</h3>
+                            <p>Fill in the form below to get instant access:</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom">
+                        <form role="form" action="" method="post" class="registration-form">
+                            <div class="form-group">
+                                <label class="sr-only" for="form-first-name">First name</label>
+                                <input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-last-name">Last name</label>
+                                <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-email">Email</label>
+                                <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-email">Password</label>
+                                <input type="password" name="form-email" placeholder="Password..." class="form-email form-control" id="form-password">
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-location">Location</label>
+                                <select name="form-location" class="form-location form-control" id="form-location">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-image">Image</label>
+                                <input type='file' style="float:left"/>
+                                <img name="form-image" class="form-image form-control" id="form-image" src="http://www.socialexplorer.com/assets/blank_avatar-33a61896cf005841524f84b618ef1d70.jpg" alt="your image" style="border-radius: 55px; width: 100px; height: 100px;"/>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-bio">Short biography</label>
+                                <textarea name="form-bio" placeholder="Short bio..." class="form-bio form-control" id="form-bio"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="form-website">Personal website</label>
+                                <input type="text" name="form-website" placeholder="Personal website..." class="form-website form-control" id="form-website">
+                            </div>
+                            <button type="submit" class="btn">Sign me up!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+</body>
+
+</html>

@@ -17,24 +17,24 @@ import java.util.List;
 @Table(name="users")
 public class User extends BaseEntity {
 
-	@NotNull
+	//@NotNull
 	@Length(max=50)
     private String firstName;
 
-	@NotNull
+	//@NotNull
 	@Length(max=50)
 	private String lastName;
 
 	@NotNull
-	@Email
+	//@Email
 	@Column(unique = true)
 	private String email;
 
-	@NotNull
+	//@NotNull
 	@JsonIgnore
 	private String password;
 
-	@NotNull
+	//@NotNull
 	@JsonIgnore
 	private Blob image;
 
@@ -57,7 +57,29 @@ public class User extends BaseEntity {
 	
 	private boolean active;
 
-    public String getPassword() {
+	@Enumerated(EnumType.STRING)
+	public Provider provider = Provider.LOCAL;
+
+	@Enumerated(EnumType.STRING)
+	public Role role;
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public String getPassword() {
 		return password;
 	}
 
