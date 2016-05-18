@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/image-picker.css">
 
 
     <!-- Favicon and touch icons -->
@@ -21,8 +21,8 @@
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/form-elements.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/uploadSong.css">
 
 </head>
 
@@ -44,7 +44,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a ui-sref="home">Home</a></li>
-                        <li><a ui-sref="upload">Upload</a></li>
+                        <li><a ui-sref="upload.first">Upload</a></li>
                         <li><a href="#">Dashboard</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -87,6 +87,10 @@
     <script src="app/libraries/ng-password-strength.min.js"></script>
     <script src="app/libraries/angular-simple-logger.min.js"></script>
     <script src="app/libraries/retina-1.1.0.min.js"></script>
+
+    <!-- Image plugins-->
+    <script src="app/libraries/imagepreview.js"></script>
+    <script src="app/libraries/image-picker.min.js"></script>
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>

@@ -1,0 +1,152 @@
+
+<div class="form-box semi-transparent">
+    <div class="form-top">
+        <div class="form-top-left">
+            <h3>Choose photos that describe your song the best</h3>
+            <p>You can set the time when the photo would display during the song</p>
+        </div>
+        <div class="form-top-right">
+            <i class="fa fa-music"></i>
+        </div>
+    </div>
+
+    <div class="form-bottom">
+
+        <form role="form" action="" method="post" class="login-form">
+
+
+            <div class="row vertical_offset20">
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage1" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview1"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage2" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview2"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage3" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview3"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row vertical_offset20">
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage4" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview4"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage5" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview5"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="col-xs-12"> <input type="file" name="testimage6" /></div>
+                    </div>
+                    <div class="row vertical_offset10">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="preview" id="preview6"></div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="row"><div class="col-xs-12">Time:</div></div>
+                            <div class="row"><div class="col-xs-12"><input class="minutes" type="number" placeholder="min"></div></div>
+                            <div class="row"><div class="col-xs-12"><input class="seconds" type="number" placeholder="sec"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row vertical_offset20">
+
+                <div class="col-xs-12 col-md-3 col-md-offset-6">
+                    <button type="submit" class="btn col-xs-12 col-md-6" style="background-color:#b3b3b3; !important;">Cancel</button>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <button type="submit" ui-sref="upload.third" class="btn" style="background-color:#19b9e7 !important;">Next</button>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('#preview1').imagepreview({
+            input: '[name="testimage1"]', preview: '#preview1'
+        });
+        $('#preview2').imagepreview({
+            input: '[name="testimage2"]', preview: '#preview2',
+        });
+        $('#preview3').imagepreview({
+            input: '[name="testimage3"]', preview: '#preview3'
+        });
+        $('#preview4').imagepreview({
+            input: '[name="testimage4"]', preview: '#preview4',
+        });
+        $('#preview5').imagepreview({
+            input: '[name="testimage5"]', preview: '#preview5'
+        });
+        $('#preview6').imagepreview({
+            input: '[name="testimage6"]', preview: '#preview6',
+        });
+    });
+</script>
+
+

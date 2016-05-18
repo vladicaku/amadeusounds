@@ -5,7 +5,32 @@ body {
     font-weight: 300;
     color: #888;
     line-height: 30px;
-    text-align: center;
+}
+.centered{
+	text-align: center;
+}
+.preview{
+	height:100px;
+	width:100px;
+	border:1px solid gray;
+}
+.preview img{
+	width:100px;
+	height:100px;
+}
+.minutes, .seconds{
+	width:60px;
+	height: 30px;
+	margin-bottom: 5px;
+}
+.vertical_offset10{
+	margin-top:10px;
+}
+.vertical_offset20{
+	margin-top:20px;
+}
+.semi-transparent{
+	opacity: 0.9;
 }
 
 strong { font-weight: 500; }
@@ -82,7 +107,6 @@ img { max-width: 100%; }
 /***** Top content *****/
 
 .inner-bg {
-    padding: 100px 0 170px 0;
 }
 
 .top-content .text {
@@ -109,7 +133,7 @@ img { max-width: 100%; }
 
 .form-top {
 	overflow: hidden;
-	padding: 0 25px 15px 25px;
+	padding: 0 25px 0 25px;
 	background: #fff;
 	-moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
 	text-align: left;
@@ -121,7 +145,7 @@ img { max-width: 100%; }
 	padding-top: 25px;
 }
 
-.form-top-left h3 { margin-top: 0; }
+.form-top-left h3 { margin-top: 0; margin-bottom: 0;}
 
 .form-top-right {
 	float: left;
@@ -182,4 +206,63 @@ img { max-width: 100%; }
 	h1, h2 { font-size: 32px; }
 
 }
+
+
+label.btn span {
+	font-size: 1.5em ;
+}
+
+label input[type="radio"] ~ i.fa.fa-circle-o{
+	color: #b3b3b3;    display: inline;
+}
+label input[type="radio"] ~ i.fa.fa-check-circle-o{
+	display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-circle-o{
+	display: none;
+}
+label input[type="radio"] {
+	display: none;
+}
+
+label input[type="radio"]:checked ~ i.fa.fa-check-circle-o{
+	color: #19b9e7;    display: inline;
+}
+label:hover input[type="radio"] ~ i.fa {
+	color: #19b9e7;
+}
+
+
+div[data-toggle="buttons"] label.active{
+	color: #19b9e7;
+}
+
+label[data-toggle="buttons"]{
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 10px;
+	font-weight: normal;
+	line-height: 1em;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: top;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+label[data-toggle="buttons"]:hover {
+	color: #19b9e7;
+}
+
+
+label[data-toggle="buttons"]:active,label[data-toggle="buttons"].active {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
 
