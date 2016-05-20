@@ -9,6 +9,8 @@ amadeusounds.controller('LoginController',
         function($scope, $rootScope, $location, $filter, UserService) {
             $scope.rememberMe = false;
 
+            console.log($scope.username+" "+$scope.password);
+
             $scope.login = function() {
                 //console.log("YEYEYE");
                 UserService.authenticate($.param({

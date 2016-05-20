@@ -23,7 +23,7 @@ public class UserInit {
 
   @PostConstruct
   public void init() {
-    User admin = userRepository.findByEmail("admin");
+    User admin = userRepository.findByEmail("admin@yahoo.com");
     if (admin == null) {
       admin = new User();
       admin.setEmail("admin@yahoo.com");

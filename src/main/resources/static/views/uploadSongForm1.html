@@ -1,0 +1,52 @@
+<script>
+
+    $('label').click(function(){
+        $('label input[type="radio"]').parent().find('span').attr('style','color:#b3b3b3;');
+        $('label input[type="radio"]:checked').parent().find('span').attr('style','color:#19b9e7;');
+    });
+</script>
+<div class="form-box semi-transparent">
+    <div class="form-top">
+        <div class="form-top-left">
+            <h3>Upload a song</h3>
+            <p>Enter basic info and upload song file:</p>
+        </div>
+        <div class="form-top-right">
+            <i class="fa fa-music"></i>
+        </div>
+    </div>
+
+    <div class="form-bottom">
+
+        <form role="form" action="" method="post" class="login-form">
+            <div class="form-group">
+                <label class="sr-only" for="form-name">Song Name</label>
+                <input type="text" name="form-name" placeholder="Song Name" class="form-name form-control" id="form-name">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="form-description">Description</label>
+                <textarea type="text" name="form-description" placeholder="Description" class="form-description form-control" id="form-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="song-file">Song file</label>
+                <input type="file" name="song-file" class="song-file form-control" id="song-file">
+            </div>
+
+            <div class="form-group" ng-controller="MusicGenresController">
+                <div class="btn-group" >
+                    <label class="btn" ng-repeat="g in genres" data-toggle="buttons">
+                        <input type="radio" ng-model="g.name" name='gender2'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{g.name}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-3 col-md-offset-6">
+                    <button type="submit" class="btn col-xs-12 col-md-6" style="background-color:#b3b3b3; !important;">Cancel</button>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <button type="submit" ui-sref="upload.second" class="btn" style="background-color:#19b9e7 !important;">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+ </div>

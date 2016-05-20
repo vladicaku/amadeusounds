@@ -4,8 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("http://lesserphotography.files.wordpress.com/2012/04/guitar-strings-black-and-white.jpg");
-    
+	$.backstretch("../images/background1.jpg");
     /*
         Form validation
     */
