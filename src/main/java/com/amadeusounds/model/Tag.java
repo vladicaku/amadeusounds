@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -16,7 +17,8 @@ public class Tag extends BaseEntity{
 	
 	@Length(max  = 50)
 	private String name;
-	
+
+	@JsonIgnore
 	private Blob image;
 
 	@ManyToMany(mappedBy = "tags")
