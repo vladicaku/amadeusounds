@@ -121,7 +121,7 @@ public class SongController {
 
         if (song == songImage.getSong()) {
             OutputStream outputStream = response.getOutputStream();
-            byte[] byteArray = songImage.getImage().getBytes(0, (int) songImage.getImage().length());
+            byte[] byteArray = songImage.getImage().getBytes(1, (int) songImage.getImage().length());
             outputStream.write(byteArray);
             outputStream.flush();
         } else {

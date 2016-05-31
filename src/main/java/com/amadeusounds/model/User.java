@@ -17,20 +17,20 @@ import java.util.List;
 @Table(name="users")
 public class User extends BaseEntity {
 
-	//@NotNull
+	@NotNull
 	@Length(max=50)
     private String firstName;
 
-	//@NotNull
+	@NotNull
 	@Length(max=50)
 	private String lastName;
 
 	@NotNull
-	//@Email
+	@Email
 	@Column(unique = true)
 	private String email;
 
-	//@NotNull
+	@NotNull
 	@JsonIgnore
 	private String password;
 
@@ -43,7 +43,8 @@ public class User extends BaseEntity {
 	
 	@Length(max = 400)
 	private String biography;
-	
+
+	@Length(max=50)
 	private String website;
 	
 	@OneToMany(mappedBy = "user")

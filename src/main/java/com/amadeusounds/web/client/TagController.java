@@ -42,11 +42,13 @@ public class TagController {
         {
             try {
                 OutputStream outputStream = response.getOutputStream();
-                byte[] byteArray = tag.getImage().getBytes(0, (int) tag.getImage().length());
+                byte[] byteArray = tag.getImage().getBytes(1, (int) tag.getImage().length());
+                response.setContentType("image/png");
+                response.setContentLengthLong(byteArray.length);
                 outputStream.write(byteArray);
                 outputStream.flush();
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }

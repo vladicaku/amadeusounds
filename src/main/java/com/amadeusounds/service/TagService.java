@@ -15,4 +15,6 @@ public interface TagService {
     Tag findTagById(Long id);
 
     List<Tag> getAllTags();
+
+    Tag saveTag(Tag tag);
 }
