@@ -21,7 +21,7 @@ public class Tag extends BaseEntity{
 	@JsonIgnore
 	private Blob image;
 
-	@ManyToMany(mappedBy = "tags")
+	@ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
 	private List<Song> songs;
 
 	public String getName() {
