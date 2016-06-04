@@ -1,15 +1,9 @@
-<script>
-    $("select").imagepicker({
-        show_label  : true,
-        limit: 2
-    })
 
-</script>
 <div class="form-box semi-transparent">
     <div class="form-top">
         <div class="form-top-left">
             <h3>Choose visual tags that describe your song the best</h3>
-            <p>You can select up to 2 visual tags</p>
+            <p>You can select up to 5 visual tags</p>
         </div>
         <div class="form-top-right">
             <i class="fa fa-music"></i>
@@ -18,34 +12,19 @@
 
     <div class="form-bottom">
 
-        <form role="form" action="" method="post" class="login-form">
-            <select class="image-picker show-html" data-limit="2" multiple="multiple">
+        <form role="form" class="login-form" ng-controller="SongUploadController">
+            <select class="image-picker show-html" data-limit="5" id="selectedTags" name="selectedTags" ng-model="selectedTags" multiple="multiple" >
 
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="1">Running</option>
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="2">Running</option>
-                <option data-img-src="http://www.spichelor.com/wp-content/uploads/2016/02/allevents.in_.jpg" value="3">Party</option>
-                <option data-img-src="http://worldnutrition.net/wp-content/uploads/2014/09/VITALZYM-VS.-WOBENZYM.jpg" value="4">Relax</option>
-                <option data-img-src="http://greenivyed.com/wp-content/uploads/2015/10/Female-student-studying-014.jpg" value="5">Studying</option>
-
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="6">Running</option>
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="7">Running</option>
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="8">Running</option>
-                <option data-img-src="http://www.spichelor.com/wp-content/uploads/2016/02/allevents.in_.jpg" value="9">Party</option>
-                <option data-img-src="http://worldnutrition.net/wp-content/uploads/2014/09/VITALZYM-VS.-WOBENZYM.jpg" value="10">Relax</option>
-
-                <option data-img-src="http://greenivyed.com/wp-content/uploads/2015/10/Female-student-studying-014.jpg" value="11">Studying</option>
-                <option data-img-src="http://healthycentralflorida.org/wp-content/uploads/2014/08/mec-spring-_u4a3495-running.jpg" value="12">Running</option>
-                <option data-img-src="http://www.spichelor.com/wp-content/uploads/2016/02/allevents.in_.jpg" value="13">Party</option>
-                <option data-img-src="http://worldnutrition.net/wp-content/uploads/2014/09/VITALZYM-VS.-WOBENZYM.jpg" value="14">Relax</option>
-                <option data-img-src="http://greenivyed.com/wp-content/uploads/2015/10/Female-student-studying-014.jpg" value="15">Studying</option>
+                <option id="{{t.id}}" data-img-src="../images/{{t.name}}.jpg" value="{{t.id}}"
+                        ng-repeat="t in tags" repeat-end="onEnd()" ng-value="t.id">{{t.name}}</option>
 
             </select>
             <div class="row vertical_offset20">
                 <div class="col-xs-12 col-md-3 col-md-offset-6">
-                    <button type="submit" class="btn col-xs-12 col-md-6" style="background-color:#b3b3b3; !important;">Cancel</button>
+                    <button type="submit" ui-sref="home" class="btn col-xs-12 col-md-6" style="background-color:#b3b3b3; !important;">Cancel</button>
                 </div>
                 <div class="col-xs-12 col-md-3">
-                    <button type="submit" ui-sref="home" class="btn" style="background-color:#19b9e7 !important;">Finish</button>
+                    <button type="submit" ui-sref="home" class="btn btn-submit"  ng-click="submit3()" style="background-color:#19b9e7 !important;">Finish</button>
                 </div>
             </div>
         </form>

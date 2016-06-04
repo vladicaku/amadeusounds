@@ -18,35 +18,35 @@
 
     <div class="form-bottom">
 
-        <form role="form" action="" method="post" class="login-form">
-            <div class="form-group">
+        <form name="songForm" role="form" ng-controller="SongUploadController" class="login-form" novalidate>
+            <div class="form-group"  ng-class="{ 'has-error' : songForm.form-name.$invalid && !songForm.form-name.$pristine }">
                 <label class="sr-only" for="form-name">Song Name</label>
-                <input type="text" name="form-name" placeholder="Song Name" class="form-name form-control" id="form-name">
+                <input ng-model="name" type="text" name="form-name" placeholder="Song Name" class="form-name form-control" id="form-name" required>
             </div>
             <div class="form-group">
                 <label class="sr-only" for="form-description">Description</label>
-                <textarea type="text" name="form-description" placeholder="Description" class="form-description form-control" id="form-description"></textarea>
+                <textarea ng-model="description" type="text" name="form-description" placeholder="Description" class="form-description form-control" id="form-description"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group"  ng-class="{ 'has-error' : songForm.songFile.$invalid && !songForm.songFile.$pristine }">
                 <label class="sr-only" for="song-file">Song file</label>
-                <input type="file" name="song-file" class="song-file form-control" id="song-file">
+                <input file-model="songFile" type="file" name="songFile" class="song-file form-control" id="song-file" required>
             </div>
 
-            <div class="form-group" ng-controller="MusicGenresController">
-                <div class="btn-group" >
-                    <label class="btn" ng-repeat="g in genres" data-toggle="buttons">
-                        <input type="radio" ng-model="g.name" name='gender2'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{g.name}}</span>
+            <div class="form-group">
+                <div class="btn-group">
+                    <label class="btn" ng-click="newValue(c.name)" ng-repeat="c in categories" data-toggle="buttons">
+                        <input type="radio" ng-model="category" name='category'><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i><span>{{c.name}}</span>
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-md-3 col-md-offset-6">
-                    <button type="submit" class="btn col-xs-12 col-md-6" style="background-color:#b3b3b3; !important;">Cancel</button>
+                    <button class="btn col-xs-12 col-md-6" ui-sref="home" ng-click="$submitted = false" style="background-color:#b3b3b3; !important;">Cancel</button>
                 </div>
                 <div class="col-xs-12 col-md-3">
-                    <button type="submit" ui-sref="upload.second" class="btn" style="background-color:#19b9e7 !important;">Next</button>
+                    <button ng-disabled="songForm.$invalid" ng-click="submit()" type="submit" ui-sref="upload.second" class="btn" style="background-color:#19b9e7 !important;">Next</button>
                 </div>
             </div>
         </form>
     </div>
- </div>
+</div>

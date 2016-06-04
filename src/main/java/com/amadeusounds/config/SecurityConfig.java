@@ -85,9 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .antMatchers("/me", "/oauth/authorize", "/oauth/token", "/user")
       .hasRole("ADMIN");
 
-    http.authorizeRequests()
-      .antMatchers("/api/admin/**")   //dodadene e /api/...
-      .hasRole("ADMIN");
+   // http.authorizeRequests()
+     // .antMatchers("/api/admin/**")   //dodadene e /api/...
+     // .hasRole("ADMIN");
 
     http.authorizeRequests()
       .antMatchers("/**")

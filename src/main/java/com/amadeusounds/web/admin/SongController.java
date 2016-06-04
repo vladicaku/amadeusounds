@@ -1,13 +1,12 @@
 package com.amadeusounds.web.admin;
 
+import com.amadeusounds.model.Category;
 import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.SongImage;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
-import com.amadeusounds.service.CommentService;
-import com.amadeusounds.service.SongImageService;
-import com.amadeusounds.service.SongService;
+import com.amadeusounds.service.*;
 import com.amadeusounds.view.SongView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +39,12 @@ public class SongController {
     @Autowired
     SongImageService songImageService;
 
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MappingJacksonValue songs(Pageable pageable) {
         Page<Song> page = songService.getAllSongsForUser(null, pageable);
@@ -56,7 +61,9 @@ public class SongController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public Response createSong(@RequestBody Song song) {
+    public Response createSong(@RequestBody Song song,@RequestParam String category, @RequestParam String username) {
+        song.setCategory(categoryService.findByName(category));
+        song.setUser(userService.findUserByEmail(username));
         songService.saveSong(song);
         Response response = new Response(ResponseType.OK, song.getId());
         return response;

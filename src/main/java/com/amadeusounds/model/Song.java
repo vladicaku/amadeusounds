@@ -41,7 +41,11 @@ public class Song extends BaseEntity {
     @JsonView(SongView.BaseView.class)
     private Category category;
 
-    @ManyToMany()
+    @ManyToMany
+    @JoinTable(
+            name="songs_tags",
+            joinColumns=@JoinColumn(name="song_id", referencedColumnName="id"),
+            inverseJoinColumns=@JoinColumn(name="tag_id", referencedColumnName="id"))
     @JsonView(SongView.BaseView.class)
     private List<Tag> tags;
 

@@ -1,9 +1,11 @@
 package com.amadeusounds.web.client;
 
 import com.amadeusounds.model.Category;
+import com.amadeusounds.model.Song;
 import com.amadeusounds.model.Tag;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
+import com.amadeusounds.service.SongService;
 import com.amadeusounds.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +31,9 @@ public class TagController {
     @Autowired
     TagService tagService;
 
+    @Autowired
+    SongService songService;
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Tag> getAllTags()
     {
@@ -35,7 +41,7 @@ public class TagController {
     }
 
     @RequestMapping(value = "/{id}/image", method = RequestMethod.GET)
-    public void getAllTags(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+    public void getTagImage(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
     {
         Tag tag = tagService.findTagById(id);
         if (tag != null)
@@ -43,7 +49,7 @@ public class TagController {
             try {
                 OutputStream outputStream = response.getOutputStream();
                 byte[] byteArray = tag.getImage().getBytes(1, (int) tag.getImage().length());
-                response.setContentType("image/png");
+                response.setContentType("image/jpg");
                 response.setContentLengthLong(byteArray.length);
                 outputStream.write(byteArray);
                 outputStream.flush();
@@ -52,7 +58,21 @@ public class TagController {
             }
         }
     }
+    @RequestMapping(value = "/{tagId}/songs/{songId}", method = RequestMethod.POST)
+    public void addTagToSong(@PathVariable Long tagId, @PathVariable Long songId) {
 
+        Song song=songService.findSongById(songId);
+        Tag tag=tagService.findTagById(tagId);
+
+        List<Tag> tags=song.getTags();
+        if(tags==null){
+            tags=new ArrayList<Tag>();
+        }
+        tags.add(tag);
+        song.setTags(tags);
+        songService.saveSong(song);
+
+    }
     @ExceptionHandler(Exception.class)
     public Response exception(Exception e) {
         return new Response(ResponseType.ERROR, e.getMessage());
