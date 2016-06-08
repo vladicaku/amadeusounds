@@ -182,4 +182,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return null;
         }
     }
+
+    @Override
+    public User findByToken(String token) {
+        return  userRepository.findByToken(token);
+    }
 }

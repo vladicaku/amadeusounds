@@ -46,84 +46,84 @@ public class DatabaseInit implements ApplicationContextAware{
                 "Alternative","House","Soul","Punk","Electronic","Pop-Folk","Retro","Latin", "other"};
 
         List<Tag> tags= tagService.getAllTags();
-        if (tags.size()==0)
-        {
-            Tag t=new Tag();
-            t.setName("Running");
-            t.setImage(getBlobFromImage("running"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Party");
-            t.setImage(getBlobFromImage("party"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Relax");
-            t.setImage(getBlobFromImage("relax"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Studying");
-            t.setImage(getBlobFromImage("studying"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Workout");
-            t.setImage(getBlobFromImage("workout"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Children");
-            t.setImage(getBlobFromImage("children"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Motivation");
-            t.setImage(getBlobFromImage("motivational"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Dance");
-            t.setImage(getBlobFromImage("dance"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Romantic");
-            t.setImage(getBlobFromImage("romantic"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Concentration");
-            t.setImage(getBlobFromImage("concentrating"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Summer");
-            t.setImage(getBlobFromImage("summer"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Teenage");
-            t.setImage(getBlobFromImage("teenage"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Fast");
-            t.setImage(getBlobFromImage("fast"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Christmas");
-            t.setImage(getBlobFromImage("christmas"));
-            tagService.saveTag(t);
-
-            t=new Tag();
-            t.setName("Chill");
-            t.setImage(getBlobFromImage("chill"));
-            tagService.saveTag(t);
-
-        }
+//        if (tags.size()==0)
+//        {
+//            Tag t=new Tag();
+//            t.setName("Running");
+//            t.setImage(getBlobFromImage("running"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Party");
+//            t.setImage(getBlobFromImage("party"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Relax");
+//            t.setImage(getBlobFromImage("relax"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Studying");
+//            t.setImage(getBlobFromImage("studying"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Workout");
+//            t.setImage(getBlobFromImage("workout"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Children");
+//            t.setImage(getBlobFromImage("children"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Motivation");
+//            t.setImage(getBlobFromImage("motivational"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Dance");
+//            t.setImage(getBlobFromImage("dance"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Romantic");
+//            t.setImage(getBlobFromImage("romantic"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Concentration");
+//            t.setImage(getBlobFromImage("concentrating"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Summer");
+//            t.setImage(getBlobFromImage("summer"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Teenage");
+//            t.setImage(getBlobFromImage("teenage"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Fast");
+//            t.setImage(getBlobFromImage("fast"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Christmas");
+//            t.setImage(getBlobFromImage("christmas"));
+//            tagService.saveTag(t);
+//
+//            t=new Tag();
+//            t.setName("Chill");
+//            t.setImage(getBlobFromImage("chill"));
+//            tagService.saveTag(t);
+//
+//        }
         List<Category> categoriesList=categoryService.getAllCategories();
         if(categoriesList.size()==0){
             for (int i=0; i<categories.length; i++)

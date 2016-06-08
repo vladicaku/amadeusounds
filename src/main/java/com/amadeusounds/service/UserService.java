@@ -46,5 +46,7 @@ public interface UserService {
 
     void changePassword(User user, String oldPassword, String newPassword) throws Exception;
 
-    public UserDetails loadUserByUsername(String username);
+    UserDetails loadUserByUsername(String username);
+
+    User findByToken(String tag);
 }

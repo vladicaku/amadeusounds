@@ -16,4 +16,6 @@ public interface UserRepository extends JpaSpecificationRepository<User, Long>{
 
     public User findByEmail(String email);
 
+    public User findByToken(String token);
+
 }

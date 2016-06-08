@@ -14,165 +14,180 @@ import java.util.List;
  * Created by Vladica Jovanovski on 3/15/2016.
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User extends BaseEntity {
 
-	@NotNull
-	@Length(max=50)
-    private String firstName;
+  @NotNull
+  @Length(max = 50)
+  private String firstName;
 
-	@NotNull
-	@Length(max=50)
-	private String lastName;
+  @NotNull
+  @Length(max = 50)
+  private String lastName;
 
-	@NotNull
-	@Email
-	@Column(unique = true)
-	private String email;
+  @NotNull
+  @Email
+  @Column(unique = true)
+  private String email;
 
-	@NotNull
-	@JsonIgnore
-	private String password;
+  @NotNull
+  @JsonIgnore
+  private String password;
 
-	//@NotNull
-	@JsonIgnore
-	private Blob image;
+  //@NotNull
+  @JsonIgnore
+  private Blob image;
 
-	@Length(max=50)
-	private String location;
-	
-	@Length(max = 400)
-	private String biography;
+  @Length(max = 50)
+  private String location;
 
-	@Length(max=50)
-	private String website;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Song> songs;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Comment> comments;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Rating> ratings;
-	
-	private boolean active;
+  @Length(max = 400)
+  private String biography;
 
-	@Enumerated(EnumType.STRING)
-	public Provider provider = Provider.LOCAL;
+  @Length(max = 50)
+  private String website;
 
-	@Enumerated(EnumType.STRING)
-	public Role role;
+  @OneToMany(mappedBy = "user")
+  private List<Song> songs;
 
-	public Provider getProvider() {
-		return provider;
-	}
+  @OneToMany(mappedBy = "user")
+  private List<Comment> comments;
 
-	public void setProvider(Provider provider) {
-		this.provider = provider;
-	}
+  @OneToMany(mappedBy = "user")
+  private List<Rating> ratings;
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+  private boolean active;
 
-	public Role getRole() {
-		return role;
-	}
+  @Enumerated(EnumType.STRING)
+  public Provider provider = Provider.LOCAL;
 
-	public String getPassword() {
-		return password;
-	}
+  @Enumerated(EnumType.STRING)
+  public Role role;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  @JsonIgnore
+  private String token;
 
-	public Blob getImage() {
-		return image;
-	}
+  public User() {
+    token = "12345";
+  }
 
-	public void setImage(Blob image) {
-		this.image = image;
-	}
+  public Provider getProvider() {
+    return provider;
+  }
 
-	public String getBiography() {
-		return biography;
-	}
+  public void setProvider(Provider provider) {
+    this.provider = provider;
+  }
 
-	public void setBiography(String biography) {
-		this.biography = biography;
-	}
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
-	public String getWebsite() {
-		return website;
-	}
+  public Role getRole() {
+    return role;
+  }
 
-	public void setWebsite(String website) {
-		this.website = website;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public List<Comment> getComments() {
-		return comments;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+  public Blob getImage() {
+    return image;
+  }
 
-	public List<Rating> getRatings() {
-		return ratings;
-	}
+  public void setImage(Blob image) {
+    this.image = image;
+  }
 
-	public void setRatings(List<Rating> ratings) {
-		this.ratings = ratings;
-	}
+  public String getBiography() {
+    return biography;
+  }
 
-	public boolean isActive() {
-		return active;
-	}
+  public void setBiography(String biography) {
+    this.biography = biography;
+  }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+  public String getWebsite() {
+    return website;
+  }
 
-	public String getEmail() {
-        return email;
-    }
+  public void setWebsite(String website) {
+    this.website = website;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public List<Comment> getComments() {
+    return comments;
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
+  }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+  public List<Rating> getRatings() {
+    return ratings;
+  }
 
-	public String getLastName() {
-		return lastName;
-	}
+  public void setRatings(List<Rating> ratings) {
+    this.ratings = ratings;
+  }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+  public boolean isActive() {
+    return active;
+  }
 
-	public String getLocation() {
-        return location;
-    }
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public List<Song> getSongs() {
-        return songs;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
+  public List<Song> getSongs() {
+    return songs;
+  }
+
+  public void setSongs(List<Song> songs) {
+    this.songs = songs;
+  }
+
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
 }
