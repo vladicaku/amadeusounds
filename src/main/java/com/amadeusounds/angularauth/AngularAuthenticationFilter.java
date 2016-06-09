@@ -53,6 +53,8 @@ public class AngularAuthenticationFilter extends OncePerRequestFilter {
                 } else {
                     loginFailed(httpServletRequest, httpServletResponse, filterChain);
                 }
+            } else if (httpServletRequest.getMethod().equals("OPTIONS")) {
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
             }
             else {
                 loginFailed(httpServletRequest, httpServletResponse, filterChain);

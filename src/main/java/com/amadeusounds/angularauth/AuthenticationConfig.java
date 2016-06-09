@@ -2,6 +2,7 @@ package com.amadeusounds.angularauth;
 
 import com.amadeusounds.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,9 +14,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 /**
  * @author Vladica Jovanovski
  */
-@org.springframework.context.annotation.Configuration
+@Configuration
 @EnableWebSecurity
-public class Configuration extends WebSecurityConfigurerAdapter {
+public class AuthenticationConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     AngularAuthenticationProvider angularAuthenticationProvider;
@@ -24,8 +25,10 @@ public class Configuration extends WebSecurityConfigurerAdapter {
     AngularAuthenticationFilter angularAuthenticationFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable();
+        http.csrf().disable();
+//        http.requiresChannel().anyRequest().requiresSecure();
+//
+//    http.requiresChannel().anyRequest().requiresSecure();
 //            .addFilterBefore(angularAuthenticationFilter, BasicAuthenticationFilter.class)
 //            .authorizeRequests()
 //                .antMatchers(HttpMethod.POST,"/login")
