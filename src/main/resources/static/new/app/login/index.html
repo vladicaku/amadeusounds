@@ -1,0 +1,60 @@
+<div class="container">
+    <div id="login" class="panel panel-info">
+        <div class="panel-heading text-center">
+            <h3 style="padding: 0; margin: 15px 0 15px 0;">Amadeusounds - Welcome</h3>
+        </div>
+        <div class="panel-body">
+
+            <p ng-show="invalidUsernameOrPassword" class="text-warning">Wrong username or password</p>
+
+            <div style="padding-top: 10px"></div>
+
+            <form class="form-horizontal form-group-material-blue">
+                <fieldset>
+                    <div class="form-group">
+                        <!--<label for="inputEmail" class="col-md-2 control-label">Email</label>-->
+
+                        <div class="col-md-12">
+                            <input ng-model="email" type="email" class="form-control" id="inputEmail"
+                                   placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="inputPassword" class="col-md-2 control-label">Password</label>-->
+
+                        <div class="col-md-12">
+                            <input ng-model="password" type="password" class="form-control" id="inputPassword"
+                                   placeholder="Password">
+
+                            <div style="padding-top: 10px"></div>
+
+                            <div class="checkbox checkbox-material-blue">
+                                <label>
+                                    <input ng-model="rememberMe" type="checkbox"> Remeber me
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding-top: 10px"></div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input type="submit" ng-click="login()" href="" class="btn btn-raised btn-info col-xs-12"
+                                   value="Login">
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <p>Don't have an account? <a href="#" class="text-info">Sign up</a></p>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.material.init();
+</script>

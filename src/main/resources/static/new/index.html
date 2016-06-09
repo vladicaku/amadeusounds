@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Twitter Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <!-- Material Design for Bootstrap -->
+    <link href="assets/css/roboto.min.css" rel="stylesheet">
+    <link href="assets/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="assets/css/ripples.min.css" rel="stylesheet">
+
+    <!-- AmadeuSounds -->
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body ng-app="amadeusoundsApp">
+
+<div class="navbar navbar-fixed-top navbar-inverse navbar-material-blue">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0)">AmadeuSongs</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-inverse-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0)">Home</a></li>
+                <li><a href="javascript:void(0)">Top</a></li>
+                <li><a href="javascript:void(0)">Trending</a></li>
+                <li class="dropdown">
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-expanded="false">Tags
+                        <b class="caret"></b>
+
+                        <div class="ripple-container"></div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">Top</a></li>
+                        <li><a href="javascript:void(0)">Trending</a></li>
+                        <li><a href="javascript:void(0)">Best Rated</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Dropdown header</li>
+                        <li><a href="javascript:void(0)">Separated link</a></li>
+                        <li><a href="javascript:void(0)">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form id="search-box" class="navbar-form navbar-left form-group-material-cyan ">
+                <div class="form-group is-empty">
+
+                    <input type="text" class="form-control col-xs-12" placeholder="Search">
+                    <!--<span class="material-input"></span>-->
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0)">Link</a></li>
+                <li class="dropdown">
+                    <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+                        <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)">Action</a></li>
+                        <li><a href="javascript:void(0)">Another action</a></li>
+                        <li><a href="javascript:void(0)">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:void(0)">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--<div class="navbar ">-->
+<!--<div class="navbar-header">-->
+<!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--<span class="icon-bar"></span>-->
+<!--</button>-->
+<!--<a class="navbar-brand" href="javascript:void(0)">Brand</a>-->
+<!--</div>-->
+<!--<div class="navbar-collapse collapse navbar-responsive-collapse">-->
+<!--<ul class="nav navbar-nav">-->
+<!--<li class="active"><a href="javascript:void(0)">Active</a></li>-->
+<!--<li><a href="javascript:void(0)">Link<div class="ripple-wrapper"></div></a></li>-->
+<!--<li class="dropdown">-->
+<!--<a href="http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropdown <b class="caret"></b><div class="ripple-wrapper"></div></a>-->
+<!--<ul class="dropdown-menu">-->
+<!--<li><a href="javascript:void(0)">Action</a></li>-->
+<!--<li><a href="javascript:void(0)">Another action</a></li>-->
+<!--<li><a href="javascript:void(0)">Something else here</a></li>-->
+<!--<li class="divider"></li>-->
+<!--<li class="dropdown-header">Dropdown header</li>-->
+<!--<li><a href="javascript:void(0)">Separated link</a></li>-->
+<!--<li><a href="javascript:void(0)">One more separated link</a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<form class="navbar-form navbar-left">-->
+<!--<input type="text" class="form-control col-lg-8" placeholder="Search">-->
+<!--</form>-->
+<!--<ul class="nav navbar-nav navbar-right">-->
+<!--<li><a href="javascript:void(0)">Link</a></li>-->
+<!--<li class="dropdown">-->
+<!--<a href="http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
+<!--<ul class="dropdown-menu">-->
+<!--<li><a href="javascript:void(0)">Action</a></li>-->
+<!--<li><a href="javascript:void(0)">Another action</a></li>-->
+<!--<li><a href="javascript:void(0)">Something else here</a></li>-->
+<!--<li class="divider"></li>-->
+<!--<li><a href="javascript:void(0)">Separated link</a></li>-->
+<!--</ul>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div id="main-wrapper" class="container-fluid">
+
+    <div ui-view></div>
+
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's-->
+    <!--standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make-->
+    <!--a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,-->
+    <!--remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing-->
+    <!--Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions-->
+    <!--of Lorem Ipsum</p>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="col-xs-3">-->
+    <!--<div class="well">-->
+    <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
+    <!--industry's standard dummy text ever since the 1500s</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+</div>
+
+<div id="player" class="container-fluid alert-material-blue">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+        of Lorem Ipsum</p>
+
+    <!--<h1 class="header">Slider</h1>-->
+    <!--<div class="sample1">-->
+    <!--<h2>Music, video, games &amp; other media</h2>-->
+    <!--<div class="slider shor slider-material-orange"></div>-->
+
+    <!--<h2>Notifications</h2>-->
+    <!--<div class="slider shor slider-material-amber"></div>-->
+
+    <!--<h2>Alarms</h2>-->
+    <!--<div class="slider shor slider-material-orange"></div>-->
+    <!--</div>-->
+</div>
+
+<!-- Libs -->
+<script src="assets/js/jquery-2.2.4.min.js"></script>
+<script src="assets/js/jquery.nouislider.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/material.js"></script>
+<script src="assets/js/ripples.js"></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
+<script src="assets/js/angular.js"></script>
+<script src="assets/js/angular-ui-router.min.js"></script>
+<script src="assets/js/angular-sanitize.min.js"></script>
+<script src="assets/js/angular-animate.min.js"></script>
+<script src="assets/js/angular-loader.min.js"></script>
+<script src="assets/js/angular-resource.min.js"></script>
+<script src="assets/js/angular-route.min.js"></script>
+<script src="assets/js/angular-touch.min.js"></script>
+<script src="assets/js/ui-bootstrap-1.1.0.min.js"></script>
+<script src="assets/js/ui-bootstrap-tpls-1.1.0.min.js"></script>
+<script src="assets/js/xeditable.js"></script>
+<!--<script src="assets/js/vendor.js"></script>-->
+<script src="assets/js/ng-password-strength.min.js"></script>
+<script src="assets/js/angular-simple-logger.min.js"></script>
+<script src="assets/js/retina-1.1.0.min.js"></script>
+<script src="assets/js/loading-bar.js"></script>
+
+<!-- Angular JS -->
+<script src="app/app.js"></script>
+<script src="app/player/playerService.js"></script>
+<script src="app/authentication/authenticationService.js"></script>
+
+<script src="app/home/homeController.js"></script>
+<script src="app/player/playerDirective.js"></script>
+<script src="app/login/loginController.js"></script>
+
+<script src="app/interceptor/interceptor.js"></script>
+
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>-->
+<!-- Init Material Bootstrap Design -->
+<script>
+    $(document).ready(function () {
+        // This command is used to initialize some elements and make them work properly
+        $.material.init();
+//
+//        $(".shor").noUiSlider({
+//            start: 40,
+//            connect: "lower",
+//            range: {
+//                min: 0,
+//                max: 100
+//            }
+//        });
+//
+//        $(".svert").noUiSlider({
+//            orientation: "vertical",
+//            start: 40,
+//            connect: "lower",
+//            range: {
+//                min: 0,
+//                max: 100
+//            }
+//        });
+    });
+</script>
+
+
+</body>
+</html>
