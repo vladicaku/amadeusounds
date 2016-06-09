@@ -49,7 +49,7 @@ public class TagController {
             try {
                 OutputStream outputStream = response.getOutputStream();
                 byte[] byteArray = tag.getImage().getBytes(1, (int) tag.getImage().length());
-                response.setContentType("image/jpg");
+                response.setContentType("image/png");
                 response.setContentLengthLong(byteArray.length);
                 outputStream.write(byteArray);
                 outputStream.flush();
@@ -58,6 +58,11 @@ public class TagController {
             }
         }
     }
+
+    //TODO
+    //To be moved in the admin class
+    //Methods for removing and adding tags to song
+    //Method for changing category of song
     @RequestMapping(value = "/{tagId}/songs/{songId}", method = RequestMethod.POST)
     public void addTagToSong(@PathVariable Long tagId, @PathVariable Long songId) {
 

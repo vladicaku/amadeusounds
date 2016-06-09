@@ -14,6 +14,7 @@ import sun.security.util.Resources;
 
 import javax.annotation.PostConstruct;
 import javax.sql.rowset.serial.SerialBlob;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -26,7 +27,7 @@ import java.util.List;
  * @author Vladica Jovanovski
  */
 @Component
-public class DatabaseInit implements ApplicationContextAware{
+public class DatabaseInit implements ApplicationContextAware {
 
     @Autowired
     TagService tagService;
@@ -42,97 +43,72 @@ public class DatabaseInit implements ApplicationContextAware{
     @PostConstruct
     public void init() throws IOException, SQLException {
         String[] categories = new String[]{"Blues", "Classic", "Country", "Disco",
-                "Funk", "Hip-Hop","Jazz", "Metal", "Pop", "R&B", "Rap","Reggae", "Rock","Techno",
-                "Alternative","House","Soul","Punk","Electronic","Pop-Folk","Retro","Latin", "other"};
+                "Funk", "Hip-Hop", "Jazz", "Metal", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno",
+                "Alternative", "House", "Soul", "Punk", "Electronic", "Pop-Folk", "Retro", "Latin", "other"};
 
-        List<Tag> tags= tagService.getAllTags();
-//        if (tags.size()==0)
-//        {
-//            Tag t=new Tag();
-//            t.setName("Running");
-//            t.setImage(getBlobFromImage("running"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Party");
-//            t.setImage(getBlobFromImage("party"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Relax");
-//            t.setImage(getBlobFromImage("relax"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Studying");
-//            t.setImage(getBlobFromImage("studying"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Workout");
-//            t.setImage(getBlobFromImage("workout"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Children");
-//            t.setImage(getBlobFromImage("children"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Motivation");
-//            t.setImage(getBlobFromImage("motivational"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Dance");
-//            t.setImage(getBlobFromImage("dance"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Romantic");
-//            t.setImage(getBlobFromImage("romantic"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Concentration");
-//            t.setImage(getBlobFromImage("concentrating"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Summer");
-//            t.setImage(getBlobFromImage("summer"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Teenage");
-//            t.setImage(getBlobFromImage("teenage"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Fast");
-//            t.setImage(getBlobFromImage("fast"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Christmas");
-//            t.setImage(getBlobFromImage("christmas"));
-//            tagService.saveTag(t);
-//
-//            t=new Tag();
-//            t.setName("Chill");
-//            t.setImage(getBlobFromImage("chill"));
-//            tagService.saveTag(t);
-//
-//        }
-        List<Category> categoriesList=categoryService.getAllCategories();
-        if(categoriesList.size()==0){
-            for (int i=0; i<categories.length; i++)
-            {
+        List<Category> categoriesList = categoryService.getAllCategories();
+        if (categoriesList.size() == 0) {
+            for (int i = 0; i < categories.length; i++) {
                 com.amadeusounds.model.Category category = new com.amadeusounds.model.Category();
                 category.setName(categories[i]);
                 categoryService.saveCategory(category);
             }
         }
+
+        String[] tags = new String[]{
+                "bath",
+                "beach",
+                "car",
+                "christmas",
+                "city",
+                "coffee",
+                "cold",
+                "concentration",
+                "couple",
+                "dance",
+                "dj",
+                "fast",
+                "favorite",
+                "food",
+                "happy",
+                "house",
+                "kids",
+                "love",
+                "moon",
+                "motivation",
+                "music",
+                "nature",
+                "night",
+                "palm",
+                "party",
+                "rain",
+                "relax",
+                "river",
+                "road",
+                "romantic",
+                "running",
+                "sad",
+                "snow",
+                "sofa",
+                "study",
+                "summer",
+                "sun",
+                "sunset",
+                "tea",
+                "travel",
+                "winter",
+                "work",
+                "workout"
+
+        };
+        List<Tag> tagList = tagService.getAllTags();
+        if (tagList.size() == 0) {
+            //String a = DatabaseInit.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            for (String s : tags) {
+                createTag(s);
+            }
+        }
+
     }
 
     @Override
@@ -140,8 +116,20 @@ public class DatabaseInit implements ApplicationContextAware{
         this.applicationContext = applicationContext;
     }
 
+    private void createTag(String name) throws IOException, SQLException{
+        Tag tag = new Tag();
+        String tagName = name.substring(0, 1).toUpperCase() + name.substring(1);
+        tag.setName(tagName);
+        Resource resource = applicationContext.getResource("classpath:/tags/medium/" + name + ".png");
+        InputStream inputStream = resource.getInputStream();
+        byte[] byteArray = new byte[inputStream.available()];
+        inputStream.read(byteArray);
+        tag.setImage(new SerialBlob(byteArray));
+        tagService.saveTag(tag);
+
+    }
     private SerialBlob getBlobFromImage(String imageName) throws IOException, SQLException {
-        Resource resource = applicationContext.getResource("classpath:/static/images/"+imageName+".jpg");
+        Resource resource = applicationContext.getResource("classpath:/static/images/" + imageName + ".jpg");
         InputStream inputStream = resource.getInputStream();
         byte[] byteArray = new byte[inputStream.available()];
         inputStream.read(byteArray);
