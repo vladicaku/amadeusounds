@@ -80,7 +80,7 @@ public class DatabaseInit implements ApplicationContextAware{
 
             t=new Tag();
             t.setName("Motivation");
-            t.setImage(getBlobFromImage("motivational"));
+            t.setImage(getBlobFromImage("motivation"));
             tagService.saveTag(t);
 
             t=new Tag();
@@ -95,7 +95,7 @@ public class DatabaseInit implements ApplicationContextAware{
 
             t=new Tag();
             t.setName("Concentration");
-            t.setImage(getBlobFromImage("concentrating"));
+            t.setImage(getBlobFromImage("concentration"));
             tagService.saveTag(t);
 
             t=new Tag();
