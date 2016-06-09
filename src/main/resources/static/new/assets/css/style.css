@@ -1,0 +1,28 @@
+body {
+    padding-bottom: 100px;
+}
+
+#search-box {
+    width: 30% !important;
+}
+
+#search-box div, #search-box input {
+    width: 100% !important;
+}
+
+#player {
+    position: fixed;
+    bottom: 0;
+}
+
+/* --------------------------------------------------------------------------------- */
+#main-wrapper {
+    margin-top: 100px;
+}
+
+/* --------------------------------------------------------------------------------- */
+#login {
+    margin: auto !important;
+    margin-top: 40px !important;
+    width: 40% !important;
+}
