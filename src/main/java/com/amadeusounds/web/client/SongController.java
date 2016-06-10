@@ -3,17 +3,13 @@ package com.amadeusounds.web.client;
 import com.amadeusounds.model.*;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
-import com.amadeusounds.repository.SongRepository;
-import com.amadeusounds.repository.UserRepository;
 import com.amadeusounds.service.*;
-import com.amadeusounds.view.SongView;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.amadeusounds.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,7 +46,7 @@ public class SongController {
     public MappingJacksonValue getSong(@PathVariable(value = "id") long id) {
         Song song = songService.findSongById(id);
         final MappingJacksonValue result = new MappingJacksonValue(song);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 
@@ -59,7 +55,7 @@ public class SongController {
         User user = userService.findUserById(id);
         Page<Song> page = songService.getAllSongsForUser(user, pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 
@@ -133,7 +129,7 @@ public class SongController {
     public Page<Song> getLatestSongs(Pageable pageable) {
         Page<Song> page = songService.getLatestSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return page;
     }
 
@@ -141,7 +137,7 @@ public class SongController {
     public MappingJacksonValue getTrendingSongs(Pageable pageable) {
         Page<Song> page = songService.getTrendingSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 
@@ -149,7 +145,7 @@ public class SongController {
     public MappingJacksonValue getTopRatedSongs(Pageable pageable) {
         Page<Song> page = songService.getTopRatedSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 
@@ -157,7 +153,7 @@ public class SongController {
     public MappingJacksonValue findAllSongs(@PathVariable(value = "term") String term, Pageable pageable) {
         Page<Song> page = songService.findAllSongs(term, pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 

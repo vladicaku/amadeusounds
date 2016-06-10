@@ -1,14 +1,13 @@
 package com.amadeusounds.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.amadeusounds.view.SongView;
+import com.amadeusounds.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Length;
@@ -23,7 +22,7 @@ public class Comment extends BaseEntity{
 
 	@NotNull
 	@DateTimeFormat(pattern = "dd-MM-yy")
-	@JsonView(SongView.BaseView.class)
+	@JsonView(Views.SongBaseView.class)
 	private LocalDate date;
 
 

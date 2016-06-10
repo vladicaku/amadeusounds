@@ -5,10 +5,9 @@ import com.amadeusounds.model.User;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.UserService;
+import com.amadeusounds.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +34,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Response getUserById(@PathVariable("id") Long id) {
+    public MappingJacksonValue getUserById(@PathVariable("id") Long id) {
         User user = userService.findUserById(id);
-        return new Response(ResponseType.OK, user);
+        final MappingJacksonValue result = new MappingJacksonValue(user);
+        result.setSerializationView(Views.UserSummaryView.class);
+        return result;
     }
 
     @RequestMapping(path="/{id}/songs", method = RequestMethod.GET)

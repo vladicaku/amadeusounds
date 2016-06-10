@@ -1,6 +1,8 @@
 package com.amadeusounds.model;
 
+import com.amadeusounds.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -47,6 +49,7 @@ public class User extends BaseEntity {
   @Length(max = 50)
   private String website;
 
+  @JsonView(Views.UserSummaryView.class)
   @OneToMany(mappedBy = "user")
   private List<Song> songs;
 

@@ -1,13 +1,12 @@
 package com.amadeusounds.web.admin;
 
-import com.amadeusounds.model.Category;
 import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.SongImage;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.*;
-import com.amadeusounds.view.SongView;
+import com.amadeusounds.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,7 +48,7 @@ public class SongController {
     public MappingJacksonValue songs(Pageable pageable) {
         Page<Song> page = songService.getAllSongsForUser(null, pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(SongView.BaseView.class);
+        result.setSerializationView(Views.SongBaseView.class);
         return result;
     }
 

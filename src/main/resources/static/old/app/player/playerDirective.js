@@ -2,7 +2,8 @@ amadeusounds.directive("player", function () {
     return {
         scope: true,
         restrict: 'E',
-        templateUrl: 'app/player/index.html'
+        templateUrl: 'app/player/index.html',
+        controller: 'PlayerController'
     }
 });
 

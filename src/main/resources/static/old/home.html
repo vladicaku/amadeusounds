@@ -48,9 +48,11 @@
 </nav>
 
 <!-- Main -->
-<div class="container">
+<div id="main-wrapper" class="container">
     <div ui-view></div>
 </div>
+
+<player></player>
 </body>
 
 <!-- Begin scripts-->
@@ -103,6 +105,9 @@
 <script src="app/controllers/UserController.js"></script>
 <script src="app/controllers/SongUploadController.js"></script>
 <script src="app/login/loginController.js"></script>
+<script src="app/player/playerController.js"></script>
 <!--<script src="app/controllers/login.js"></script>-->
+<!-- Directives -->
+<script src="app/player/playerDirective.js"></script>
 <!-- End scripts -->
 </html>

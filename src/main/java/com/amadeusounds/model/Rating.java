@@ -1,11 +1,10 @@
 package com.amadeusounds.model;
 
-import com.amadeusounds.view.SongView;
+import com.amadeusounds.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -26,7 +25,7 @@ public class Rating extends BaseEntity{
 
 	@NotNull
 	@DateTimeFormat(pattern = "dd-MM-yy")
-	@JsonView(SongView.BaseView.class)
+	@JsonView(Views.SongBaseView.class)
 	private LocalDate date;
 
 	@ManyToOne

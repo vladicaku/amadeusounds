@@ -1,10 +1,8 @@
 package com.amadeusounds.model;
 
-import com.amadeusounds.view.SongView;
+import com.amadeusounds.view.Views;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,7 +20,7 @@ import java.util.List;
 public class Song extends BaseEntity {
 
     @Length(max = 50)
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private String name;
 
     @NotNull
@@ -30,15 +28,15 @@ public class Song extends BaseEntity {
     private Blob song;
 
     @Length(max = 200)
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private String description;
 
     @OneToMany(mappedBy = "song")
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private List<SongImage> images;
 
     @ManyToOne
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private Category category;
 
     @ManyToMany
@@ -46,30 +44,30 @@ public class Song extends BaseEntity {
             name="songs_tags",
             joinColumns=@JoinColumn(name="song_id", referencedColumnName="id"),
             inverseJoinColumns=@JoinColumn(name="tag_id", referencedColumnName="id"))
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private List<Tag> tags;
 
     @NotNull
     @DateTimeFormat(pattern = "dd-MM-yy")
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private LocalDate date;
 
     @ManyToOne
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongSummaryView.class)
     private User user;
 
     @OneToMany(mappedBy = "song")
-    @JsonView(SongView.SummaryView.class)
+    @JsonView(Views.SongSummaryView.class)
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "song")
-    @JsonView(SongView.SummaryView.class)
+    @JsonView(Views.SongSummaryView.class)
     private List<Rating> ratings;
 
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private double rating;
 
-    @JsonView(SongView.BaseView.class)
+    @JsonView(Views.SongBaseView.class)
     private Long views;
 
     public String getName() {

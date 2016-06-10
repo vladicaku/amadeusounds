@@ -1,5 +1,6 @@
 package com.amadeusounds.repository;
 
+import com.amadeusounds.model.Category;
 import com.amadeusounds.model.Tag;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TagRepository extends JpaSpecificationRepository<Tag, Long>{
+    public Tag findByName(String name);
 }
