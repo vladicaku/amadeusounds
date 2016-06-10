@@ -2,35 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
     <title>Amadeusounds</title>
-
     <!-- CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/image-picker.css">
-
-
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/form-elements.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/amadeus-style.css">
 </head>
-
-<!-- Begin body -->
-
 <body ng-app="amadeusounds-app" ng-cloak class="ng-cloak">
-
-<!-- NAVIGATION -->
+<!-- Navigation -->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -39,7 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-music"></span>AmadeuSounds</a>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-music"></i> AmadeuSounds</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -49,25 +40,20 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-if="!isAuthenticated"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-if="isAuthenticated"><a ng-click="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-
-<!-- MAIN CONTENT -->
+<!-- Main -->
 <div class="container">
-
-    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
     <div ui-view></div>
-
 </div>
 </body>
 
-
 <!-- Begin scripts-->
-
 <!-- Libraries -->
 <script src="app/libraries/jquery-1.11.1.min.js"></script>
 <script src="app/libraries/jquery.backstretch.min.js"></script>
@@ -87,44 +73,36 @@
 <script src="app/libraries/ng-password-strength.min.js"></script>
 <script src="app/libraries/angular-simple-logger.min.js"></script>
 <script src="app/libraries/retina-1.1.0.min.js"></script>
-
 <!-- Image plugins-->
 <script src="app/libraries/imagepreview.js"></script>
 <script src="app/libraries/image-picker.min.js"></script>
-
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
 <!--[if lt IE 10]>
 <script src="app/libraries/placeholder.js"></script>
 <![endif]-->
-
 <!-- load momentJS (required for angular-moment) -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <!-- load angular-moment -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
-
 <!--[if lte IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
 <![endif]-->
 <script src="//cdn.jsdelivr.net/satellizer/0.13.4/satellizer.min.js"></script>
 
-
 <!-- Custom scripts -->
 <script src="app/app.js"></script>
 <script src="js/scripts.js"></script>
 <script src="js/uploadSong.js"></script>
-
 <!-- Services -->
 <script src="app/services/UserService.js"></script>
-
+<script src="app/authentication/authenticationService.js"></script>
+<script src="app/interceptor/interceptor.js"></script>
+<script src="app/player/playerService.js"></script>
 <!-- Controllers -->
 <script src="app/controllers/UserController.js"></script>
 <script src="app/controllers/SongUploadController.js"></script>
-<script src="app/controllers/login.js"></script>
-
-
+<script src="app/login/loginController.js"></script>
+<!--<script src="app/controllers/login.js"></script>-->
 <!-- End scripts -->
-
-
 </html>
