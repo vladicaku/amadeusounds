@@ -68,7 +68,7 @@ amadeusounds.controller('SongUploadController',
             $rootScope.currentUser = {"username": "lala@gmail.com", "id": 1};
 
 
-            $http.get('api/categories').success(function (data, status, headers, config) {
+            $http.get('/api/categories').success(function (data, status, headers, config) {
                 $scope.categories = data;
                 $scope.category = data[1].name;
                 console.log($scope.categories);
@@ -79,7 +79,7 @@ amadeusounds.controller('SongUploadController',
             $scope.uploadFile = function (file, songId) {
                 console.log('file is ');
                 console.log(file);
-                var uploadUrl = "api/admin/songs/" + songId + "/upload";
+                var uploadUrl = "/api/admin/songs/" + songId + "/upload";
                 fileUpload.uploadFileToUrl(file, uploadUrl);
             };
             $scope.newValue = function (categoryName) {
@@ -94,7 +94,7 @@ amadeusounds.controller('SongUploadController',
 
                 $http({
                     method: "POST",
-                    url: "api/admin/songs",
+                    url: "/api/admin/songs",
                     data: $scope.song,
                     params: {"category": $scope.category, "username": $scope.currentUser.username}
                 })
@@ -116,14 +116,14 @@ amadeusounds.controller('SongUploadController',
                 console.log('file is ');
                 console.log(file);
                 //?????
-                var uploadUrl = "api/admin/songs/" + $rootScope.songId + "/images/" + imageId + "/upload";
+                var uploadUrl = "/api/admin/songs/" + $rootScope.songId + "/images/" + imageId + "/upload";
                 fileUpload.uploadFileToUrl(file, uploadUrl);
             };
 
             function uploadImage(image, imageFile) {
                 $http({
                     method: "POST",
-                    url: "api/admin/songs/" + $rootScope.songId + "/images",
+                    url: "/api/admin/songs/" + $rootScope.songId + "/images",
                     data: image
                 })
                     .then(
@@ -219,7 +219,7 @@ amadeusounds.controller('SongUploadController',
                 }, 1);
             };
 
-            $http.get('api/tags').success(function (data, status, headers, config) {
+            $http.get('/api/tags').success(function (data, status, headers, config) {
                 $scope.tags = data;
                 console.log("i am here for tags");
                 console.log($scope.tags);
@@ -234,7 +234,7 @@ amadeusounds.controller('SongUploadController',
                 angular.forEach(values, function (tagId, index) {
                     $http({
                         method: "POST",
-                        url: 'api/tags/' + tagId + '/songs/' + $rootScope.songId
+                        url: '/api/tags/' + tagId + '/songs/' + $rootScope.songId
                     })
                         .then(
                             function success1(response) {
