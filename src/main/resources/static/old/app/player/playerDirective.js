@@ -6,18 +6,18 @@ amadeusounds.directive("player", function () {
     }
 });
 
-angular.module("amadeusoundsApp").directive('someAudio', function () {
-    return {
-        scope: {
-            videoCurrentTime: "=videoCurrentTime"
-        },
-        controller: function ($scope, $element) {
-
-            $scope.onTimeUpdate = function () {
-                console.log($scope.videoCurrentTime);
-            };
-
-            console.log("set");
-        }
-    }
-});
+//angular.module("amadeusoundsApp").directive('someAudio', function () {
+//    return {
+//        scope: {
+//            videoCurrentTime: "=videoCurrentTime"
+//        },
+//        controller: function ($scope, $element) {
+//
+//            $scope.onTimeUpdate = function () {
+//                console.log($scope.videoCurrentTime);
+//            };
+//
+//            console.log("set");
+//        }
+//    }
+//});

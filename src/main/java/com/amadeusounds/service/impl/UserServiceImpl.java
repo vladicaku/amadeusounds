@@ -40,8 +40,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private static String passwordSalt = "AmadeusPassSalt!Amadeus";
-
     @Override
     public User findUserById(long id) {
         User user = userRepository.findOne(id);
@@ -63,23 +61,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public User registerUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword() + passwordSalt));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setSongs(new ArrayList<>());
         user.setComments(new ArrayList<>());
         user.setRatings(new ArrayList<>());
         userRepository.saveAndFlush(user);
         return user;
-    }
-
-    @Override
-    public User loginUser(String email, String password) throws Exception {
-        User user = userRepository.findByEmail(email);
-        String encodedPassword = passwordEncoder.encode(password + passwordSalt);
-        if (user.getPassword().equals(encodedPassword)) {
-            return user;
-        } else {
-            throw new Exception("Wrong password.");
-        }
     }
 
     @Override
@@ -96,18 +83,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void changePassword(User user, String oldPassword, String newPassword) throws Exception {
-        String oldEncodedPassword = passwordEncoder.encode(oldPassword + passwordSalt);
-        String newEncodedPassword = passwordEncoder.encode(newPassword + passwordSalt);
-
-        if (!user.getPassword().equals(oldEncodedPassword)) {
+        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+            if (oldPassword.equals(newPassword)) {
+                throw new Exception("The old and the new password cannot be same.");
+            }
+            else {
+                user.setPassword(passwordEncoder.encode(newPassword));
+            }
+        }
+        else {
             throw new Exception("Wrong password.");
         }
-
-        if (oldEncodedPassword.equals(newEncodedPassword)) {
-            throw new Exception("The old and the new password cannot be same.");
-        }
-
-        user.setPassword(newEncodedPassword);
     }
 
     @Override

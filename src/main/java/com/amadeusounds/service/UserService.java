@@ -30,8 +30,6 @@ public interface UserService {
 
     User findUserByEmail(String email);
 
-    User loginUser(String email, String password) throws Exception;
-
     User updateUser(User user);
 
     void deleteUser(User user);
