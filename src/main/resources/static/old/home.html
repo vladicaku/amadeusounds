@@ -39,7 +39,7 @@
                 <li><a href="#">Dashboard</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li ng-if="!isAuthenticated"><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li ng-if="!isAuthenticated"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 <li ng-if="isAuthenticated"><a ng-click="logout()" href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
