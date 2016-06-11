@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void changePassword(User user, String oldPassword, String newPassword) throws Exception {
-        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+       // if (passwordEncoder.matches(oldPassword, user.getPassword())) {
             if (oldPassword.equals(newPassword)) {
                 throw new Exception("The old and the new password cannot be same.");
             }
@@ -91,10 +91,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 user.setPassword(passwordEncoder.encode(newPassword));
             }
         }
-        else {
-            throw new Exception("Wrong password.");
-        }
-    }
+
+
 
     @Override
     @Transactional

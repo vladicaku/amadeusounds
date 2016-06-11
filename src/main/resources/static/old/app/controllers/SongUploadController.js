@@ -44,10 +44,10 @@ amadeusounds.directive("repeatEnd", function () {
     };
 });
 amadeusounds.service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function (file, uploadUrl) {
+    this.uploadFileToUrl = function (file, uploadUrl, type) {
         var fd = new FormData();
         console.log("file " + file);
-        fd.append('song', file);
+        fd.append(type, file);
         $http.post(uploadUrl, fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
@@ -76,11 +76,11 @@ amadeusounds.controller('SongUploadController',
                 // log error
             });
 
-            $scope.uploadFile = function (file, songId) {
+            $scope.uploadSongFile = function (file, songId) {
                 console.log('file is ');
                 console.log(file);
                 var uploadUrl = "/api/admin/songs/" + songId + "/upload";
-                fileUpload.uploadFileToUrl(file, uploadUrl);
+                fileUpload.uploadFileToUrl(file, uploadUrl, "song");
             };
             $scope.newValue = function (categoryName) {
                 $scope.category = categoryName;
@@ -102,7 +102,7 @@ amadeusounds.controller('SongUploadController',
                         function success1(response) {
                             console.log(response.data.message);
                             $rootScope.songId = response.data.message;
-                            $scope.uploadFile($scope.songFile, response.data.message);
+                            $scope.uploadSongFile($scope.songFile, response.data.message);
                         },
                         function error1(response) {
                             console.log(response);
@@ -117,10 +117,12 @@ amadeusounds.controller('SongUploadController',
                 console.log(file);
                 //?????
                 var uploadUrl = "/api/admin/songs/" + $rootScope.songId + "/images/" + imageId + "/upload";
-                fileUpload.uploadFileToUrl(file, uploadUrl);
+                fileUpload.uploadFileToUrl(file, uploadUrl,"image");
             };
 
             function uploadImage(image, imageFile) {
+                console.log("image");
+                console.log(imageFile);
                 $http({
                     method: "POST",
                     url: "/api/admin/songs/" + $rootScope.songId + "/images",

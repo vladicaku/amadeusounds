@@ -36,6 +36,7 @@
             <ul class="nav navbar-nav">
                 <li><a ui-sref="home">Home</a></li>
                 <li><a ui-sref="upload.first">Upload</a></li>
+                <li ng-if="isAuthenticated"><a ui-sref="profile">My Profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!isAuthenticated"><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -102,9 +103,12 @@
 <script src="app/player/playerService.js"></script>
 <!-- Controllers -->
 <script src="app/controllers/UserController.js"></script>
+<script src="app/controllers/RegisterController.js"></script>
 <script src="app/controllers/SongUploadController.js"></script>
+<script src="app/controllers/ProfileController.js"></script>
 <script src="app/login/loginController.js"></script>
 <script src="app/player/playerController.js"></script>
+
 <!--<script src="app/controllers/login.js"></script>-->
 <!-- Directives -->
 <script src="app/player/playerDirective.js"></script>
