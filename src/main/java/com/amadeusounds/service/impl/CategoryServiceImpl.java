@@ -14,9 +14,14 @@ import java.util.List;
  * @author Vladica Jovanovski
  */
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Override
+    public Category findByCategoryId(Long id) {
+        return categoryRepository.findOne(id);
+    }
 
     @Override
     public List<Category> getAllCategories() {
@@ -25,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public Category saveCategory(Category category) {
-        return  categoryRepository.saveAndFlush(category);
+        return categoryRepository.saveAndFlush(category);
     }
 
     @Override

@@ -24,6 +24,15 @@ public class SpecificationUtils {
         };
     }
 
+    public static <T> Specification<T> contains(String path, Object param) {
+        return new Specification<T>() {
+            @Override
+            public Predicate toPredicate(Root<T> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                return criteriaBuilder.isMember(param, getPath(root, path));
+            }
+        };
+    }
+
     public static <T> Specification<T> lessThan(String path, Comparable param, boolean inclusive) {
         return new Specification<T>() {
             @Override

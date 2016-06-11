@@ -7,7 +7,11 @@ import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.SongService;
 import com.amadeusounds.service.TagService;
+import com.amadeusounds.view.Views;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

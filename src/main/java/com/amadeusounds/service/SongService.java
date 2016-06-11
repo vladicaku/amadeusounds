@@ -1,6 +1,8 @@
 package com.amadeusounds.service;
 
+import com.amadeusounds.model.Category;
 import com.amadeusounds.model.Song;
+import com.amadeusounds.model.Tag;
 import com.amadeusounds.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,10 @@ public interface SongService {
     void addBlobToSong(Song song, MultipartFile multipartFile) throws Exception;
 
     Page<Song> getAllSongsForUser(User user, Pageable pageable);
+
+    Page<Song> getAllSongsForTag(Tag tag, Pageable pageable);
+
+    Page<Song> getAllSongsForCategory(Category category, Pageable pageable);
 
     Page<Song> getLatestSongs(Pageable pageable);
 
