@@ -1,3 +1,6 @@
+/**
+ * Authentication Service
+ */
 amadeusounds.factory('AuthenticationService', ['$http', '$rootScope', '$state', function ($http, $rootScope, $state) {
     var loginUrl = 'http://localhost:8080/login';
     var service = {};

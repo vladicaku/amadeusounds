@@ -1,0 +1,28 @@
+<h2>Home</h2>
+
+<!--<div>-->
+    <!--<div ng-repeat="song in songs">-->
+        <!--<p>song.name</p>-->
+        <!--<p>song.rating</p>-->
+    <!--</div>-->
+<!--</div>-->
+
+<ul>
+    <li dir-paginate="song in songs | itemsPerPage: pagination.itemsPerPage"
+        total-items="pagination.totalElements" current-page="pagination.current">{{ song.name }}</li>
+</ul>
+
+<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
+
+<!--<table>-->
+    <!--<tr dir-paginate="song in songs | itemsPerPage: pagination.itemsPerPage"-->
+        <!--total-items="pagination.totalElements" current-page="pagination.current">-->
+
+        <!--<td>{{ user.name }}</td>-->
+        <!--<td>{{ user.rating }}</td>-->
+    <!--</tr>-->
+<!--</table>-->
+
+<!--<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>-->
+

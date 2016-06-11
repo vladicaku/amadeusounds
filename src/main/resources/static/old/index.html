@@ -35,6 +35,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="home">Trending</a></li>
                 <li><a ui-sref="upload.first">Upload</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -74,6 +75,7 @@
 <script src="app/libraries/ng-password-strength.min.js"></script>
 <script src="app/libraries/angular-simple-logger.min.js"></script>
 <script src="app/libraries/retina-1.1.0.min.js"></script>
+<script src="app/libraries/dirPagination.js"></script>
 <!-- Image plugins-->
 <script src="app/libraries/imagepreview.js"></script>
 <script src="app/libraries/image-picker.min.js"></script>
@@ -100,12 +102,13 @@
 <script src="app/authentication/authenticationService.js"></script>
 <script src="app/interceptor/interceptor.js"></script>
 <script src="app/player/playerService.js"></script>
+<script src="app/home/homeService.js"></script>
 <!-- Controllers -->
 <script src="app/controllers/UserController.js"></script>
 <script src="app/controllers/SongUploadController.js"></script>
 <script src="app/login/loginController.js"></script>
 <script src="app/player/playerController.js"></script>
-<!--<script src="app/controllers/login.js"></script>-->
+<script src="app/home/homeController.js"></script>
 <!-- Directives -->
 <script src="app/player/playerDirective.js"></script>
 <!-- End scripts -->
