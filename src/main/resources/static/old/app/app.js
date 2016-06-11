@@ -33,6 +33,11 @@ amadeusounds.config(['$stateProvider', '$urlRouterProvider', function ($statePro
             templateUrl: 'views/uploadSongView.html',
             requireLogin: true
         })
+        .state('profile', {
+            url: '/profile',
+            templateUrl: 'views/profileView.html',
+            requireLogin: true
+        })
         .state('upload.first', {
             url: '/uploadFirst',
             templateUrl: 'views/uploadSongForm1.html',

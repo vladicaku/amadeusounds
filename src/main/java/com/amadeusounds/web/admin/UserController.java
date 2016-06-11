@@ -22,9 +22,21 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Response updateUser(@PathVariable(value = "id") Long id, @RequestBody User user) {
-        user.setId(id);
-        userService.updateUser(user);
+    public Response updateUser(@PathVariable(value = "id") Long id, @RequestBody User user) throws Exception {
+
+        User oldUser=userService.findUserByEmail(user.getEmail());
+
+        oldUser.setBiography(user.getBiography());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setLastName(user.getLastName());
+        oldUser.setLocation(user.getLocation());
+        oldUser.setWebsite(user.getWebsite());
+
+        userService.updateUser(oldUser);
+        if(user.getPassword()!=null){
+            userService.changePassword(oldUser, oldUser.getPassword(), user.getPassword());
+        }
+
         return new Response(ResponseType.OK, "");
     }
 

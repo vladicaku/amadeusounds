@@ -33,7 +33,6 @@ public class User extends BaseEntity {
   private String email;
 
   @NotNull
-  @JsonIgnore
   private String password;
 
   //@NotNull
