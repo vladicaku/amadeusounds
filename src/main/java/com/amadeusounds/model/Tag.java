@@ -21,6 +21,7 @@ public class Tag extends BaseEntity{
 	@JsonIgnore
 	private Blob image;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
 	private List<Song> songs;
 
@@ -39,6 +40,12 @@ public class Tag extends BaseEntity{
 	public void setImage(Blob image) {
 		this.image = image;
 	}
-	
-	
+
+	public List<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
+	}
 }

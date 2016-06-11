@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface CategoryService {
 
+    Category findByCategoryId(Long id);
+
     List<Category> getAllCategories();
 
     Category saveCategory(Category category);

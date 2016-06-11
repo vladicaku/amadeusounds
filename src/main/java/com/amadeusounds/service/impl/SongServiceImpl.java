@@ -1,8 +1,6 @@
 package com.amadeusounds.service.impl;
 
-import com.amadeusounds.model.Rating;
-import com.amadeusounds.model.Song;
-import com.amadeusounds.model.User;
+import com.amadeusounds.model.*;
 import com.amadeusounds.repository.BaseRepository;
 import com.amadeusounds.repository.SongRepository;
 import com.amadeusounds.service.SongService;
@@ -105,6 +103,16 @@ public class SongServiceImpl implements SongService {
     @Override
     public Page<Song> getAllSongsForUser(User user, Pageable pageable) {
         return songRepository.findAll(SpecificationUtils.<Song>equals("user", user), pageable);
+    }
+
+    @Override
+    public Page<Song> getAllSongsForTag(Tag tag, Pageable pageable) {
+        return songRepository.findAll(SpecificationUtils.<Song>contains("tags", tag), pageable);
+    }
+
+    @Override
+    public Page<Song> getAllSongsForCategory(Category category, Pageable pageable) {
+        return songRepository.findAll(SpecificationUtils.<Song>equals("category", category), pageable);
     }
 
     @Override

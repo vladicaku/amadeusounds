@@ -44,6 +44,12 @@ public class SongController {
     @Autowired
     SongImageService songImageService;
 
+    @Autowired
+    TagService tagService;
+
+    @Autowired
+    CategoryService categoryService;
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public MappingJacksonValue getSong(@PathVariable(value = "id") long id) {
         Song song = songService.findSongById(id);
@@ -127,6 +133,31 @@ public class SongController {
             throw new Exception("Image not found");
         }
     }
+
+    @RequestMapping(value = "/by-tag/{tagId}", method = RequestMethod.GET)
+    public MappingJacksonValue getAllSongsForTag(@PathVariable(value = "tagId") long tagId, Pageable pageable) {
+        Tag tag = tagService.findTagById(tagId);
+        if (tag != null) {
+            Page<Song> page = songService.getAllSongsForTag(tag, pageable);
+            final MappingJacksonValue result = new MappingJacksonValue(page);
+            result.setSerializationView(Views.SongSummaryView.class);
+            return result;
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/by-category/{categoryId}", method = RequestMethod.GET)
+    public MappingJacksonValue getAllSongsForCategory(@PathVariable(value = "categoryId") long categoryId, Pageable pageable) {
+        Category category = categoryService.findByCategoryId(categoryId);
+        if (category != null) {
+            Page<Song> page = songService.getAllSongsForCategory(category, pageable);
+            final MappingJacksonValue result = new MappingJacksonValue(page);
+            result.setSerializationView(Views.SongSummaryView.class);
+            return result;
+        }
+        return null;
+    }
+
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)
     public MappingJacksonValue getLatestSongs(Pageable pageable) {
