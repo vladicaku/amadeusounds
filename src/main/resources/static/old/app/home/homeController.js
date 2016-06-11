@@ -4,7 +4,7 @@ amadeusounds.controller('HomeController', [ '$scope', '$http', 'HomeService', 'P
         $scope.songs = {};
 
         $scope.pagination = {
-            itemsPerPage: 2,
+            itemsPerPage: 6,
             current: 1,
             totalElements: 0
         };

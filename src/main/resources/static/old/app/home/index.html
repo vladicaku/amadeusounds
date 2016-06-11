@@ -6,11 +6,31 @@
         <!--<p>song.rating</p>-->
     <!--</div>-->
 <!--</div>-->
+<div class="row">
+    <div class="col-xs-12 col-sm-4"
+            dir-paginate="song in songs | itemsPerPage: pagination.itemsPerPage"
+        total-items="pagination.totalElements" current-page="pagination.current">
 
-<ul>
-    <li dir-paginate="song in songs | itemsPerPage: pagination.itemsPerPage"
-        total-items="pagination.totalElements" current-page="pagination.current">{{ song.name }}</li>
-</ul>
+        <div class="song">
+            <div class="song-images">
+                <div class="song-image"  ng-repeat="image in song.images">
+                    <img ng-src="/api/songs/{{song.id}}/image/{{image.id}}" alt="image">
+                </div>
+            </div>
+
+            <div class="song-text">
+                <h3><a href="#">{{song.name}}</a></h3>
+                <p>by <a href="#">{{song.user.firstName}} {{song.user.lastName}} </a> in {{song.category.name}}</p>
+            </div>
+
+            <div class="song-tags" style="overflow: hidden;">
+                <div class="tag" ng-repeat="tag in song.tags">
+                    <img src="/api/tags/{{tag.id}}/image" alt="tag">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 

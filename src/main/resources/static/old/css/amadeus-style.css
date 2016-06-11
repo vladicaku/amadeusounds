@@ -1,3 +1,4 @@
+/* -----------------------------------------Body--------------------------------------- */
 body {
     padding-bottom: 200px;
 }
@@ -5,16 +6,75 @@ body {
 .navbar {
     border-radius: 0px !important;
 }
-/* ------------------------------------------------------ */
-#main-wrapper {
-    margin-top: 100px;
+/* -----------------------------------------Logo--------------------------------------- */
+#logo {
+    position: relative;
+    top: -12px;
 }
-/* ------------------------------------------------------ */
+/* -----------------------------------------Main--------------------------------------- */
+#main-wrapper {
+
+}
+/* -----------------------------------------Songs--------------------------------------- */
+.song {
+    height: 350px !important;
+    margin-bottom: 15px;
+    padding: 3px;
+    /*background-color: #eee !important;*/
+    /*border-radius: 5px !important;*/
+    /*overflow: hidden;*/
+}
+
+.song h1, .song h2, .song h3, .song p, .song a {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.song a {
+    color: #167ac6 !important;
+}
+
+.song a:hover {
+    text-decoration: underline !important;
+}
+
+.song .song-text {
+    margin-top: 5px;
+}
+/* -----------------------------------------Songs--------------------------------------- */
+
+/* -----------------------------------------Song images----------------------------------- */
+.song-images {
+    height: 200px !important;
+    overflow: hidden;
+}
+
+.song-image img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.song-image {
+    display: none;
+}
+
+.song-image:first-child {
+    display: block;
+}
+    /* -----------------------------------------Tags----------------------------------- */
+.tag {
+    float: left;
+    margin-right: 5px;
+}
+
+/* -----------------------------------------Player--------------------------------------- */
 #player {
     position: fixed;
     bottom: 0;
 }
-/* ------------------------------------------------------ */
+
+/* -------------------------------------Tgs in upload form---------------------------------- */
 .image_picker_image {
     width: 28px !important;
 }

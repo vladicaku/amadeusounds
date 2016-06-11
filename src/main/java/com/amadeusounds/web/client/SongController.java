@@ -119,6 +119,7 @@ public class SongController {
 
         if (song == songImage.getSong()) {
             OutputStream outputStream = response.getOutputStream();
+            response.setContentType("image/jpg");
             byte[] byteArray = songImage.getImage().getBytes(1, (int) songImage.getImage().length());
             outputStream.write(byteArray);
             outputStream.flush();
@@ -131,7 +132,7 @@ public class SongController {
     public MappingJacksonValue getLatestSongs(Pageable pageable) {
         Page<Song> page = songService.getLatestSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(Views.SongBaseView.class);
+        result.setSerializationView(Views.SongSummaryView.class);
         return result;
     }
 
