@@ -16,9 +16,13 @@
             <select class="image-picker show-html" data-limit="5" id="selectedTags" name="selectedTags"
                     ng-model="selectedTags" multiple="multiple">
 
-                <option id="{{t.id}}" data-img-src="../images/{{t.name}}.jpg" value="{{t.id}}"
+                <option id="{{t.id}}" data-img-src="/api/tags/{{t.id}}/image" value="{{t.id}}"
                         ng-repeat="t in tags" repeat-end="onEnd()" ng-value="t.id">{{t.name}}
                 </option>
+
+                <!--<option id="{{t.id}}" data-img-src="../images/{{t.name}}.png" value="{{t.id}}"-->
+                        <!--ng-repeat="t in tags" repeat-end="onEnd()" ng-value="t.id">{{t.name}}-->
+                <!--</option>-->
 
             </select>
 

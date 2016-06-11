@@ -14,6 +14,19 @@ body {
     position: fixed;
     bottom: 0;
 }
+/* ------------------------------------------------------ */
+.image_picker_image {
+    width: 28px !important;
+}
+
+.thumbnail {
+    width: 90px !important;
+    text-align: center !important;
+}
+
+.thumbnail p {
+    cursor:default;
+}
 /* ----------------------------------------------------- */
 input[type=range] {
     -webkit-appearance: none;
