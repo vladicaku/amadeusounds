@@ -1,31 +1,19 @@
-<div id="player">
-    <div class="container-fluid">
-        <!--<div id="player-images" class="col-xs-12 col-sm-4 hidden-xs">-->
-            <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the-->
-                <!--industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and-->
-                <!--scrambled it to make.</p>-->
-        <!--</div>-->
-
-        <div id="player-controls" class="col-xs-12">
-            <p>Song: <b>{{currentSong}}</b></p>
-            <input type="range" name="time" min="0" max="100" ng-model="$root.percentage" ng-change="rangeChanged()">
-
-            <p>{{currentTime}}</p>
-
-            <p>{{duration}}</p>
-
-            <p>{{position}}</p>
-            <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>-->
+<div id="player" style="width: 100%">
+        <div>
+            <!--<p>{{currentSong.name}} by {{currentSong.user.firstName}} {{currentSong.user.lastName}} in {{currentSong.category.name}}</p>-->
+            <p>{{currentSong.name}} <span style="float: right;">{{currentSong.category.name}}</span></p>
         </div>
+        <div>
+            <div id="player-controls" style="float: left; max-width:50px;">
+                <a ng-show="paused" href="#" ng-click="play()"><i class="glyphicon glyphicon-play"></i></a>
+                <a ng-hide="paused" href="#" ng-click="pause()"><i class="glyphicon glyphicon-pause"></i></a>
+            </div>
 
-    </div>
-    <!--<h1>This is player</h1>-->
-
-
-    <!--<audio ng-src="{{currentSong}}" audioplayer controls></audio>-->
-
-    <!--<audio id="player" controls>-->
-    <!--<source ng-src="{{currentSong}}" type="audio/mpeg">-->
-    <!--Your browser does not support the audio tag.-->
-    <!--</audio>-->
+            <div id="player-timeline" style="overflow: hidden; padding: 3px;">
+                <input type="range" name="time" min="0" max="100" ng-model="$root.percentage" ng-change="rangeChanged()">
+                <!--<p>{{currentTime}}</p>-->
+                <!--<p>{{duration}}</p>-->
+                <!--<p>{{position}}</p>-->
+            </div>
+        </div>
 </div>

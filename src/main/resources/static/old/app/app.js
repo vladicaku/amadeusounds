@@ -1,7 +1,7 @@
 var amadeusounds = angular.module('amadeusounds-app', [
     'ui.router',
     'ngResource',
-    'ngAnimate',
+    //'ngAnimate',
     'xeditable',
     //'angularMoment',
     'ui.bootstrap',

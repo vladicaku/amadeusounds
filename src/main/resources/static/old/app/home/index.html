@@ -13,13 +13,15 @@
 
         <div class="song">
             <div class="song-images">
-                <div class="song-image"  ng-repeat="image in song.images">
-                    <img ng-src="/api/songs/{{song.id}}/image/{{image.id}}" alt="image">
+                <!--<img src="https://joshualightningwarrior.files.wordpress.com/2015/12/hd-wallpapers-sound-waves-musical-note-desktop-2560x1600-wallpaper.jpg?w=636" alt="missing image" />-->
+                <div class="song-image">
+                    <!--<img ng-hide="hideMe(song, image)" ng-src="/api/songs/{{song.id}}/image/{{image.id}}" alt="image">-->
+                    <img ng-src="/api/songs/{{song.id}}/image/{{song.images[song.currentImagePosition].id}}"  alt="image">
                 </div>
             </div>
 
             <div class="song-text">
-                <h3><a href="#">{{song.name}}</a></h3>
+                <h3><a ng-click="load(song)" href="#">{{song.name}}</a></h3>
                 <p>by <a href="#">{{song.user.firstName}} {{song.user.lastName}} </a> in {{song.category.name}}</p>
             </div>
 
