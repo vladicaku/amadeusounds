@@ -11,6 +11,35 @@ body {
     position: relative;
     top: -12px;
 }
+
+#search {
+    all: initial;
+    display: block;
+    width: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height:20px;
+    margin: 15px;
+    color: #9d9d9d;
+    border-bottom: 1px solid #9d9d9d;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+}
+
+#search:focus {
+    outline: 0;
+    /*background: #fff;*/
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    /*border: 3px solid #ccc;*/
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
 /* -----------------------------------------Main--------------------------------------- */
 #main-wrapper {
 
@@ -20,6 +49,7 @@ body {
     height: 350px !important;
     margin-bottom: 15px;
     padding: 3px;
+    /*background-color: rgb(238, 238, 238);*/
     /*background-color: #eee !important;*/
     /*border-radius: 5px !important;*/
     /*overflow: hidden;*/
@@ -41,8 +71,6 @@ body {
 .song .song-text {
     margin-top: 5px;
 }
-/* -----------------------------------------Songs--------------------------------------- */
-
 /* -----------------------------------------Song images----------------------------------- */
 .song-images {
     height: 200px !important;
@@ -89,7 +117,7 @@ body {
     padding: 5px 10px 5px 10px ;
     background-color: #000 !important;
     /*padding-bottom: 15px;*/
-    border-top: 1px solid #cccccc;
+    /*border-top: 1px solid #cccccc;*/
     color: #EEEEEE;
 }
 
