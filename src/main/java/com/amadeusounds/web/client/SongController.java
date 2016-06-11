@@ -5,11 +5,13 @@ import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.*;
 import com.amadeusounds.view.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,11 +128,11 @@ public class SongController {
     }
 
     @RequestMapping(value = "/latest", method = RequestMethod.GET)
-    public Page<Song> getLatestSongs(Pageable pageable) {
+    public MappingJacksonValue getLatestSongs(Pageable pageable) {
         Page<Song> page = songService.getLatestSongs(pageable);
         final MappingJacksonValue result = new MappingJacksonValue(page);
-        result.setSerializationView(Views.SongSummaryView.class);
-        return page;
+        result.setSerializationView(Views.SongBaseView.class);
+        return result;
     }
 
     @RequestMapping(value = "/trending", method = RequestMethod.GET)

@@ -1,5 +1,7 @@
 package com.amadeusounds.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Blob;
 
 import javax.persistence.Entity;
@@ -10,13 +12,15 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "song_images")
 public class SongImage extends BaseEntity{
-	
+
+	@JsonIgnore
 	@NotNull
 	private Blob image;
 
 	@NotNull
 	private int timing;
 
+	@JsonIgnore
 	@NotNull
 	@ManyToOne
 	private Song song;

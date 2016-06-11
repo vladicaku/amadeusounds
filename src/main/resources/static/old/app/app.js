@@ -15,7 +15,7 @@ amadeusounds.config(['$stateProvider', '$urlRouterProvider', function ($statePro
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'views/homeView.html'
+            templateUrl: 'app/home/index.html'
         })
         .state('register', {
             url: '/register',
