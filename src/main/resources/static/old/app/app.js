@@ -1,11 +1,12 @@
 var amadeusounds = angular.module('amadeusounds-app', [
     'ui.router',
     'ngResource',
-    'ngAnimate',
+    //'ngAnimate',
     'xeditable',
     //'angularMoment',
     'ui.bootstrap',
-    'ngPasswordStrength'
+    'ngPasswordStrength',
+    'angularUtils.directives.dirPagination'
 ]);
 
 amadeusounds.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -15,7 +16,8 @@ amadeusounds.config(['$stateProvider', '$urlRouterProvider', function ($statePro
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'app/home/index.html'
+            templateUrl: 'app/home/index.html',
+            controller: 'HomeController'
         })
         .state('register', {
             url: '/register',

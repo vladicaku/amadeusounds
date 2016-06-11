@@ -1,23 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Registration Form Template</title>
+
 
     <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "json/countries.json",
+                dataType: "json",
+                success: function (data) {
 
-        $(document).ready(function(){
-//            $.ajax({
-//                url: "json/countries.json",
-//                dataType: "json",
-//                success: function (data) {
-//
-//                    $("#form-location").html('');
-//                    $("select").append("<option default selected> Location... </option>");
-//                    for (i = 0; i < data.length; i++) {
-//                        var display = data[i].name + " (" + data[i].code + ")";
-//
-//                        $("select").append("<option>" + display + "</option>");
-//                    }
-//                }
-//            });
+                    $("#form-location").html('');
+                    $("select").append("<option default selected> Location... </option>");
+                    for (i = 0; i < data.length; i++) {
+                        var display = data[i].name + " (" + data[i].code + ")";
+
+                        $("select").append("<option>" + display + "</option>");
+                    }
+                }
+            });
 
             $(":file").change(function () {
                 if (this.files && this.files[0]) {
@@ -29,28 +36,33 @@
         });
         function imageIsLoaded(e) {
             $('#form-image').attr('src', e.target.result);
-        };
-
-        //console.log("LALALALL" + $scope.first);
+        }
+        ;
     </script>
 
+
+</head>
 
 <body>
 
 <!-- Top content -->
-<div class="top-content centered" >
-
+<div class="top-content centered">
+    <script>
+        $.backstretch("/old/img/background.jpg");
+    </script>
     <div class="inner-bg">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5 phone">
-                    <img src="http://www.victoryapostolicchurch.org/sites/www.victoryapostolicchurch.org/files/assets/Register%20Button.jpg" alt="" style="border-radius: 10px; margin-top: 19%">
+                    <img src="http://www.victoryapostolicchurch.org/sites/www.victoryapostolicchurch.org/files/assets/Register%20Button.jpg"
+                         alt="" style="border-radius: 10px; margin-top: 19%">
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-5 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>Register to our App</h3>
+
                             <p>Fill in the form below to get instant access:</p>
                         </div>
                         <div class="form-top-right">
@@ -132,3 +144,5 @@
 
 
 </body>
+
+</html>
