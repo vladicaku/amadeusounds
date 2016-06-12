@@ -6,6 +6,7 @@ var amadeusounds = angular.module('amadeusounds-app', [
     //'angularMoment',
     'ui.bootstrap',
     'ngPasswordStrength',
+    'ngCookies',
     'angularUtils.directives.dirPagination'
 ]);
 

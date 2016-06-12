@@ -31,12 +31,12 @@
                 <span class="icon-bar"></span>
             </button>
             <!--<i class="glyphicon glyphicon-music"></i>-->
-            <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png" alt="logo" height="40px"></a>
+            <a class="navbar-brand" href=#" ui-sref="home-index"><img id="logo" src="img/logo.png" alt="logo" height="40px"></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a ui-sref="home-index">Home</a></li>
-                <li><a ui-sref="home({arg1: 'trending'})">Trending</a></li>
+                <li><a ui-sref="home-index"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+                <li><a ui-sref="home({arg1: 'trending'})"><i class="glyphicon glyphicon-fire"></i> Trending</a></li>
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -49,12 +49,11 @@
                             <li ng-repeat="tag in tags"><a ui-sref="home({arg1: 'tags', arg2: tag.id})"><img ng-src="http://localhost:8080/api/tags/{{tag.id}}/image" width="12px"> {{tag.name}}</a></li>
                     </ul>
                 </li>
-
-                <li><a ui-sref="upload.first">Upload</a></li>
                 <li><input id="search" type="text" placeholder="Search..."/></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="upload.first"><i class="glyphicon glyphicon-open"></i> Upload</a></li>
                 <li ng-if="isAuthenticated"><a ui-sref="profile">My Profile</a></li>
                 <li ng-if="!isAuthenticated"><a ui-sref="register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li ng-if="!isAuthenticated"><a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -93,6 +92,7 @@
 <script src="app/libraries/angular-simple-logger.min.js"></script>
 <script src="app/libraries/retina-1.1.0.min.js"></script>
 <script src="app/libraries/dirPagination.js"></script>
+<script src="app/libraries/angular-cookies.js"></script>
 <!-- Image plugins-->
 <script src="app/libraries/imagepreview.js"></script>
 <script src="app/libraries/image-picker.min.js"></script>

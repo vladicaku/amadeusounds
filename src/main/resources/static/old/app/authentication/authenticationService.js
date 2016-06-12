@@ -1,9 +1,15 @@
 /**
  * Authentication Service
  */
-amadeusounds.factory('AuthenticationService', ['$http', '$rootScope', '$state', function ($http, $rootScope, $state) {
+amadeusounds.factory('AuthenticationService', ['$http', '$rootScope', '$state', '$cookies', function ($http, $rootScope, $state, $cookies) {
     var loginUrl = 'http://localhost:8080/login';
     var service = {};
+
+    var cookieToken = $cookies.get('angular-authentication-token');
+    if (cookieToken != undefined) {
+        $rootScope.token = cookieToken;
+        $rootScope.isAuthenticated = true;
+    }
 
     service.login = function (email, password) {
         var req = {
@@ -28,6 +34,7 @@ amadeusounds.factory('AuthenticationService', ['$http', '$rootScope', '$state', 
                     $http.defaults.headers.get = {
                         'angular-authentication-token': token
                     };
+                    $cookies.put('angular-authentication-token', token);
                 }
 
             }, function (result) {
@@ -48,6 +55,9 @@ amadeusounds.factory('AuthenticationService', ['$http', '$rootScope', '$state', 
         $http.defaults.headers.get = {
             'angular-authentication-token': undefined
         };
+
+        $cookies.remove('angular-authentication-token');
+        $state.go("home-index");
     };
 
     service.isAuthenticated = function () {

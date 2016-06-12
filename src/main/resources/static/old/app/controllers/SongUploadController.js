@@ -117,7 +117,7 @@ amadeusounds.controller('SongUploadController',
                 console.log(file);
                 //?????
                 var uploadUrl = "/api/admin/songs/" + $rootScope.songId + "/images/" + imageId + "/upload";
-                fileUpload.uploadFileToUrl(file, uploadUrl,"image");
+                fileUpload.uploadFileToUrl(file, uploadUrl, "image");
             };
 
             function uploadImage(image, imageFile) {
@@ -147,27 +147,27 @@ amadeusounds.controller('SongUploadController',
 
                 $scope.image1 = {};
                 $scope.image1.song_id = $rootScope.songId;
-                $scope.image1.timing = $scope.minutes1 * 60 + $scope.seconds1;
+                $scope.image1.timing = ($scope.minutes1 || 0) * 60 + $scope.seconds1;
 
                 $scope.image2 = {};
                 $scope.image2.song_id = $rootScope.songId;
-                $scope.image2.timing = $scope.minutes2 * 60 + $scope.seconds2;
+                $scope.image2.timing = ($scope.minutes2 || 0) * 60 + $scope.seconds2;
 
                 $scope.image3 = {};
                 $scope.image3.song_id = $rootScope.songId;
-                $scope.image3.timing = $scope.minutes3 * 60 + $scope.seconds3;
+                $scope.image3.timing = ($scope.minutes3 || 0) * 60 + $scope.seconds3;
 
                 $scope.image4 = {};
                 $scope.image4.song_id = $rootScope.songId;
-                $scope.image4.timing = $scope.minutes4 * 60 + $scope.seconds4;
+                $scope.image4.timing = ($scope.minutes4 || 0) * 60 + $scope.seconds4;
 
                 $scope.image5 = {};
                 $scope.image5.song_id = $rootScope.songId;
-                $scope.image5.timing = $scope.minutes5 * 60 + $scope.seconds5;
+                $scope.image5.timing = ($scope.minutes5 || 0) * 60 + $scope.seconds5;
 
                 $scope.image6 = {};
                 $scope.image6.song_id = $rootScope.songId;
-                $scope.image6.timing = $scope.minutes6 * 60 + $scope.seconds6;
+                $scope.image6.timing = ($scope.minutes6 || 0) * 60 + $scope.seconds6;
                 // alert("song: "+$scope.seconds1 + " "+$scope.minutes1);
                 if ($scope.imageFile1) {
                     uploadImage($scope.image1, $scope.imageFile1);
