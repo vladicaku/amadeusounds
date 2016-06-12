@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d81c3c8c-418a-4d0b-8f86-4955872849bb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/old/app/player/playerService.js" afterPath="$PROJECT_DIR$/src/main/resources/static/old/app/player/playerService.js" />
     </list>
     <ignored path="amadeusounds.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -990,7 +989,7 @@
       <workItem from="1465570742677" duration="13626000" />
       <workItem from="1465649943357" duration="255000" />
       <workItem from="1465650238441" duration="30420000" />
-      <workItem from="1465685618710" duration="12543000" />
+      <workItem from="1465685618710" duration="12562000" />
     </task>
     <task id="LOCAL-00001" summary="Small change">
       <created>1459800687784</created>
@@ -1208,11 +1207,17 @@
       <option name="project" value="LOCAL" />
       <updated>1465697660531</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="SongImage small fix">
+      <created>1465698206590</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1465698206590</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292188000" />
+    <option name="totallyTimeSpent" value="292207000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1269,7 +1274,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small update" />
     <MESSAGE value="Fixed" />
     <MESSAGE value="New changes&#10;" />
     <MESSAGE value="SongImage repo and service are completed and tested" />
@@ -1294,7 +1298,8 @@
     <MESSAGE value="Menu implemented" />
     <MESSAGE value="SongImage bug fixed&#10;Login implemented with cookies" />
     <MESSAGE value="Max number of latest songs increased to 100&#10;Z index fixed&#10;Padding decreased" />
-    <option name="LAST_COMMIT_MESSAGE" value="Max number of latest songs increased to 100&#10;Z index fixed&#10;Padding decreased" />
+    <MESSAGE value="SongImage small fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="SongImage small fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
