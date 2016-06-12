@@ -221,7 +221,22 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Page<Song> findAllSongs(String term, Pageable pageable) {
-        return null;
+        String terms[] = term.split(" ");
+
+        Specifications<Song> specifications = null;
+
+        for (String s: terms) {
+            String newTerm = "%" + s + "%";
+            specifications = Specifications.where(SpecificationUtils.<Song>like("name", newTerm));
+            specifications.or(SpecificationUtils.<Song>like("description", newTerm));
+            specifications.or(SpecificationUtils.<Song>like("category.name", newTerm));
+            //specifications.or(SpecificationUtils.<Song>like("tags.name", term));
+            specifications.or(SpecificationUtils.<Song>like("user.firstName", newTerm));
+            specifications.or(SpecificationUtils.<Song>like("user.lastName", newTerm));
+            specifications.or(SpecificationUtils.<Song>like("user.email", newTerm));
+        }
+
+        return songRepository.findAll(specifications, pageable);
     }
 
     protected Session getCurrentSession()  {
