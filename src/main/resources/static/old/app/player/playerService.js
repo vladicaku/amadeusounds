@@ -33,9 +33,9 @@ amadeusounds.factory("PlayerService", function ($rootScope) {
             counter++;
         });
 
-        if (a > 0) {
+        //if (a > 0) {
             $rootScope.currentSong.currentImagePosition = a;
-        }
+        //}
     };
 
     var service = {
