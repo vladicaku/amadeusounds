@@ -109,7 +109,7 @@
                             </div>
                             <div class="form-group" ng-class="{ 'has-error': myForm.image.$dirty && myForm.image.$error.required }">
                                 <label class="sr-only" for="form-image">Image</label>
-                                <input type='file' required style="float:left"/>
+                                <input type='file' file-model="param.file" required style="float:left"/>
                                 <img class="form-image form-control" ng-model="image" name="image" id="form-image" src="http://www.socialexplorer.com/assets/blank_avatar-33a61896cf005841524f84b618ef1d70.jpg" alt="your image" style="border-radius: 55px; width: 100px; height: 100px;"/>
                                 <span style="color:red" ng-show="myForm.image.$dirty && myForm.image.$invalid">
                                 <span ng-show="myForm.image.$error.required"  class="help-block">Image is required.</span>

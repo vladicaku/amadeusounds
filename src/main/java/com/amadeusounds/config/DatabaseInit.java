@@ -64,6 +64,7 @@ public class DatabaseInit implements ApplicationContextAware {
         createCategories();
         createTags();
         createSongs();
+        createDefoltUserImage();
     }
 
     private void createSongs() throws IOException, SQLException {
@@ -229,6 +230,27 @@ public class DatabaseInit implements ApplicationContextAware {
             System.out.println("User Angela created.");
         }
 
+    }
+
+    private void createDefoltUserImage() throws IOException, SQLException{
+        if (userRepository.findByEmail("defolt@gmail.com") == null) {
+            User user = new User();
+            user.setActive(true);
+            user.setFirstName("Defolt");
+            user.setLastName("Image");
+            user.setEmail("defolt@gmail.com");
+            user.setPassword(passwordEncoder.encode("pass123"));
+            user.setToken(passwordEncoder.encode(user.getFirstName() + user.getLastName()));
+
+            Resource resource = applicationContext.getResource("classpath:/tags/medium/profile_default.png");
+            InputStream inputStream = resource.getInputStream();
+            byte[] byteArray = new byte[inputStream.available()];
+            inputStream.read(byteArray);
+            user.setImage(new SerialBlob(byteArray));
+
+            userRepository.saveAndFlush(user);
+            System.err.println("Defolt User Image created.");
+        }
     }
 
 

@@ -18,6 +18,17 @@ amadeusounds.controller('HomeController', ['$http', '$rootScope', '$scope', '$st
             return result? result[0] : null; // or undefined
         };
 
+        $scope.searchSongs = function () {
+            console.log("searchSongs called");
+            HomeService.searchSongs($scope.pagination, what).then(function (response) {
+                $scope.songs = response.data.content;
+                $scope.pagination.totalElements = response.data.totalElements;
+                $scope.songs.forEach(function (s) {
+                    s.currentImagePosition = s.images != undefined ? 0 : undefined;
+                });
+            });
+        };
+
         $scope.getLatestSongs = function () {
             console.log("getLatestSongs called");
             HomeService.getLatestSongs($scope.pagination).then(function (response) {
@@ -84,6 +95,10 @@ amadeusounds.controller('HomeController', ['$http', '$rootScope', '$scope', '$st
         else if(where == 'tags') {
             $scope.title = findObjectById($rootScope.tags, what).name;
             $scope.func = $scope.getSongsByTag;
+        }
+        else if(where == 'search') {
+            $scope.title = "Search: " + "'" + what + "'";
+            $scope.func = $scope.searchSongs;
         }
         else {
             $scope.title = "Home";

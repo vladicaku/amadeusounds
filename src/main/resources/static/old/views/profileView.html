@@ -35,27 +35,27 @@
 
             //DA SE SMENI!!!!!!!!
             /*var userId=1;
-            var file=$("#profile-image").val();
-            $("#uploadProfileImage").click(function () {
-                var fd = new FormData();
-                console.log("file " + file);
-                fd.append("image", file);
+             var file=$("#profile-image").val();
+             $("#uploadProfileImage").click(function () {
+             var fd = new FormData();
+             console.log("file " + file);
+             fd.append("image", file);
 
-                jQuery.ajax({
-                    url:"/api/admin/users/" + userId + "/image",
-                    data: fd,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    type: 'POST',
-                    success: function(data){
-                        console.log(data);
-                    }
-                });
+             jQuery.ajax({
+             url:"/api/admin/users/" + userId + "/image",
+             data: fd,
+             cache: false,
+             contentType: false,
+             processData: false,
+             type: 'POST',
+             success: function(data){
+             console.log(data);
+             }
+             });
 
-                $("#form-image").attr("src","/api/users/" + userId + "/image");
-            });
-            */
+             $("#form-image").attr("src","/api/users/" + userId + "/image");
+             });
+             */
             $(":file").change(function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
@@ -92,104 +92,104 @@
 </head>
 <body>
 
-        <div class="container" style="margin-top:7%" >
-            <div class="row">
-                <form class="form-horizontal" role="form" ng-controller="ProfileController">
-                <div class="col-lg-3 col-md-3 col-xs-12">
-                    <div class="card img">
-                        <div class="card-block">
-                            <h4 class="card-title">Profile Picture</h4>
-                            <div class="uploadImage">
-                               <div class="upload-button">
+<div class="container" style="margin-top:7%" >
+    <div class="row">
+        <form class="form-horizontal" role="form" ng-controller="ProfileController">
+            <div class="col-lg-3 col-md-3 col-xs-12">
+                <div class="card img">
+                    <div class="card-block">
+                        <h4 class="card-title">Profile Picture</h4>
+                        <div class="uploadImage">
+                            <div class="upload-button">
                                 <div class="wrap">
                                     <a class="wrapper">
-                                    <img class="card-img-top profile-pic" name="image" id="form-image" src="/api/users/{{currentUserId}}/image" width="250px" height="350px" border="0" alt=""/>
+                                        <img class="card-img-top profile-pic" name="image" id="form-image" src="http://localhost:8080/api/users/{{currentUserId}}/image" width="250px" height="350px" border="0" alt=""/>
                                     </a>
                                 </div>
                             </div>
 
-                            </div>
                         </div>
                     </div>
-                    <input class="file-upload"  id="profile-image" name="user-image" type="file"/>
-                    <input type="button" id="uploadProfileImage" class="btn btn-primary" ng-click="changeImage()" value="Upload Image"/>
                 </div>
-
-
-                <div class="col-lg-9 col-md-9 col-xs-12 personal-info">
-                    <div class="panel panel-default credit-card-box">
-                        <div class="panel-heading display-table" >
-                            <div class="row display-tr" >
-                                <h3 class="panel-title display-td" >Personal info</h3>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">First name:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="{{user.firstName}}" ng-model="user.firstName" ng-disabled="state==stateRead">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Last name:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="{{user.lastName}}" ng-model="user.lastName" ng-disabled="state==stateRead" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Email:</label>
-                                    <div class="col-lg-8">
-                                        <input class="form-control" type="text" value="{{user.email}}" ng-model="user.email" ng-disabled="true">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Password:</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" type="password"  ng-model="user.password" ng-disabled="state==stateRead">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-3 control-label">Location:</label>
-                                    <div class="col-lg-8">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="form-location">Location</label>
-                                            <select class="form-location form-control" id="form-location" value="{{user.location}}" ng-model="user.location"  ng-disabled="state==stateRead">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Short biography:</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" type="text"  value="{{user.biography}}" ng-model="user.biography" ng-disabled="state==stateRead">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Personal website:</label>
-                                    <div class="col-md-8">
-                                        <input class="form-control" type="text"  value="{{user.website}}" ng-model="user.website" ng-disabled="state==stateRead">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"></label>
-                                    <div class="col-md-8">
-                                        <input type="button" class="btn btn-primary" value={{state}} ng-click="editOrSave()">
-                                        <span></span>
-                                        <input type="reset" class="btn btn-default" ng-show="state==stateEdit" ng-click="cancel()" value="Cancel">
-                                    </div>
-                                </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                </form>
+                <input class="file-upload" file-model="profileImage.file" id="profile-image" name="user-image" type="file"/>
+                <input type="button" id="uploadProfileImage" class="btn btn-primary" ng-click="changeImage()" value="Upload Image"/>
             </div>
-        </div>
+
+
+            <div class="col-lg-9 col-md-9 col-xs-12 personal-info">
+                <div class="panel panel-default credit-card-box">
+                    <div class="panel-heading display-table" >
+                        <div class="row display-tr" >
+                            <h3 class="panel-title display-td" >Personal info</h3>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">First name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{user.firstName}}" ng-model="user.firstName" ng-disabled="state==stateRead">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Last name:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{user.lastName}}" ng-model="user.lastName" ng-disabled="state==stateRead" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{user.email}}" ng-model="user.email" ng-disabled="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Password:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="password"  ng-model="user.password" ng-disabled="state==stateRead">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Location:</label>
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-location">Location</label>
+                                    <select class="form-location form-control" id="form-location" value="{{user.location}}" ng-model="user.location"  ng-disabled="state==stateRead">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Short biography:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text"  value="{{user.biography}}" ng-model="user.biography" ng-disabled="state==stateRead">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Personal website:</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text"  value="{{user.website}}" ng-model="user.website" ng-disabled="state==stateRead">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <input type="button" class="btn btn-primary" value={{state}} ng-click="editOrSave()">
+                                <span></span>
+                                <input type="reset" class="btn btn-default" ng-show="state==stateEdit" ng-click="cancel()" value="Cancel">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
     </div>
+</div>
+</div>
 
 
 </body>
