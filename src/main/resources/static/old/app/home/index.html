@@ -11,8 +11,8 @@
             <div class="song-images">
                 <!--<img src="https://joshualightningwarrior.files.wordpress.com/2015/12/hd-wallpapers-sound-waves-musical-note-desktop-2560x1600-wallpaper.jpg?w=636" alt="missing image" />-->
                 <div class="song-image">
-                    <!--<img ng-hide="hideMe(song, image)" ng-src="/api/songs/{{song.id}}/image/{{image.id}}" alt="image">-->
-                    <img ng-src="/api/songs/{{song.id}}/image/{{song.images[song.currentImagePosition].id}}"  alt="image">
+                    <img ng-if="song.images.length==0" ng-src="/old/img/default.jpg" alt="image">
+                    <img ng-if="song.images.length>0" ng-src="/api/songs/{{song.id}}/image/{{song.images[song.currentImagePosition].id}}"  alt="image">
                 </div>
             </div>
 
