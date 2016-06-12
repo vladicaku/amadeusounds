@@ -35,18 +35,18 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a ui-sref="home">Home</a></li>
-                <li><a ui-sref="home">Trending</a></li>
+                <li><a ui-sref="home-index">Home</a></li>
+                <li><a ui-sref="home({arg1: 'trending'})">Trending</a></li>
                 <li class="dropdown">
-                    <a ui-sref="home" class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="category in categories"><a href="#">{{category.name}}</a></li>
+                        <li ng-repeat="category in categories"><a ui-sref="home({arg1: 'categories', arg2: category.id})">{{category.name}}</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a ui-sref="home" class="dropdown-toggle" data-toggle="dropdown">Tags <span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Tags <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                            <li ng-repeat="tag in tags"><a href="#"><img ng-src="http://localhost:8080/api/tags/{{tag.id}}/image" width="12px"> {{tag.name}}</a></li>
+                            <li ng-repeat="tag in tags"><a ui-sref="home({arg1: 'tags', arg2: tag.id})"><img ng-src="http://localhost:8080/api/tags/{{tag.id}}/image" width="12px"> {{tag.name}}</a></li>
                     </ul>
                 </li>
 

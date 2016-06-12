@@ -1,7 +1,8 @@
-amadeusounds.controller('HomeController', [ '$rootScope', '$scope', '$http', 'HomeService', 'PlayerService',
-    function($rootScope, $scope, $http, HomeService, PlayerService) {
+amadeusounds.controller('HomeController', ['$rootScope', '$scope', '$stateParams', 'HomeService', 'PlayerService',
+    function ($rootScope, $scope, $stateParams, HomeService, PlayerService) {
 
         $scope.songs = {};
+        $scope.title = "";
 
         $scope.pagination = {
             itemsPerPage: 6,
@@ -9,71 +10,94 @@ amadeusounds.controller('HomeController', [ '$rootScope', '$scope', '$http', 'Ho
             totalElements: 0
         };
 
-        $scope.getLatestSongs = function() {
+        var where = $stateParams.arg1 || 'home';
+        var what = $stateParams.arg2 || '';
+        //alert(where + '-' + what);
+        var findObjectById = function getByValue2(arr, value) {
+            var result  = arr.filter(function(o){return o.id == value;} );
+            return result? result[0] : null; // or undefined
+        };
+
+        $scope.getLatestSongs = function () {
             console.log("getLatestSongs called");
-            HomeService.getLatestSongs($scope.pagination).then(function(response){
+            HomeService.getLatestSongs($scope.pagination).then(function (response) {
                 $scope.songs = response.data.content;
                 $scope.pagination.totalElements = response.data.totalElements;
-                $scope.songs.forEach(function(s){
+                $scope.songs.forEach(function (s) {
                     s.currentImagePosition = s.images != undefined ? 0 : undefined;
                 });
             });
         };
 
-        $scope.load = function(song) {
+        $scope.getSongsByCategory = function () {
+            console.log("getSongsByCategory called");
+            HomeService.getSongsByCategory($scope.pagination, what).then(function (response) {
+                $scope.songs = response.data.content;
+                $scope.pagination.totalElements = response.data.totalElements;
+                $scope.songs.forEach(function (s) {
+                    s.currentImagePosition = s.images != undefined ? 0 : undefined;
+                });
+            });
+        };
+
+        $scope.getSongsByTag = function () {
+            console.log("getSongsByTag called");
+            HomeService.getSongsByTag($scope.pagination, what).then(function (response) {
+                $scope.songs = response.data.content;
+                $scope.pagination.totalElements = response.data.totalElements;
+                $scope.songs.forEach(function (s) {
+                    s.currentImagePosition = s.images != undefined ? 0 : undefined;
+                });
+            });
+        };
+
+        $scope.getTrendingSongs = function () {
+            console.log("getTrendingSongs called");
+            $scope.title = "Trending"
+            HomeService.getTrendingSongs($scope.pagination).then(function (response) {
+                $scope.songs = response.data.content;
+                $scope.pagination.totalElements = response.data.totalElements;
+                $scope.songs.forEach(function (s) {
+                    s.currentImagePosition = s.images != undefined ? 0 : undefined;
+                });
+            });
+        };
+
+        // load the file into the player
+        $scope.load = function (song) {
             song.currentImagePosition = song.images != undefined ? 0 : undefined;
             PlayerService.load(song);
         };
+
+        if(where == 'home') {
+            $scope.title = "Home";
+            $scope.func = $scope.getLatestSongs;
+        }
+        else if(where == 'trending') {
+            $scope.title = "Trending";
+            $scope.func = $scope.getTrendingSongs;
+        }
+        else if(where == 'categories') {
+            $scope.title = findObjectById($rootScope.categories, what).name;
+            $scope.func = $scope.getSongsByCategory;
+        }
+        else if(where == 'tags') {
+            $scope.title = findObjectById($rootScope.tags, what).name;
+            $scope.func = $scope.getSongsByTag;
+        }
+        else {
+            $scope.title = "Home";
+            $scope.func = $scope.getLatestSongs;
+        };
+
         // Fill the page on load
-        $scope.getLatestSongs(1);
+        //$scope.func();
+        $scope.func();
 
-        $scope.pageChanged = function(newPage) {
-            $scope.getLatestSongs(newPage);
+        $scope.pageChanged = function (newPage) {
+            $scope.func(newPage);
         };
 
-        $scope.hideMe = function(song, image) {
-            if (song.id != $rootScope.currentSong.id) {
-                return false;
-            }
 
-            var position = song.images.indexOf(image);
-
-            if (position == 0) {
-                if($rootScope.currentTime > image.timing) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            if (position == song.images.length - 1) {
-                if($rootScope.currentTime > image.timing) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            if ($rootScope.currentTime <= song.images[position]) {
-                return false;
-            } else {
-                return true;
-            }
-
-        };
-
-        $scope.hasImageInFuture = function(time, images) {
-            //console.log("DA BEE!!");
-            var flag = false;
-
-            images.forEach(function(item){
-                if (item.timing > time) {
-                    flag = true;
-                    return;
-                }
-            });
-
-            return flag;
-        };
     }
 ]);

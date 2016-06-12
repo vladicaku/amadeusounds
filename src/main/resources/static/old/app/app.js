@@ -14,8 +14,13 @@ amadeusounds.config(['$stateProvider', '$urlRouterProvider', function ($statePro
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
-        .state('home', {
+        .state('home-index', {
             url: '/home',
+            templateUrl: 'app/home/index.html',
+            controller: 'HomeController'
+        })
+        .state('home', {
+            url: '/home/:arg1/:arg2',
             templateUrl: 'app/home/index.html',
             controller: 'HomeController'
         })

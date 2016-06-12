@@ -1,19 +1,7 @@
-<style>
-    body {
-        background-image: none !important;
-    }
-</style>
-<h2>Home</h2>
 <script>
     $.backstretch("destroy", false);
 </script>
-
-<!--<div>-->
-    <!--<div ng-repeat="song in songs">-->
-        <!--<p>song.name</p>-->
-        <!--<p>song.rating</p>-->
-    <!--</div>-->
-<!--</div>-->
+<h2>{{title}}</h2>
 <div class="row">
     <div class="col-xs-12 col-sm-4"
             dir-paginate="song in songs | itemsPerPage: pagination.itemsPerPage"
@@ -29,8 +17,8 @@
             </div>
 
             <div class="song-text">
-                <h3><a ng-click="load(song)" href="#">{{song.name}}</a></h3>
-                <p>by <a href="#">{{song.user.firstName}} {{song.user.lastName}} </a> in {{song.category.name}}</p>
+                <h3><a href="" ng-click="load(song)">{{song.name}}</a></h3>
+                <p>by <a href="">{{song.user.firstName}} {{song.user.lastName}} </a> in {{song.category.name}}</p>
             </div>
 
             <div class="song-tags" style="overflow: hidden;">
