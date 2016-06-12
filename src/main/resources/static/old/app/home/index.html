@@ -23,7 +23,7 @@
 
             <div class="song-tags" style="overflow: hidden;">
                 <div class="tag" ng-repeat="tag in song.tags">
-                    <img src="/api/tags/{{tag.id}}/image" alt="tag">
+                    <a href="" ui-sref="home({arg1: 'tags', arg2: tag.id})"><img src="/api/tags/{{tag.id}}/image" alt="tag"></a>
                 </div>
             </div>
         </div>
