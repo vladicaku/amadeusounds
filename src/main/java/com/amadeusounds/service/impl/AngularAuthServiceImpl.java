@@ -6,12 +6,14 @@ import com.amadeusounds.service.AngularAuthService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 /**
  * Simple service for managing principals
  *
  * @author Vladica Jovanovski
  */
+@Service
 public class AngularAuthServiceImpl implements AngularAuthService{
 
     @Override

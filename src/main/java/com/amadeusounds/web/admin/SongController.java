@@ -3,6 +3,7 @@ package com.amadeusounds.web.admin;
 import com.amadeusounds.model.Comment;
 import com.amadeusounds.model.Song;
 import com.amadeusounds.model.SongImage;
+import com.amadeusounds.model.User;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.*;
@@ -44,6 +45,9 @@ public class SongController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AngularAuthService angularAuthService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MappingJacksonValue songs(Pageable pageable) {
         Page<Song> page = songService.getAllSongsForUser(null, pageable);
@@ -61,8 +65,9 @@ public class SongController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Response createSong(@RequestBody Song song,@RequestParam String category, @RequestParam String username) {
+        User user = angularAuthService.getUser();
+        song.setUser(user);
         song.setCategory(categoryService.findByName(category));
-        song.setUser(userService.findUserByEmail(username));
         songService.saveSong(song);
         Response response = new Response(ResponseType.OK, song.getId());
         return response;
