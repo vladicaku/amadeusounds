@@ -1,9 +1,6 @@
 package com.amadeusounds.web.admin;
 
-import com.amadeusounds.model.Comment;
-import com.amadeusounds.model.Song;
-import com.amadeusounds.model.SongImage;
-import com.amadeusounds.model.User;
+import com.amadeusounds.model.*;
 import com.amadeusounds.model.json.Response;
 import com.amadeusounds.model.json.ResponseType;
 import com.amadeusounds.service.*;
@@ -47,6 +44,9 @@ public class SongController {
 
     @Autowired
     AngularAuthService angularAuthService;
+
+    @Autowired
+    RatingService ratingService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public MappingJacksonValue songs(Pageable pageable) {
@@ -220,6 +220,19 @@ public class SongController {
         songImageService.addBlobToSongImage(songImage, multipartFile);
         Response response = new Response(ResponseType.OK, "");
         return response;
+    }
+
+    @RequestMapping(value = "/{songId}/rating/", method = RequestMethod.POST)
+    public Response rateSong(@PathVariable("songId") Long songId, @RequestBody Rating rating) {
+        User user = angularAuthService.getUser();
+
+        Song song = songService.findSongById(songId);
+
+        rating.setSong(song);
+        rating.setUser(user);
+        ratingService.rate(rating);
+
+        return new Response(ResponseType.OK, "");
     }
 
     @ExceptionHandler(Exception.class)

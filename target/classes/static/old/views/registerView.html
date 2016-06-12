@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Registration Form Template</title>
+
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "json/countries.json",
+                dataType: "json",
+                success: function (data) {
+
+                    $("#form-location").html('');
+                    $("select").append("<option default selected> Location... </option>");
+                    for (i = 0; i < data.length; i++) {
+                        var display = data[i].name + " (" + data[i].code + ")";
+
+                        $("select").append("<option>" + display + "</option>");
+                    }
+                }
+            });
+
+            $(":file").change(function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoaded;
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+        function imageIsLoaded(e) {
+            $('#form-image').attr('src', e.target.result);
+        }
+        ;
+    </script>
+
+
+</head>
+
+<body>
+
+<!-- Top content -->
+<div class="top-content centered">
+    <script>
+        $.backstretch("/old/img/background.jpg");
+    </script>
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 phone">
+                    <img src="http://www.victoryapostolicchurch.org/sites/www.victoryapostolicchurch.org/files/assets/Register%20Button.jpg"
+                         alt="" style="border-radius: 10px; margin-top: 19%">
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5 form-box">
+                    <div class="form-top">
+                        <div class="form-top-left">
+                            <h3>Register to our App</h3>
+
+                            <p>Fill in the form below to get instant access:</p>
+                        </div>
+                        <div class="form-top-right">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                    </div>
+                    <div class="form-bottom"  ng-controller="RegisterController" >
+                        <form role="form" name="myForm" class="registration-form" novalidate>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.firstName.$dirty && myForm.firstName.$invalid }">
+                                <label class="sr-only" for="form-first-name">First name</label>
+                                <input type="text" placeholder="First name..."  class="form-first-name form-control"  ng-minlength="2" ng-maxlength="20" name="firstName" ng-model="firstName" id="form-first-name">
+                                <p ng-show="myForm.firstName.$error.minlength" class="help-block">First name is too short.</p>
+                                <p ng-show="myForm.firstName.$error.maxlength" class="help-block">First name is too long.</p>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.lastName.$dirty && myForm.lastName.$invalid }">
+                                <label class="sr-only" for="form-last-name">Last name</label>
+                                <input type="text" placeholder="Last name ..." class="form-last-name form-control" ng-minlength="5" ng-maxlength="20" ng-model="lastName" name="lastName" id="form-last-name">
+                                <p ng-show="myForm.lastName.$error.minlength" class="help-block">Last name is too short.</p>
+                                <p ng-show="myForm.lastName.$error.maxlength" class="help-block">Last name is too long.</p>
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.email.$dirty && myForm.email.$invalid }">
+                                <label class="sr-only" for="form-email">Email</label>
+                                <input type="email" name="email" placeholder="Email..." class="form-email form-control" ng-model="email" name="email" id="form-email">
+                                <p ng-show="myForm.email.$invalid && myForm.email.$dirty" class="help-block">Enter a valid email.</p>
+
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.password.$dirty && myForm.password.$error.required }">
+                                <label class="sr-only" for="form-email">Password</label>
+                                <input type="password" placeholder="Password..." class="form-email form-control" ng-model="password" name="password" id="form-password" required>
+                                <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                                <span ng-show="myForm.password.$error.required"  class="help-block">Password is required.</span>
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.location.$dirty && myForm.location.$error.required }">
+                                <label class="sr-only" for="form-location">Location</label>
+                                <select class="form-location form-control" id="form-location" ng-model="location"  name="location" required>
+                                    <option ng-repeat="country in countries" value="{{country.name}}">{{country.name}}</option>
+                                </select>
+                                 <span style="color:red" ng-show="myForm.location.$dirty && myForm.location.$invalid">
+                                <span ng-show="myForm.location.$error.required"  class="help-block">Location is required.</span>
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.image.$dirty && myForm.image.$error.required }">
+                                <label class="sr-only" for="form-image">Image</label>
+                                <input type='file' required style="float:left"/>
+                                <img class="form-image form-control" ng-model="image" name="image" id="form-image" src="http://www.socialexplorer.com/assets/blank_avatar-33a61896cf005841524f84b618ef1d70.jpg" alt="your image" style="border-radius: 55px; width: 100px; height: 100px;"/>
+                                <span style="color:red" ng-show="myForm.image.$dirty && myForm.image.$invalid">
+                                <span ng-show="myForm.image.$error.required"  class="help-block">Image is required.</span>
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.biography.$dirty && myForm.biography.$error.required }">
+                                <label class="sr-only" for="form-biography">Short biography</label>
+                                <textarea placeholder="Biography..." name="biography" class="form-biography form-control" ng-model="biography" id="form-biography" required></textarea>
+                                <span style="color:red" ng-show="myForm.biography.$dirty && myForm.biography.$invalid">
+                                <span ng-show="myForm.biography.$error.required"  class="help-block">Short biography is required.</span>
+                                </span>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': myForm.website.$dirty && myForm.website.$error.required }">
+                                <label class="sr-only" for="form-website">Personal website</label>
+                                <input type="text" placeholder="Personal website..." name="website" class="form-website form-control" ng-model="website" id="form-website" required>
+                                <span style="color:red" ng-show="myForm.website.$dirty && myForm.website.$invalid">
+                                <span ng-show="myForm.website.$error.required"  class="help-block">Personal website is required.</span>
+                                </span>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-submit" ng-click="SendData()" ng-disabled="myForm.firstName.$dirty && myForm.firstName.$invalid || myForm.lastName.$dirty && myForm.lastName.$invalid || myForm.email.$dirty && myForm.email.$invalid || myForm.password.$dirty && myForm.password.$invalid || myForm.location.$dirty && myForm.location.$invalid || myForm.image.$dirty && myForm.image.$invalid || myForm.bio.$dirty && myForm.bio.$invalid || myForm.website.$dirty && myForm.website.$invalid">Sign me up!</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

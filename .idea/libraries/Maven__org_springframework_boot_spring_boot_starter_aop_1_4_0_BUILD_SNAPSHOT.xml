@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.boot:spring-boot-starter-aop:1.4.0.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160611.142200-416.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160612.070708-417.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160611.142200-416-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160612.070708-417-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160611.142200-416-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-aop/1.4.0.BUILD-SNAPSHOT/spring-boot-starter-aop-1.4.0.BUILD-20160612.070708-417-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

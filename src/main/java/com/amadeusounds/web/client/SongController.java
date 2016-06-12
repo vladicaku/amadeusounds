@@ -92,19 +92,19 @@ public class SongController {
      * @param rating
      * @return Response
      */
-    @RequestMapping(value = "/{songId}/rating/", method = RequestMethod.POST)
-    public Response rateSong(@PathVariable("songId") Long songId, @RequestBody Rating rating) {
-        /**
-         * TODO:
-         * Get current user from session
-         */
-        User user = null;
-        Song song = songService.findSongById(songId);
-        rating.setSong(song);
-        rating.setUser(user);
-        ratingService.rate(rating);
-        return new Response(ResponseType.OK, "");
-    }
+//    @RequestMapping(value = "/{songId}/rating/", method = RequestMethod.POST)
+//    public Response rateSong(@PathVariable("songId") Long songId, @RequestBody Rating rating) {
+//        /**
+//         * TODO:
+//         * Get current user from session
+//         */
+//        User user = null;
+//        Song song = songService.findSongById(songId);
+//        rating.setSong(song);
+//        rating.setUser(user);
+//        ratingService.rate(rating);
+//        return new Response(ResponseType.OK, "");
+//    }
 
     /**
      * Get a image for a song

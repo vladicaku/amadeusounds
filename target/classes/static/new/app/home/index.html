@@ -1,0 +1,15 @@
+<div ng-controller="HomeController">
+    <div ng-repeat="song in songs">
+        <div class="song">
+
+            <a href="" ng-click='player.load(song.url)'>{{song.url}}</a>
+            <!--<audio controls>-->
+            <!--<source src="{{song.url}}" type="audio/mpeg">-->
+            <!--Your browser does not support the audio tag.-->
+            <!--</audio>-->
+        </div>
+    </div>
+    <h1>It is working</h1>
+</div>
+
+<player></player>

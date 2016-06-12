@@ -1,0 +1,19 @@
+<div id="player" style="width: 100%">
+        <div>
+            <!--<p>{{currentSong.name}} by {{currentSong.user.firstName}} {{currentSong.user.lastName}} in {{currentSong.category.name}}</p>-->
+            <p>{{currentSong.name}} <span style="float: right;">{{currentSong.category.name}}</span></p>
+        </div>
+        <div>
+            <div id="player-controls" style="float: left; max-width:50px;">
+                <a ng-show="paused" href="#" ng-click="play()"><i class="glyphicon glyphicon-play"></i></a>
+                <a ng-hide="paused" href="#" ng-click="pause()"><i class="glyphicon glyphicon-pause"></i></a>
+            </div>
+
+            <div id="player-timeline" style="overflow: hidden; padding: 3px;">
+                <input type="range" name="time" min="0" max="100" ng-model="$root.percentage" ng-change="rangeChanged()">
+                <!--<p>{{currentTime}}</p>-->
+                <!--<p>{{duration}}</p>-->
+                <!--<p>{{position}}</p>-->
+            </div>
+        </div>
+</div>
