@@ -20,7 +20,7 @@ amadeusounds.controller('HomeController', ['$rootScope', '$scope', '$stateParams
 
         $scope.searchSongs = function () {
             console.log("searchSongs called");
-            HomeService.searchSongs($scope.pagination, ($rootScope.searchTerm || '')).then(function (response) {
+            HomeService.searchSongs($scope.pagination, what).then(function (response) {
                 $scope.songs = response.data.content;
                 $scope.pagination.totalElements = response.data.totalElements;
                 $scope.songs.forEach(function (s) {
@@ -97,7 +97,7 @@ amadeusounds.controller('HomeController', ['$rootScope', '$scope', '$stateParams
             $scope.func = $scope.getSongsByTag;
         }
         else if(where == 'search') {
-            $scope.title = "Search: " + "'" + ($rootScope.searchTerm || '') + "'";
+            $scope.title = "Search: " + "'" + what + "'";
             $scope.func = $scope.searchSongs;
         }
         else {
